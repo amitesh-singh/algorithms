@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 int main()
 {
 	const int rows = 4, col = 4;
