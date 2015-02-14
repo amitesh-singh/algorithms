@@ -45,7 +45,7 @@ _is_rect_inside(int i, int j, int r1, int r2)
    int f2 = (j + 1 - r1) * (j + 1 - r1) + (i - 1 - r1) * (i - 1 - r1) - r1 * r1;
 
    if (c1 <= 0 &&  c2 >= 0 && d1 <= 0 && d2 >= 0
-       && e1 <= 0 && e2 >= 0 && f1 >=0 && f2 >= 0)
+       && e1 <= 0 && e2 >= 0 && f1 <=0 && f2 >= 0)
      return true;
 
    return false;
