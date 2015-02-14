@@ -32,8 +32,8 @@ _is_rect_inside(int i, int j, int r1, int r2)
    int c1 = (j - r2) * (j - r2) + (i - r2) *(i - r2) - r2 * r2;
    int c2 = (j - r1) * (j - r1) + (i - r1) * (i - r1) - r1 * r1;
 
-   cout << "(" << j << "," << i << ":";
-   cout << "c1: " << c1 << " c2: " << c2 << endl;
+  // cout << "(" << j << "," << i << ":";
+  // cout << "c1: " << c1 << " c2: " << c2 << endl;
 
    int d1 = (j + 1 - r2) * (j + 1 - r2) + (i - r2) *(i - r2) - r2 * r2;
    int d2 = (j + 1 - r1) * (j + 1 - r1) + (i - r1) * (i - r1) - r1 * r1;
@@ -54,6 +54,8 @@ _is_rect_inside(int i, int j, int r1, int r2)
 static int
 _find_rects_in_circles(int r1, int r2)
 {
+   if (r1 >= r2)
+     return 0;
    int n = 2 * r2;
    Rect *matrix = new(mem) Rect[n * n];
 
@@ -77,10 +79,9 @@ _find_rects_in_circles(int r1, int r2)
 
              if (_is_rect_inside(i, j, r1, r2))
                ret++;
-             
           }
      }
-   _print_matrix(matrix, r2, r2);
+   //_print_matrix(matrix, r2, r2);
 
    //lets apply our logic
 
@@ -90,8 +91,7 @@ _find_rects_in_circles(int r1, int r2)
 int test_case = 0;
 int main()
 {
-   freopen("input.txt", "r",
-           stdin);
+   freopen("input.txt", "r", stdin);
 
    cin >> test_case;
    int r1, r2;
