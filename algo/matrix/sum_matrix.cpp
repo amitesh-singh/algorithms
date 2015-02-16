@@ -1,6 +1,14 @@
 #include <iostream>
 #include <cstdio>
 
+// 1    2    3 = 6
+// 1    4    9 = 
+// 2    3    4 = 9
+// = 4  = 9  = 16   
+// diagonal (L2R) = 1 + 4 + 4
+// diagonal (R2L) = 3 + 4 + 2
+// Find the max sum of horizontal rows, vertical cols and diagonal sums
+//
 using namespace std;
 
 const int rows = 3;
