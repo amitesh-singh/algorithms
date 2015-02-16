@@ -73,5 +73,7 @@ int main()
 
    delete []m;
 
+   //3rd way
+
    return 0;
 }
