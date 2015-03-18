@@ -1,0 +1,9 @@
+Design a graph in C++ 
+
+1. Graph g;
+   g.addEdges("Google", "MS", 20);  //20 is weight
+   g.addEdges("Google", "Amazon", 30); 
+   Google ---20---> MS
+   Google ---30---> Amazon
+
+2. 

@@ -1,0 +1,62 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Answer	infected_area.cpp	/^int Answer;$/;"	v
+COLS	ladder.cpp	/^const int COLS = 16;$/;"	v
+COLS	maze.cpp	/^const int COLS = 4;$/;"	v
+COLS	maze2.cpp	/^const int COLS = 4;$/;"	v
+CompareObject	tetris.cpp	/^struct CompareObject$/;"	s	file:
+HOR	tetris.cpp	/^     HOR = 0,$/;"	e	enum:__anon1	file:
+N	infected_area.cpp	/^int N;$/;"	v
+N	tetris.cpp	/^int N;$/;"	v
+Object	tetris.cpp	/^   Object(int r, int c, int type):$/;"	f	struct:Object
+Object	tetris.cpp	/^struct Object$/;"	s	file:
+Pos	infected_area.cpp	/^   Pos(int r, int c): r_(r), c_(c) {}$/;"	f	struct:Pos
+Pos	infected_area.cpp	/^struct Pos$/;"	s	file:
+Pos	maze.cpp	/^struct Pos$/;"	s	file:
+Pos	maze2.cpp	/^struct Pos$/;"	s	file:
+ROWS	ladder.cpp	/^const int ROWS = 16;$/;"	v
+ROWS	maze.cpp	/^const int ROWS = 4;$/;"	v
+ROWS	maze2.cpp	/^const int ROWS = 4;$/;"	v
+TestCases	infected_area.cpp	/^int TestCases;$/;"	v
+VER	tetris.cpp	/^     VER = 1$/;"	e	enum:__anon1	file:
+_c	tetris.cpp	/^   int _r, _c;$/;"	m	struct:Object	file:
+_findMaxInfectedArea	infected_area.cpp	/^_findMaxInfectedArea(int **m, int **sol, vector<Pos> &posList)$/;"	f	file:
+_findObjects	tetris.cpp	/^_findObjects(int **m, int **sol, vector<Object> &objList)$/;"	f	file:
+_findObjectsUtil	tetris.cpp	/^_findObjectsUtil(int **m, int r, int c,$/;"	f	file:
+_printMatrix	tetris.cpp	/^_printMatrix(int **m)$/;"	f	file:
+_r	tetris.cpp	/^   int _r, _c;$/;"	m	struct:Object	file:
+_type	tetris.cpp	/^   int _type;$/;"	m	struct:Object	file:
+_util	infected_area.cpp	/^_util(int **m, int **sol, int r, int c, int &ret)$/;"	f	file:
+c_	infected_area.cpp	/^   int r_, c_;$/;"	m	struct:Pos	file:
+findPath	ladder.cpp	/^findPath(int **m, int r, int c)$/;"	f	file:
+findPathUtil	ladder.cpp	/^findPathUtil(int **m, int r, int c, int sol[][COLS])$/;"	f	file:
+isNeighbour	tetris.cpp	/^isNeighbour(int **m, int r, int c)$/;"	f	file:
+isSafe	infected_area.cpp	/^isSafe(int **m, int r, int c)$/;"	f	file:
+isSafe	ladder.cpp	/^isSafe(int **m, int r, int c)$/;"	f	file:
+isSafe	maze.cpp	/^isSafe(int m[][COLS], int r, int c)$/;"	f	file:
+isSafe	maze2.cpp	/^isSafe(int m[][COLS], int r, int c)$/;"	f	file:
+main	infected_area.cpp	/^int main()$/;"	f
+main	ladder.cpp	/^int main()$/;"	f
+main	maze.cpp	/^int main()$/;"	f
+main	maze2.cpp	/^int main()$/;"	f
+main	tetris.cpp	/^int main()$/;"	f
+operator ()	tetris.cpp	/^   inline bool operator()(const Object &lhs, const Object &rhs)$/;"	f	struct:CompareObject
+print	tetris.cpp	/^   void print()$/;"	f	struct:Object
+printMatrix	maze.cpp	/^printMatrix(int m[][COLS])$/;"	f	file:
+r_	infected_area.cpp	/^   int r_, c_;$/;"	m	struct:Pos	file:
+solveMaze	maze.cpp	/^solveMaze(int m[][COLS], Pos &start, Pos &end)$/;"	f	file:
+solveMaze	maze2.cpp	/^solveMaze(int m[][COLS], Pos &start, Pos &end)$/;"	f	file:
+solveMazeUtil	maze.cpp	/^solveMazeUtil(int m[][COLS], int r, int c, Pos &end, int sol[][COLS])$/;"	f	file:
+solveMazeUtil	maze2.cpp	/^solveMazeUtil(int m[][COLS], int r, int c, Pos &end, int sol[][COLS])$/;"	f	file:
+testCases	ladder.cpp	/^int testCases = 1;$/;"	v
+testCases	maze.cpp	/^int testCases = 3;$/;"	v
+testCases	maze2.cpp	/^int testCases = 3;$/;"	v
+testCases	tetris.cpp	/^int testCases;$/;"	v
+x	maze.cpp	/^   int x, y;$/;"	m	struct:Pos	file:
+x	maze2.cpp	/^   int x, y;$/;"	m	struct:Pos	file:
+y	maze.cpp	/^   int x, y;$/;"	m	struct:Pos	file:
+y	maze2.cpp	/^   int x, y;$/;"	m	struct:Pos	file:

@@ -1,0 +1,8 @@
+1: write a smart class named "graph" to show the graph structure
+2. 
+  [1] ----- [0]
+   |         |
+  [2] ------[3] ---- [5]
+   
+  something like in EFL which shows the BFS or DFS process?
+  it would be nice demo.
