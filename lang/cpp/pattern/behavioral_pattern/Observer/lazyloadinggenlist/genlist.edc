@@ -1,0 +1,199 @@
+collections {
+   group { name: "elm/genlist/item/default/default";
+      images {
+         image: "unnamed.png" COMP;
+         image: "missed_call.png" COMP; 
+         image: "incoming_call.png" COMP; //right green arrow
+         image: "outgoing_call.png" COMP; //left red arrow
+      }
+      data.item: "texts" "elm.text.telephone elm.text.name elm.text.callno";
+      data.item: "contents" "elm.swallow.icon";
+      parts {
+         part { name: "bg"; type: RECT;
+            description { state: "default" 0.0;
+               color: 0 0 0 255;
+            }
+         }
+         part { name: "pad.left_top_icon"; type: SPACER;
+            description { state: "default" 0.0;
+               rel1.to: "bg";
+               rel2.to: "bg";
+               rel2.relative: 0 0;
+               min: 4 4;
+               max: 4 4;
+               fixed: 1 1;
+               align: 0 0;
+            }
+         }
+         part { name: "pad.right_icon"; type: SPACER;
+            description { state: "default" 0.0;
+               rel1.to: "bg";
+               rel2.to: "bg";
+               rel1.relative: 0 1;
+               rel2.relative: 0 1;
+               min: 50 4;
+               max: 50 4;
+               align: 0 1;
+               fixed: 1 1;
+            }
+         }
+         // [] elm.swallow.icon ?
+         part { name: "elm.swallow.icon"; type: SWALLOW;
+            description { state: "default" 0.0;
+               rel1.to: "pad.left_top_icon";
+               rel1.relative: 1 1;
+               rel2.to: "pad.right_icon";
+               rel2.relative: 1 0;
+               min: 50 80;
+               fixed: 1 0;
+            }
+         }
+         part { name: "clip.end"; type: RECT;
+            description { state: "default" 0.0;
+               rel1.to: "dial.image";
+               rel2.to: "dial.image";
+               visible: 0;
+            }
+            description { state: "clicked" 0.0;
+               rel1.to: "dial.image";
+               rel2.to: "dial.image";
+               color: 0 200 0 200; 
+               visible: 1;
+            }
+         }
+         part { name: "dial.image"; type: IMAGE;
+            description { state: "default" 0.0;
+               rel1.to: "bg";
+               rel1.relative: 1 0;
+               rel2.to: "bg";
+               rel2.relative: 1 1;
+               align: 1 0.5;
+               image.normal: "unnamed.png";
+               min: 80 50;
+               fixed: 1 1;
+            }
+         }
+         part { name: "pad.horizontal_line_from_end"; type: SPACER;
+            description { state: "default" 0.0;
+               rel1.to: "dial.image";
+               rel2.to: "dial.image";
+               rel2.relative: 0 0;
+               align: 1 0;
+               min: 3 0;
+               max: 3 0;
+               fixed: 1 1;
+            }
+         }
+         part { name: "horizontal_line"; type: RECT;
+            description { state: "default" 0.0;
+               color: 100 55 55 55;
+               rel1.to: "pad.horizontal_line_from_end";
+               rel1.offset: 0 9;
+               rel2.offset: 0 -9;
+               rel2.to: "dial.image";
+               rel2.relative: 0 1;
+            }
+         }
+         part { name: "elm.text.callno"; type: TEXT;
+            description { state: "default" 0.0;
+               color: 255 0 0 255;
+               text.text: "(3)";
+               rel1.to: "horizontal_line";
+               rel2.to: "horizontal_line";
+               rel2.relative: 0 0;
+               align: 1 0;
+               text.size: 9;
+               min: 20 20;
+               max: 20 20;
+               fixed: 1 1;
+            }
+         }
+         //texts
+         part { name: "elm.text.name"; type: TEXT;
+              description { state: "default" 0.0;
+                 text.size: 15;
+                 text.font: "arial";
+                 color: 255 255 255 255;
+                 rel1.to: "elm.swallow.icon";
+                 rel1.relative: 1 0;
+                 rel2.to: "separator_line";
+                 rel2.relative: 0 0;
+                 align: 0 0;
+                 text.text: "amitesh singh";
+                 text.align: 0 0;
+                 min: 300 18;
+                 max: 300 18;
+                 //max: 0 20;
+                 fixed: 1 1;
+              }
+         }
+         part { name: "elm.text.telephone"; type: TEXT;
+            description { state: "default" 0.0;
+               text.font: "Sans:style=Bold";
+               text.size: 7;
+               text.align: 0 0;
+               color: 200 200 200 200;
+               rel1.to: "elm.text.name";
+               rel2.to: "elm.text.name";
+               rel1.relative: 0 1;
+               align: 0 0;
+               min: 100 12;
+               max: 100 12;
+               text.text: "+918800927722";
+               fixed: 1 1;
+            }
+         }
+         part { name: "call_status.image"; type: IMAGE;
+            description { state: "default" 0.0;
+               //image.normal: "missed_call.png";
+               image.normal: "incoming_call.png";
+               rel1.to: "elm.text.telephone";
+               rel1.relative: 0 1;
+               rel2.to: "elm.text.telephone";
+               min: 20 20;
+               max: 20 20;
+               align: 0 0;
+               fixed: 1 1;
+            }
+            description { state: "missed_call" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "missed_call.png";
+            }
+            description { state: "outgoing_call" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "outgoing_call.png";
+            }
+         }
+         //separator line
+         part { name: "separator_line"; type: RECT;
+            description { state: "default" 0.0;
+               color: 55 55 55 55;
+               rel1.to: "bg";
+               rel1.relative: 0 1;
+               rel1.offset: 0 -3;
+               rel2.to: "bg";
+            }
+         }
+      } //parts ends
+      programs {
+         program {
+            signal: "mouse,clicked,1";
+            source: "dial.image";
+            action: STATE_SET "clicked" 0.0;
+            target: "clip.end";
+            after: "mouse_clicked_done";
+         }
+         program { name: "mouse_clicked_done";
+            action: STATE_SET "default" 0.0;
+            target: "clip.end";
+            transition: LINEAR 0.3;
+            after: "mouse_clicked_end";
+         }
+         program { name: "mouse_clicked_end";
+            //action: SIGNAL_EMIT "call,phone,init" "";
+            script {
+               emit("call,phone,init", "");
+            }
+         }
+      }
+  
