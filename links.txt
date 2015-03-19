@@ -1,6 +1,16 @@
 1st stage:
 https://allaboutalgorithms.wordpress.com
+http://codeforces.com/problemset
+http://acm.timus.ru/problemset.aspx?space=1&page=all&sort=difficulty
+https://projecteuler.net/archives
 
 
 2nd stage:
 hackerrank.com
+http://www.spoj.com/
+http://codeforces.com
+
+For Revisions
+http://codersmaze.com/
+http://www.learnalgorithms.in/
+
