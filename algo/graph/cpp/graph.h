@@ -21,11 +21,18 @@ struct Vertex
     {
         cout << _n << " visited\n";
     }
+
+    Vertex(Vertex &c):_n(c._n), _color(c._color)
+    {
+    }
 };
 
 class Graph
 {
-    map<Vertex *, list<Vertex *> > _adj;
+    struct Compare
+    {
+    };
+    map<Vertex *, list<Vertex *> *, Compare> _adj;
 
 public:
     Graph()
@@ -39,7 +46,7 @@ public:
 
     Vertex *getVertex(int n)
     {
-        map<Vertex *, list<Vertex *> >::iterator itr = _adj.begin();
+        map<Vertex *, list<Vertex *> *>::iterator itr = _adj.begin();
 
         for (; itr != _adj.end(); ++itr)
         {
@@ -53,8 +60,36 @@ public:
     void addEdges(Vertex *v1, Vertex *v2)
     {
         //This is undirected graph.
-        _adj[v1].push_back(v2);
-        _adj[v2].push_back(v1);
+        //find v1
+        map<Vertex *, list<Vertex *> *>::iterator itrV1 = _adj.find(v1);
+        map<Vertex *, list<Vertex *> *>::iterator itrV2 = _adj.find(v2);
+
+        if (itrV1 != _adj.end())
+        {
+            cout << "v1..\n";
+            _adj[v1]->push_back(v2);
+        }
+        else
+        {
+            cout << "empty v1..\n";
+            list<Vertex *> *l = new list<Vertex *>();
+            l->push_back(v2);
+            _adj[v1] = l;
+
+        }
+
+        if (itrV2 != _adj.end())
+        {
+            cout << "v2..\n";
+            _adj[v2]->push_back(v1);
+        }
+        else
+        {
+            cout << "empty v2..\n";
+            list<Vertex *> *l = new list<Vertex *>();;
+            l->push_back(v1);
+            _adj[v2] = l;
+        }        
     }
 
     void BFS(Vertex *v)
@@ -69,8 +104,8 @@ public:
             Vertex *current = q.front();
             q.pop();
 
-            list<Vertex *>::iterator itr = _adj[current].begin();
-            for (; itr != _adj[current].end(); ++itr)
+            list<Vertex *>::iterator itr = _adj[current]->begin();
+            for (; itr != _adj[current]->end(); ++itr)
             {
                 if ((*itr)->_color == WHITE)
                 {
