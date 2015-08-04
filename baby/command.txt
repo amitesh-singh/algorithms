@@ -1,0 +1,7 @@
+set terminal pngcairo size 1024,768 enhanced
+set output "babyweight.png"
+set xlabel "Months"
+set ylabel "Weight (in Kg)"
+set yrange[2:]
+plot './baby_weight.txt' using 1:2 title 'baby weight' with linespoints
+set term x11
