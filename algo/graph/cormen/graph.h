@@ -63,7 +63,7 @@ class Graph
           {
              color[i] = white;
              parent[i] = -1;
-             d[i] = d[i] = 0;
+             d[i] = f[i] = 0;
           }
 
         time = 0; //initialize our timer
@@ -142,6 +142,8 @@ class Graph
           }
         //what we do in BFS?
         BFSCormen_Util(v, color);
+
+        delete [] color;
      }
 };
 
