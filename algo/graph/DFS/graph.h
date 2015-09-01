@@ -9,19 +9,25 @@ class Graph
 {
    int V;
    list<int> *adj; //Adjacency list.
+   enum Color {white, gray, black};
 
-   void DFSUtil(int v, bool visited[])
+   void DFSUtil(int v, Color color[])
      {
-        //we already visted 'v'
-        visited[v] = true;
+        color[v] = gray; //We discovered v, make it gray
         cout << v << " ";
 
         list<int>::iterator itr = adj[v].begin();
         for (; itr != adj[v].end(); ++itr)
           {
-             if (!visited[*itr])
-               DFSUtil(*itr, visited);
+             if (color[*itr] == white)
+               {
+                  color[*itr] = gray;
+                  DFSUtil(*itr, visited);
+               }
           }
+
+        color[v] = black; // We are done and make it black
+        cout << v << ",";
      }
 
  public:
@@ -46,14 +52,14 @@ class Graph
    //v -> the vertex from where we will start of DFS
    void DFS(int v)
      {
-        bool *visited = new bool[V];
+        Color *color = new Color[V];
 
         for (int i = 0; i < V; ++i)
-          visited[i] = false;
+          color[i] = white;
 
-        DFSUtil(v, visited);
+        DFSUtil(v, color);
 
-        delete [] visited;
+        delete [] color;
      }
 };
 
