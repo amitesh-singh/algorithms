@@ -69,17 +69,23 @@ public:
 
    void DFSCormen(int v)
      {
+        int time = 0;
         Color *color = new Color[V];
+        int *d = new int[V];
+        int *f = new int[V];
 
         for (int i = 0; i < V; ++i)
           {
              color[i] = white;
+             d[i] = f[i] = 0;
           }
 
         stack<int> s;
 
         s.push(v);
         color[v] = grey;
+        time = time + 1;
+        d[v] = time;
 
         while (!s.empty())
           {
@@ -92,16 +98,24 @@ public:
                     {
                        color[*itr] = grey;
                        s.push(*itr);
+                       ++time;
+                       d[*itr] = time;
                     }
                }
-             cout << current << ",";
+             time = time + 1;
+             f[current] = time;
+             cout << current << "(" << d[current] << "/" << f[current] << ")" <<
+                ",";
 
              color[current] = black;
           }
         cout << endl;
 
         delete [] color;
+        delete [] f;
+        delete [] d;
      }
-};
+
+}; //class ends
 
 #endif
