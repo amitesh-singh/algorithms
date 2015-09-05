@@ -49,7 +49,6 @@ class Graph
      {
         for (int i = 0; i < V; ++i)
           {
-             cout << "i: " << i << endl;
              for (int j = 0; j < V; ++j)
                {
                   cout << mempool[i][j] << " ";
@@ -68,7 +67,6 @@ class Graph
 
              stack<int> st;
              st.push(s);
-             cout << __func__ << endl;
 
              while (!st.empty())
                {

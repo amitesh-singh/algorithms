@@ -23,7 +23,7 @@ int main()
              g.addEdges(e1, e2);
           }
 
-        g.DFS(1);
+        g.DFS(0);
 
         //cout << "Loop: " << g.IsLoop() << endl;
 
