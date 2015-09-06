@@ -6,6 +6,8 @@ using namespace std;
 // This is our memory pool for allocating adj list.
 int mem[100][100];
 
+//its better to allocate it separately per stack obj?
+//TODO:
 int stackmem[100];
 class stack
 {
