@@ -1,0 +1,6 @@
+Can anyone suggest me a linear time algorithm that takes as input a directed acyclic graph G=(V,E) and two vertices s and t and returns the number of simple paths from s to t in G.
+I have an algorithm in which I will run a DFS(Depth First Search) but if DFS finds t then it will not change the color(from white to grey) of any of the nodes which comes in the path s⇝t so that if this is the subpath of any other path then also DFS goes through this subpath again.For example consider the adjacency list where we need to find the number of paths from p to v.
+posryvzworryvwzsszv
+Here DFS will start with p and then lets say it goes to p⇝z since it doesnot encounter v DFS will run normally.Now second path is psryv since it encounter v we will not change the color of vertices s,r,y,v to grey.Then the path pov since color of v is still white.Then the path posryv since color of s is white and similarly of path poryv.Also a counter is maintained which get incremented when v is encountered.
+
+Problem: 22-4.2 @ cormen, page no. 552

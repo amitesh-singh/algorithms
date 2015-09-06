@@ -33,7 +33,11 @@ int main()
           }
         cout << endl;
 
-        g.topologicalSort();
+        //g.topologicalSort();
+        //cout << "paths from 0 to 3: " << g.findPaths(0, 3);
+
+        g.findPathsAfterTS(0, 3);
+        cout << endl;
      }
 
    return 0;

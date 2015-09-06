@@ -3,6 +3,17 @@ https://allaboutalgorithms.wordpress.com
 http://codeforces.com/problemset
 http://acm.timus.ru/problemset.aspx?space=1&page=all&sort=difficulty
 https://projecteuler.net/archives
+http://courses.csail.mit.edu/iap/interview/materials.php
+https://www.topcoder.com/community/data-science/data-science-tutorials/
+https://www.interviewbit.com/invite/hebe
+http://everything2.com/title/hard%2520interview%2520questions
+http://www.intertechtion.com/answers/
+http://algomuse.appspot.com/
+http://www.dsalgo.com/2013/02/index.php.html
+http://codercareer.blogspot.in/
+http://www.hiredintech.com/app
+https://learn.hackerearth.com/
+
 
 
 2nd stage:
