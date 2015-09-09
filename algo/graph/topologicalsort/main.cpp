@@ -36,7 +36,8 @@ int main()
         //g.topologicalSort();
         //cout << "paths from 0 to 3: " << g.findPaths(0, 3);
 
-        g.findPathsAfterTS(0, 3);
+        //g.findPathsAfterTS(0, 3);
+		g.topologicalSortByIndegree();
         cout << endl;
      }
 
