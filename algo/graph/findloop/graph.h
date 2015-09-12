@@ -57,60 +57,58 @@ class Graph
           }
      }
 
-        enum Color {white, gray, black};
+   enum Color {white, gray, black};
 
-        void DFS_visit(int s, Color color[], int d[], int f[])
+   void DFS_visit(int s, Color color[], int d[], int f[])
+     {
+        time++;
+        d[s] = time;
+        color[s] = gray;
+
+        stack<int> st;
+        st.push(s);
+
+        while (!st.empty())
           {
-             time++;
-             d[s] = time;
-             color[s] = gray;
-
-             stack<int> st;
-             st.push(s);
-
-             while (!st.empty())
-               {
-                  int u = st.top();
-                  st.pop();
-                  int **itr = mempool;
-                  for (int i = 0; i < V; ++i)
-                    {
-                       if (itr[u][i] == -1) break;
-                       if (color[itr[u][i]] == white)
-                         {
-                            color[itr[u][i]] = gray;
-                            ++time;
-                            d[itr[u][i]] = time;
-                            st.push(itr[u][i]);
-                         }
-                    }
-                  color[u] = black;
-                  ++time;
-                  f[u] = time;
-                  cout << u << ",";
-               }
-             cout << endl;
-          }
-        void DFS(int s)
-          {
-             Color *color = new Color[V];
-             int *d = new int[V];
-             int *f = new int[V];
-
+             int u = st.top();
+             st.pop();
+             int **itr = mempool;
              for (int i = 0; i < V; ++i)
                {
-                  color[i] = white;
-                  d[i] = f[i] = 0;
+                  if (itr[u][i] == -1) break;
+                  if (color[itr[u][i]] == white)
+                    {
+                       color[itr[u][i]] = gray;
+                       ++time;
+                       d[itr[u][i]] = time;
+                       st.push(itr[u][i]);
+                    }
                }
-             print_mempool();
-
-             time = 0;
-             DFS_visit(s, color, d, f);
-
-             delete [] color;
-             delete [] d;
-             delete [] f;
+             color[u] = black;
+             ++time;
+             f[u] = time;
+             cout << u << ",";
           }
+        cout << endl;
+     }
+   void DFS(int s)
+     {
+        Color *color = new Color[V];
+        int *d = new int[V];
+        int *f = new int[V];
 
+        for (int i = 0; i < V; ++i)
+          {
+             color[i] = white;
+             d[i] = f[i] = 0;
+          }
+        print_mempool();
 
+        time = 0;
+        DFS_visit(s, color, d, f);
+
+        delete [] color;
+        delete [] d;
+        delete [] f;
+     }
 };
