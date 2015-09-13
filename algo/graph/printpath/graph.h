@@ -50,8 +50,8 @@ class Graph
 
         for (int i = 0; i < V; ++i)
           {
-             color[i] = white;
-             parent[i] = -1;
+             color[i] = white; //or memset(color, 0, sizeof(Color) * V)
+             parent[i] = -1; // or memset(parent, -1, sizeof(int) * V);
           }
 
         //prepare our parent relationship

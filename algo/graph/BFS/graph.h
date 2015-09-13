@@ -31,7 +31,7 @@ class Graph
      {
         queue<int> q;
         int *d = new int[V];
-        memset(d, 0, V);
+        memset(d, 0, V * sizeof(int));
 
         q.push(v);
         d[v] = 0;

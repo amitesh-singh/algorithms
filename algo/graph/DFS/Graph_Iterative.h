@@ -86,28 +86,27 @@ public:
         color[v] = grey;
         time = time + 1;
         d[v] = time;
+        int current = v;
+        cout << v << " ";
 
-        while (!s.empty())
+        while (!s.empty());
           {
-             int current = s.top();
+             cout << "hello..";
+             current = s.top();
              s.pop();
-             list<int>::iterator itr = adj[current].begin();
-             for (; itr != adj[current].end(); ++itr)
+             if (color[current] == white)
                {
-                  if (color[*itr] == white)
+                  color[current] = grey;
+                  cout << current << " ";
+                  list<int>::iterator itr = adj[current].begin();
+                  for (; itr != adj[current].end(); ++itr)
                     {
-                       color[*itr] = grey;
-                       s.push(*itr);
-                       ++time;
-                       d[*itr] = time;
+                       if (color[*itr] == white)
+                         {
+                            s.push(*itr);
+                         }
                     }
                }
-             time = time + 1;
-             f[current] = time;
-             cout << current << "(" << d[current] << "/" << f[current] << ")" <<
-                ",";
-
-             color[current] = black;
           }
         cout << endl;
 

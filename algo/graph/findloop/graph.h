@@ -153,8 +153,8 @@ class Graph
         bool *visited = new bool[V];
         bool *restack = new bool[V];
 
-        memset(visited, 0, V);
-        memset(restack, 0, V);
+        memset(visited, 0, V * sizeof bool);
+        memset(restack, 0, V * sizeof bool);
 
         bool found = false;
         for (int i = 0; i < V; ++i)
@@ -254,7 +254,7 @@ class Graph
         int *parent = new int[V];
 
         memset(color, 0, sizeof(Color) * V);
-        memset(parent, 0, V * sizeof(int));
+        memset(parent, -1, V * sizeof(int));
 
         print_mempool();
         for (int i = 0; i < 1; ++i)

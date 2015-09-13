@@ -51,7 +51,7 @@ public:
    void genericGraphSearch(int node)
      {
         bool *visited = new bool[_vertices];
-        memset(visited, 0, _vertices);
+        memset(visited, 0, _vertices * sizeof(bool));
 
         visited[node] = true;
         for (int col = 0; col < _vertices; ++col)

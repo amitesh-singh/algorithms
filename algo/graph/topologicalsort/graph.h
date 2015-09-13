@@ -106,8 +106,8 @@ class Graph
          Color *color = new Color[_V];
          int *paths = new int[_V];
 
-         memset(paths, 0, _V);
-         memset(color, 0, _V);
+         memset(paths, 0, _V * sizeof Color);
+         memset(color, 0, _V * sizeof int);
 
          //paths[s] = 1;
 
@@ -144,8 +144,8 @@ class Graph
          Color *color = new Color[_V];
          int *arr = new int[_V];
 
-         memset(color, 0, _V);
-         memset(arr, -1, _V);
+         memset(color, 0, _V * sizeof Color);
+         memset(arr, -1, _V * sizeof int);
          int i = 0;
 
          topoSortUtil(s, color, arr, i);
