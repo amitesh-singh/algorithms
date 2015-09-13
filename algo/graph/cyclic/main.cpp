@@ -1,36 +1,33 @@
 #include "graph.h"
+#include <cstdio>
+#include <cstring>
+
+int TestCases;
+int  testCase;
+int V, E;
+int e1, e2;
 
 int main()
 {
-   Graph g(4, true);
+   freopen("input.txt", "r", stdin);
+   cin >> TestCases;
 
-   g.addEdges(0, 1);
-   g.addEdges(0, 2);
-   g.addEdges(2, 0);
-   g.addEdges(2, 1);
-   g.addEdges(0, 3);
-   g.addEdges(2, 3);
-   g.addEdges(3, 3);
+   for (testCase = 1; testCase <= TestCases; ++testCase)
+     {
+        cin >> V >> E;
 
-   //start the DFS from '2'
-   g.DFS(2);
-   cout << endl;
-
-   //start the DFS from '0'
-   g.DFS(0);
-   cout << endl;
-   cout << "Is graph cyclic? " << g.isCyclic() << endl;
-   cout << "Is graph cyclic ~~ iterative? " << g.isCyclicIterative() << endl;
-
-   Graph g2(3, true);
-
-   g2.addEdges(0, 1);
-   g2.addEdges(1, 2);
-   //g2.addEdges(0, 2);
-   //this does not work!!
-   //Remember DFS does not work for directed graph
-   cout << "Is graph cyclic? " << g2.isCyclic() << endl;
-   cout << "Is graph cyclic ~~ iterative? " << g2.isCyclicIterative() << endl;
+        Graph g(V, true);
+        cout << "START------------------------\n";
+        for (int i = 0; i < E; ++i)
+          {
+             cin >> e1 >> e2;
+             cout << "(" << e1 << "," << e2 << ") ";
+             g.addEdge(e1, e2);
+          }
+        cout << endl;
+        cout << "Is Graph cycle: " << g.isCyclic() << endl;
+        cout << "END------------------------\n";
+     }
 
    return 0;
 }
