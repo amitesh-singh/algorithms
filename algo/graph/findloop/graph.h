@@ -111,4 +111,72 @@ class Graph
         delete [] d;
         delete [] f;
      }
+
+   //Question:
+   // Find loop and print the loop.
+   // If no loop  is found, print "no loop found"
+
+   bool findCycleUtil(int s, bool visited[], bool restack[])
+     {
+        if (visited[s] == false)
+          {
+             visited[s] = true;
+             restack[s] = true;
+
+             int **itr = mempool;
+             int u = 0;
+             for (int i = 0; i < V; ++i)
+               {
+                  u = itr[s][i];
+                  if (u != -1)
+                    {
+                       if (visited[u] == false)
+                         {
+                            if (findCycleUtil(u, visited, restack))
+                              return true;
+                         }
+                       else if (restack[u])
+                         return true;
+                    }
+               }
+          }
+
+        restack[s] = false;
+        return false;
+     }
+
+   void findCycle()
+     {
+        bool *visited = new bool[V];
+        bool *restack = new bool[V];
+
+        memset(visited, 0, V);
+        memset(restack, 0, V);
+
+        bool found = false;
+        for (int i = 0; i < V; ++i)
+          {
+             if ((found = findCycleUtil(i, visited, restack)))
+               break;
+          }
+        if (found)
+          {
+             cout << "Loop found\n";
+             //Lets print the loop
+             // We know restack will have the enteries
+             //TODO: This is wrong... need to think how to print loops in a direct graph
+             for (int i = 0; i < V; ++i)
+               {
+                  if (restack[i] == true)
+                    cout << i << " ";
+               }
+             cout << endl;
+          }
+        else
+          cout << "No loop found\n";
+
+
+        delete [] visited;
+        delete [] restack;
+     }
 };
