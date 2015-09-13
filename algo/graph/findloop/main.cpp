@@ -15,22 +15,21 @@ int main()
      {
         // read the no. of vertices
         cin >> V >> E;
-        Graph g(V, false);
+        Graph g(V, true);
         for (int i = 0; i < E; ++i)
           {
              //read edges.
              cin >> e1 >> e2;
+             cout << "(" << e1 << "," << e2 << ") ";
              g.addEdges(e1, e2);
           }
+        cout << "\n";
 
         cout << "---------- START --------\n";
-        g.findCycle();
+        //g.findCycle();
         cout << "Back Edges: \n";
         g.findBackEdges();
         cout << "---------- END --------\n";
-
-        //cout << "Loop: " << g.IsLoop() << endl;
-
      }
 
    return 0;

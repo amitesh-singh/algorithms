@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stack>
 #include <string.h>
+#include <vector>
+#include <cstdlib> // abort()
 
 using namespace std;
 
@@ -49,6 +51,7 @@ class Graph
      {
         for (int i = 0; i < V; ++i)
           {
+             cout << i << ": ";
              for (int j = 0; j < V; ++j)
                {
                   cout << mempool[i][j] << " ";
@@ -162,14 +165,6 @@ class Graph
         if (found)
           {
              cout << "Loop found\n";
-             //Lets print the loop
-             // We know restack will have the enteries
-             //TODO: This is wrong... need to think how to print loops in a direct graph
-             for (int i = 0; i < V; ++i)
-               {
-                  if (restack[i] == true)
-                    cout << i << " ";
-               }
              cout << endl;
           }
         else
@@ -180,6 +175,7 @@ class Graph
      }
 
    // This finds the back edges in a direct graph
+   // and print each cycle
    /*
       How can we detect back edges with DFS? For
       undirected graphs, easy: see if we’ve visited
@@ -190,42 +186,92 @@ class Graph
       is still GRAY, we have a back edge.
       */
 
-   void findBackEdgesUtil(int s, Color color[])
+   struct Edge
      {
+        int e1, e2;
+        Edge(int _e1, int _e2): e1(_e1), e2(_e2) {}
+        void print()
+          {
+             cout << "(" << e1 << "," << e2 << ")";
+          }
+     };
+
+   vector<Edge> edges;
+
+   void findBackEdgesUtil(int s, Color color[], int parent[])
+     {
+        //cout << "********************* " << s << "****************\n";
         int u;
         if (color[s] == white)
           {
+             //cout << s << " is grey now\n";
              color[s] = gray;
              for (int i = 0; i < V; ++i)
                {
                   u = mempool[s][i];
                   if (u != -1)
                     {
+                       //cout << "color [" << u << "] = " << color[u] << endl;
                        if (color[u] == white)
-                         findBackEdgesUtil(u, color);
+                         {
+                            parent[u] = s;
+                            findBackEdgesUtil(u, color, parent);
+                         }
                        else if (color[u] == gray)
                          {
                             cout << "Boom!, we have a back edge: (" << s << "," << u << ")";
                             cout << endl;
+                            edges.push_back(Edge(s, u));
                          }
                     }
                }
           }
-        else if (color[s] == gray)
+        //cout << s << " is black now\n";
+        color[s] = black;
+        //cout << "********************* FINISH  " << s << "****************\n";
+     }
+
+   void printPath(int v1, int v2, int parent[])
+     {
+        if (v1 == v2)
           {
-             color[s] = black;
+             cout << v1 << " ";
+          //abort();
+          }
+        else if (parent[v2] == -1)
+          cout << "No path found\n";
+        else
+          {
+             //cout << v1 << ", " << v2 << endl;
+             printPath(v1, parent[v2], parent);
+             cout << v2 << " ";
           }
      }
 
    void findBackEdges()
      {
         Color *color = new Color[V];
+        int *parent = new int[V];
 
-        memset(color, 0, V);
+        memset(color, 0, sizeof(Color) * V);
+        memset(parent, 0, V * sizeof(int));
 
-        for (int i = 0; i < V; ++i)
-          findBackEdgesUtil(i, color);
+        print_mempool();
+        for (int i = 0; i < 1; ++i)
+          findBackEdgesUtil(i, color, parent);
+
+        cout << "no. of back edges: " << edges.size() << endl;
+        for (int i = 0; i < edges.size(); ++i)
+          {
+             edges[i].print();
+             cout << ";";
+             cout << "Path: ";
+             printPath(edges[i].e2, edges[i].e1, parent);
+             cout << endl;
+          }
+        cout << endl;
 
         delete [] color;
+        delete [] parent;
      }
 };
