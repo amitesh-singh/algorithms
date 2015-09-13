@@ -175,8 +175,57 @@ class Graph
         else
           cout << "No loop found\n";
 
-
         delete [] visited;
         delete [] restack;
+     }
+
+   // This finds the back edges in a direct graph
+   /*
+      How can we detect back edges with DFS? For
+      undirected graphs, easy: see if we’ve visited
+      the vertex before, i.e. color ≠ WHITE.
+      For directed graphs: Recall that we color a
+      vertex GRAY while its adjacent vertices are
+      being explored. If we re-visit the vertex while it
+      is still GRAY, we have a back edge.
+      */
+
+   void findBackEdgesUtil(int s, Color color[])
+     {
+        int u;
+        if (color[s] == white)
+          {
+             color[s] = gray;
+             for (int i = 0; i < V; ++i)
+               {
+                  u = mempool[s][i];
+                  if (u != -1)
+                    {
+                       if (color[u] == white)
+                         findBackEdgesUtil(u, color);
+                       else if (color[u] == gray)
+                         {
+                            cout << "Boom!, we have a back edge: (" << s << "," << u << ")";
+                            cout << endl;
+                         }
+                    }
+               }
+          }
+        else if (color[s] == gray)
+          {
+             color[s] = black;
+          }
+     }
+
+   void findBackEdges()
+     {
+        Color *color = new Color[V];
+
+        memset(color, 0, V);
+
+        for (int i = 0; i < V; ++i)
+          findBackEdgesUtil(i, color);
+
+        delete [] color;
      }
 };

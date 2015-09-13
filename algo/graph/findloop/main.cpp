@@ -23,8 +23,11 @@ int main()
              g.addEdges(e1, e2);
           }
 
-        //g.DFS(0);
+        cout << "---------- START --------\n";
         g.findCycle();
+        cout << "Back Edges: \n";
+        g.findBackEdges();
+        cout << "---------- END --------\n";
 
         //cout << "Loop: " << g.IsLoop() << endl;
 
