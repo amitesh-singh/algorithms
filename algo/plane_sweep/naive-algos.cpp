@@ -22,9 +22,7 @@ struct Point
 
    double distance(Point &p)
      {
-        double d;
-        d = sqrt((x - p.x)*(x - p.x) + (y - p.y)*(y - p.y));
-
+        double d = sqrt((x - p.x)*(x - p.x) + (y - p.y)*(y - p.y));
         return d;
      }
 
