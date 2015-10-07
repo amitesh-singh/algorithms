@@ -11,33 +11,6 @@ class Graph
    int V;
    list<int> *adj; //Adjacency list
 
-   void DFSUtil(int v, bool visited[])
-   {
-      stack<int> s;
-
-      s.push(v);
-      visited[v] = true;
-
-      while (!s.empty())
-      {
-         int visited_node = s.top();
-         s.pop();
-         cout << visited_node << " ";
-
-         list<int>::iterator itr = adj[visited_node].begin();
-         for (; itr != adj[visited_node].end(); ++itr)
-         {
-            //push all the children into stack
-            if (!visited[*itr])
-              {
-                 s.push(*itr);
-                 visited[*itr] = true;
-              }
-         }
-      }
-      cout << endl;
-   }
-
 public:
    // n -> no .of vetices
    // dir -> directed or undirected.
@@ -50,17 +23,6 @@ public:
       adj[v].push_back(w);
       if (!directed)
          adj[w].push_back(v);
-   }
-
-   void DFS(int v)
-   {
-      bool *visited = new bool[V];
-      for (int i = 0; i < V; ++i)
-      {
-         visited[i] = false;
-      }
-
-      DFSUtil(v, visited);
    }
 
    enum Color {white, grey, black};
@@ -90,9 +52,11 @@ public:
         cout << v << " is discovered now\n";
 
         bool isAllChildrenFinished = true;
+        int count = 0;
 
         while (!s.empty())
           {
+             ++count;
              reprocess = false;
              isAllChildrenFinished = true;
              current = s.top();
@@ -107,12 +71,13 @@ public:
                        s.push(*itr);
                        isAllChildrenFinished = false;
                        reprocess = true;
+                       d[*itr] = ++time;
                        cout << (int)(*itr) << " is discovered now\n";
                        break;
                     }
                   else if (color[*itr] == grey)
                     {
-                       isAllChildrenFinished = false;
+                       isAllChildrenFinished = true;
                     }
                }
 
@@ -124,9 +89,10 @@ public:
                   f[current] = ++time;
                   s.pop();
                   color[current] = black;
-                  cout << current << "is black now\n";
+                  cout << current << "(" << d[current] << "/" << f[current] << ") is black now\n";
                }
-          };
+          }
+        cout << "total iterations in while loop: " << count << endl;
         cout << endl;
 
         delete [] color;
@@ -136,19 +102,30 @@ public:
 
 }; //class ends
 
+int T;
+int V, E;
+int v1, v2;
 
 int main()
 {
-   //undirected graph
+   // Iterative Graph traveral
 
-   cout << "Directed Graph: ";
-   Graph g2(3, true);
+   freopen("input.txt", "r", stdin);
+   cin >> T;
 
-   g2.addEdges(0, 1);
-   g2.addEdges(1, 2);
+   for (int testCase = 1; testCase <= T; ++testCase)
+     {
+        cin >> V >> E;
+        Graph g(V, true);
 
-   cout << "corment DFS:";
-   g2.DFSCormen(0);
+        for (int i = 0; i < E; ++i)
+          {
+             cin >> v1 >> v2;
+             g.addEdges(v1, v2);
+          }
+
+        g.DFSCormen(0);
+     }
 
    return 0;
 }
