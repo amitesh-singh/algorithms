@@ -65,6 +65,7 @@ class Graph
 
     void addEdge(int v1, int v2, int w)
       {
+         // note, it is a directed graph basically.
          for (int i = 0; i < 4; ++i)
            {
               if (mem[v1][i] == -1)
@@ -73,6 +74,7 @@ class Graph
                    break;
                 }
            }
+
          weight[v1][v2] = w;
       }
 
@@ -110,30 +112,50 @@ class Graph
            }
       }
 
-    int bellmanFord(int s)
+    int minDistance(int d[], bool tree[])
       {
-         initializeSource(s);
-         // Relax each edge with V - 1
-         unsigned x = 0;
-         //cout << "V: " << V << endl;
-         for (int count = 1; count <= V - 1; ++count)
+         int minIndex, min = INF;
+
+         for (int v = 0; v < V; ++v)
            {
-              for (int i = 0; i < V; ++i)
+              if (tree[v] == false && d[v] < min)
                 {
-                   for (int j = 0; j < 4; ++j)
-                     {
-                        ++x;
-                        if (mem[i][j] == -1)
-                          {
-                             //cout << "breaking loop " << endl;
-                             break;
-                          }
-                        relax(i, mem[i][j]);
-                     }
+                   minIndex = v;
+                   min = d[v];
                 }
            }
 
-         cout << "BF time: " << x << endl;
+         return minIndex;
+      }
+
+    int dijkstra(int s)
+      {
+         initializeSource(s);
+         bool *tree = new bool[V];
+
+         memset(tree, 0, sizeof(bool) * V);
+         // Relax each edge with V - 1
+         unsigned x = 0;
+//         cout << "V: " << V << endl;
+         for (int count = 0; count < V - 1; ++count)
+           {
+              int u = minDistance(d, tree);
+
+              tree[u] = true;
+
+              for (int i = 0; i < 4; ++i)
+                {
+                   ++x;
+                   if (mem[u][i] == -1)
+                     break;
+
+                   relax(u, mem[u][i]);
+                }
+           }
+
+         cout << " time: " << x << endl;
+
+         delete [] tree;
 
          // return DEST position distance
          return d[V - 1];
@@ -190,7 +212,7 @@ int main()
           }
 
         //g.print();
-        cout << "#" << testCase << " " << g.bellmanFord(0) << endl;
+        cout << "#" << testCase << " " << g.dijkstra(0) << endl;
 
      }
 
