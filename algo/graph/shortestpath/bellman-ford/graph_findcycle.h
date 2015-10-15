@@ -60,6 +60,9 @@ class Graph
                }
           }
 
+        bool *unrelaxedEdges = new bool[V];
+        memset(unrelaxedEdges, 0, sizeof(bool) * V);
+
         int row = 0;
         for (; row < V; ++row)
           {
@@ -68,15 +71,20 @@ class Graph
                {
                   if (d[row] != INFINITY && d[*itr] > d[row] + W[row][*itr])
                     {
-                       cout << "Negative Weight Cycle found\n";
-                       return false;
+                       cout << row << "---" << *itr << " Negative Weight Cycle found\n";
+                       unrelaxedEdges[*itr] = true;
+                       //return false;
                     }
                }
           }
 
         for (int i = 0; i < V; ++i)
           {
-             cout << "d[" << i << "] = " << d[i] << endl;
+             cout << "d[" << i << "] = " << d[i];
+             if (unrelaxedEdges[i])
+               cout << "----> unrelaxed edge\n";
+             else
+               cout << "\n";
           }
 
         return true;
