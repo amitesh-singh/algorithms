@@ -173,70 +173,70 @@ class Graph
 
 
     //This is based on Cormen book exercise 22-4.last question
-	//We will be using in-degree propery of vertices.
-	// Steps:
-	// 1. popuplate in-degree[V] in addEdge() function
-	// 2. traverse whole in-degree and push those vertices with in-degree[i] == 0 into queue
-	// 3. add check if Q is empty, G is cycle 
-	// 4. process till Q is not empty, print Q.front() and pop form Q
-	//    process neighbours and decrement their in-degree by one and push those into
-	//    Q if in-degree[v] == 0
-	//      Q.push(v)
+    //We will be using in-degree propery of vertices.
+    // Steps:
+    // 1. popuplate in-degree[V] in addEdge() function
+    // 2. traverse whole in-degree and push those vertices with in-degree[i] == 0 into queue
+    // 3. add check if Q is empty, G is cycle 
+    // 4. process till Q is not empty, print Q.front() and pop form Q
+    //    process neighbours and decrement their in-degree by one and push those into
+    //    Q if in-degree[v] == 0
+    //      Q.push(v)
 
-	void topologicalSortByIndegree()
-	{
-		queue<int> Q;
-		unsigned int count = 0;
-		int *arr = new int[_V];
-		for (int i = 0; i < _V; ++i)
-		{
-			if (inDegree[i] == 0)
-			{
-				Q.push(i);
-				++count;
-				//cout << "count : " << count << endl;
-			}
-		}
+    void topologicalSortByIndegree()
+      {
+         queue<int> Q;
+         unsigned int count = 0;
+         int *arr = new int[_V];
+         for (int i = 0; i < _V; ++i)
+           {
+              if (inDegree[i] == 0)
+                {
+                   Q.push(i);
+                   ++count;
+                   //cout << "count : " << count << endl;
+                }
+           }
 
-		if (Q.empty()) 
-		{
-			cout << "There are no in-degree = 0 vertices, This graph has a cycle\n";
-			return;
-		}
-		int i = 0;
-		while (!Q.empty())
-		{
-			int q = Q.front();
-			Q.pop();
-			cout << q << " " ;
-			arr[i++] = q;
+         if (Q.empty()) 
+           {
+              cout << "There are no in-degree = 0 vertices, This graph has a cycle\n";
+              return;
+           }
+         int i = 0;
+         while (!Q.empty())
+           {
+              int q = Q.front();
+              Q.pop();
+              cout << q << " " ;
+              arr[i++] = q;
 
-			list<int>::iterator itr = adj[q].begin();
-			for (; itr != adj[q].end(); ++itr)
-			{
-				int v = *itr;
-				inDegree[v]--;
+              list<int>::iterator itr = adj[q].begin();
+              for (; itr != adj[q].end(); ++itr)
+                {
+                   int v = *itr;
+                   inDegree[v]--;
 
-				if (inDegree[v] == 0)
-				{
-					Q.push(v);
-					++count;
-					//cout << "count : " << count << endl;
-				}
-			}	
-		}
+                   if (inDegree[v] == 0)
+                     {
+                        Q.push(v);
+                        ++count;
+                        //cout << "count : " << count << endl;
+                     }
+                }	
+           }
 
-		if (count < _V)
-		{
-			cout << "Graph has cycle" << endl;
-			return;
-		}
+         if (count < _V)
+           {
+              cout << "Graph has cycle" << endl;
+              return;
+           }
 
-		for (i = _V - 1; i >= 0; --i)
-			cout << arr[i] << " ";
-		cout << endl;
+         for (i = _V - 1; i >= 0; --i)
+           cout << arr[i] << " ";
+         cout << endl;
 
-	}
+      }
 
 
 };
