@@ -1,3 +1,5 @@
+// https://www.hackerearth.com/code-monk-graph-theory-i/algorithm/kingdom-of-monkeys/
+
 #include <iostream>
 #include <cstdio>
 #include <list>
