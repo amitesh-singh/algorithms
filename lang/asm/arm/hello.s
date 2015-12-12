@@ -12,10 +12,10 @@ _start:
 //         r0      r1                   r2
 // write(int fd, const void *buf, size_t len);
 /* write syscall */
-mov %r0, $1 
+mov %r0, #1  // both $1 and #1 are allowed.
 ldr %r1, =msg 
 ldr %r2, =len 
-mov %r7, $4 /* syscall of write() goes to r7*/
+mov %r7, #4 /* syscall of write() goes to r7*/
 swi $0 // software interrupt
 
 //       r0
