@@ -102,6 +102,12 @@ class Graph
      {
        cout << "d[" << v << "] = " << d[v] << endl;
      }
+     for (int v = 0; v < V; ++v)
+     {
+        if (tree[v])
+          cout << v << " ";
+     }
+     cout << endl;
    }
 
    void addEdge(int e1, int e2, int w)

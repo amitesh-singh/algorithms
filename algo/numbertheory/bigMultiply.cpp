@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdio>
+#include <vector>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ populateStringFromInt(long long a)
    sprintf(buf, "%lld", a);
    return string(buf);
 }
-#include <vector>
+
 static string
 multiplyTwoStrings(string s1, string s2)
 {
