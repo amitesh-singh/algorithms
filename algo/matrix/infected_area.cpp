@@ -34,7 +34,7 @@ _util(int **m, int **sol, int r, int c, int &ret)
         return;
 
    sol[r][c] = 1;
-   //check left, right, top, bottom and diagonals = 8 directions
+   //check left, right, top, bottom  - 4 directions
 
    //Left
    if (isSafe(m, r, c - 1) && !sol[r][c - 1])
