@@ -13,8 +13,8 @@ output:
    connect all given nodes
 
    e.g. 4
-   0--------1 
-   | \    / | 
+   0--------1
+   | \    / |
    |__\__/__|
    2--------3
 
@@ -73,8 +73,9 @@ class Graph
                }
              visited[i] = true;
           }
-     }
 
+          delete [] visited;
+     }
 };
 
 int T, N;
