@@ -1,7 +1,8 @@
 //
 // this example shows the matrix bfs traversal level. We have a matrix named bfs_matrix[][] which shows the
 // level of traversal from a point - very good conceptual
-//
+// this is helful in case of you need to know who gonna win a race if two objects are present
+// in matrix and everybody is running.
 
 #include <iostream>
 #include <cstdio>

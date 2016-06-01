@@ -56,6 +56,20 @@ _bfsUtil(int x, int y)
         x = curr.r_;
         y = curr.c_;
 
+//You can make below code simpler
+// const int dr = {-1, 1, 0, 0}; Up, Down, Left, right for row
+// const int dc = {0, 0, -1, 1};
+// for (int i = 0; i < 4; ++i)
+// {
+//   int ddr = r + dr[i];
+//   int ddc = c + dr[i];
+//   if (isSafe(ddr, ddc) && color[ddr][ddc] == white)
+//     {
+//        color[ddr][ddc] = grey; q.push(Pos(ddr, ddc));
+//     }
+// }
+// The above code is simpler and easy to debug; follow this from now onwards.
+//
         //Left
         if (isSafe(x, y - 1))
           {
