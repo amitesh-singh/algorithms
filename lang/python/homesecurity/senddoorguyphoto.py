@@ -12,6 +12,7 @@ from email import encoders
 """ first dowload the photo"""
 urllib.urlretrieve ("http://192.168.0.105:8080/photo.jpg", "/tmp/photo.jpg")
 """note: photoaf.jpg - take focused photo"""
+"""Pavel's(ip webcam author) tip: http://ip:8080/shot.jpg, if you want the same resolution as video, and no delay.  """
 
 timeformat = "%H:%M:%S"
 dateformat = "%d/%m/%Y"
