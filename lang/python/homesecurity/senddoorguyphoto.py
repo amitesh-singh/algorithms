@@ -8,10 +8,14 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.MIMEBase import MIMEBase
 from email import encoders
+# how to install; pip install readchar
+import readchar
 
 while 1:
-
-   x = raw_input("want to send photo?")
+   print "want to send photo? "
+#x = raw_input("want to send photo?")
+   x = readchar.readchar()
+   print repr(x)
 
    if x == 'x':
 
