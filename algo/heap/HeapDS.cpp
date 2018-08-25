@@ -40,7 +40,7 @@ class Heap
         int n = mSize;
         int *temp = new int[mSize];
         int k = 0;
-        for(int i =n;i>0;++i)
+        for(int i =n;i>0;--i)
           {
              temp[k++] = mArr[0];
              //cout << mArr[0] << ",";
