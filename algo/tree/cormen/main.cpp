@@ -6,25 +6,28 @@ struct node
 {
    int key;
    node *left, *right;
-
+   node *parent;
    node(int k = 0, node *l = 0, node *r = 0): key(k), left(l), right(r)
    {
+       parent = 0;
    }
 };
 
-void insert(node *&root, int k)
+void insert(node *&root, int k, node *p = 0)
 {
     if (root == 0)
     {
         node *newnode = new node(k);
+        newnode->parent = p;
         root = newnode;
+
         return;
     }
 
     if (k < root->key)
-        insert(root->left, k);
+        insert(root->left, k, root);
     else if (k > root->key)
-        insert(root->right, k);
+        insert(root->right, k, root);
     else
       ; //duplicate, don't do anything
 }
@@ -40,6 +43,18 @@ node *search(node *root, int k)
         return search(root->right, k);
 }
 
+node *iterativeSearch(node *root, int k)
+{
+    while (root != 0 && k != root->key)
+    {
+        if (k < root->key)
+            root = root->left;
+        else
+            root = root->right;
+    }
+
+    return root;
+}
 
 void inorder(node *root)
 {
@@ -79,6 +94,61 @@ node *findMax(node *root)
         return findMax(root->right);
 }
 
+node *successor(node *root)
+{
+    if (root == 0) return 0;
+    if (root->right)
+        return findMin(root->right);
+    node *p = root->parent;
+    while (p && root == p->right)
+    {
+        root = p;
+        p = root->parent;
+    }
+    
+    return p;
+}
+
+void remove(node *&root, int k)
+{
+    if (root == 0) return;
+    if (k < root->key)
+        remove(root->left, k);
+    else if (k > root->key)
+        remove(root->right, k);
+    else if (root->left && root->right)
+    {
+        root->key = findMin(root->right)->key;
+        remove(root->right, root->key);
+    }
+    else
+    {
+        node *tmp = root;
+        if (root->left)
+            root = root->left;
+        else
+            root = root->right;
+        
+        delete tmp;
+    }
+}
+
+void deleteTree(node *&root)
+{
+    if (root == 0) return;
+    deleteTree(root->left);
+    deleteTree(root->right);
+    delete root;
+    root = 0;
+}
+
+
+int height(node *root)
+{
+   if (root == 0) return 0;
+   return std::max(height(root->left), height(root->right)) + 1;
+}
+
 int main()
 {
    int T;
@@ -99,7 +169,8 @@ int main()
            insert(root, number);
        }
 
-       cout << "finding 11: " << search(root, 11)->key << endl;
+       //cout << "finding 11: " << search(root, 11)->key << endl;
+       //cout << "finding 11 using iterativeSearch: " << iterativeSearch(root, 11)->key << endl;
        cout << "inorder: ";
        inorder(root);
        
@@ -112,6 +183,15 @@ int main()
        cout << "min is: " << findMin(root)->key << endl;
        
        cout << "max is: " << findMax(root)->key << endl;
+       cout << "successor(9) is: " << successor(search(root, 9))->key << endl;
+       cout << "height=" << height(root) << "\n";
+       cout << "delete 9: " << endl;
+       remove(root, 9);
+
+       inorder(root);
+       cout << "clean the root: ";
+       deleteTree(root);
+       cout << "root address is : " << root << endl;
    }
 
    return 0;
