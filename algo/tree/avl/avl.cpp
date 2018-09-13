@@ -132,10 +132,17 @@ void remove(node *&root, int k)
      remove(root->right, k);
    else if (root->left && root->right)
      {
+        root->key = findMin(root->right)->key;
+        remove(root->right, root->key);
      }
    else
      {
+        node *tmp = root;
+        if (root->left) root = root->left;
+        else root = root->right;
      }
+
+   balance(root);
 }
 
 int main()
@@ -145,6 +152,11 @@ int main()
    insert(root, 9);
    insert(root, 89);
    insert(root, 56);
+
+   preorder(root);
+
+   cout << "Deleted 9\n";
+   remove(root, 9);
 
    preorder(root);
 
