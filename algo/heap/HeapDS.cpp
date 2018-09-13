@@ -140,7 +140,7 @@ class heap
            }
          else
            {
-              while (i != 1 && A[parent(i) > A[i]])
+              while (i != 1 && A[parent(i)] > A[i])
                 {
                    std::swap(A[parent(i)], A[i]);
                    i = parent(i);
@@ -152,6 +152,9 @@ class heap
 int main()
 {
    int arr[] = { 4, 5 , 9, -1, 0, 98, 234, 45};
+   
+   cout << "\nMax heap: \n";
+   cout << endl;
    heap<MAX> maxheap(arr, sizeof(arr)/sizeof(int));
    maxheap.build();
    maxheap.print();
@@ -165,6 +168,21 @@ int main()
    cout << "inserting 11 into heap:\n";
    maxheap.insert(11);
    maxheap.print();
+   cout << "max now is: " << maxheap.pop() << endl;
+
+   cout << "\nMin heap: \n\n";
+
+   heap<MIN> minheap(arr, sizeof(arr)/sizeof(int));
+   minheap.build();
+   minheap.print();
+
+   cout << "min is: " << minheap.getMin() << endl;
+   minheap.pop();
+   minheap.print();
+
+   minheap.insert(11);
+   minheap.print();
+   cout << "min now is and popped it: " << minheap.pop() << endl;
 
    return 0;
 }
