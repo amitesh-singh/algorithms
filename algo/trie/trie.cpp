@@ -69,6 +69,56 @@ bool search(node *root, string key)
    return (tmp && tmp->isLastWord);
 }
 
+bool haveChildren(node *root)
+{
+   for (int i = 0; i < ALPHABETIC_SIZE; ++i)
+     {
+        if (root->children[i])
+          return true;
+     }
+
+   return false;
+}
+
+bool remove(node *&curr, string key)
+{
+   if (curr == 0) return false;
+
+   if (key.length())
+     {
+        int index = key[0] - 'a';
+        if (curr && curr->children[index] &&
+            remove(curr->children[index], key.substr(1)) &&
+            curr->isLastWord == false)
+          {
+             if (!haveChildren(curr))
+               {
+                  delete curr;
+                  curr = 0;
+                  return true;
+               }
+             else
+               return false;
+          }
+     }
+   if (key.length() == 0 && curr->isLastWord)
+     {
+        if (!haveChildren(curr))
+          {
+             delete curr;
+             curr = 0;
+             return true;
+          }
+        else
+          {
+             curr->isLastWord = false;
+             return false;
+          }
+     }
+
+   return false;
+}
+
 int main()
 {
    node *root = 0;
@@ -84,6 +134,11 @@ int main()
    cout << "searching for amit: " << search(root, "amit") << endl;
    cout << "searching for avi: " << search(root, "avi") << endl;
    cout << "searching for avit: " << search(root, "avit") << endl;
+
+   cout << "deleting amit: " << remove(root, "amit") << endl;
+   cout << "searching for amit: " << search(root, "amit") << endl;
+
+   printTrie(root);
 
    return 0;
 }
