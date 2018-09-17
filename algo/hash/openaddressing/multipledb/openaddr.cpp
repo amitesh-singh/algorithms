@@ -52,7 +52,7 @@ void hashinsert(int &hashindex, hashtable *ht, char name[MAX_LEN], char email[MA
 
    while (ht[index].status == 1)
      {
-        index = (index + index) % hashtablesize;
+        index = (index + 1) % hashtablesize;
         if (index == hashindex)
           {
              cerr << __func__ << "hash is full\n";
@@ -92,7 +92,7 @@ void search(char data[MAX_LEN], hashtable *ht, char dataout[MAX_LEN], int dataty
                   return;
                }
           }
-        index = (index + index) % hashtablesize;
+        index = (index + 1) % hashtablesize;
         if (index == hashindex)
           {
              cerr << "not found\n";
@@ -141,7 +141,7 @@ void del(char name[MAX_LEN])
           {
              break;
           }
-        index = (index + index) % hashtablesize;
+        index = (index + 1) % hashtablesize;
         if (index == hashindex)
           {
              cerr << "del - unable to delete, data available\n";

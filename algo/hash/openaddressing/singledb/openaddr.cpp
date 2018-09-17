@@ -47,7 +47,7 @@ int getIndex(int initialIndex)
    while (hashTable[finalIndex].statushash == 1)
      {
         //linear probe
-        finalIndex = (finalIndex + finalIndex) % HASHTABLESIZE;
+        finalIndex = (finalIndex + 1) % HASHTABLESIZE;
         if (finalIndex == initialIndex)
           {
              cerr << "Table is full\n" << endl;
@@ -81,7 +81,7 @@ int search(char *key)
              break;
           }
 
-        finalIndex = (finalIndex + finalIndex) % HASHTABLESIZE;
+        finalIndex = (finalIndex + 1) % HASHTABLESIZE;
         if (finalIndex == index)
           {
              cerr << "Not found" << endl;
