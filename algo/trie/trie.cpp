@@ -29,14 +29,13 @@ void insert(node *&root, string key)
    for (int i = 0; i < key.length(); ++i)
      {
         int index = key[i] - 'a';
-       // cout << key[i] << endl;
 
         if (!tmp->children[index])
           tmp->children[index] = new node(false, key[i]);
          tmp = tmp->children[index];
      }
 
-   if (tmp) tmp->isLastWord = true;
+   tmp->isLastWord = true;
 }
 
 
