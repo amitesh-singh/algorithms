@@ -8,7 +8,7 @@ struct node
     int height;
     node *left, *right;
 
-    node(int k = 0, node *l = 0, node *r = 0): key(k), left(l), right(r)
+    node(int k = 0, node *l = 0, node *r = 0): key(k), left(l), right(r), height(0)
    {
    }
 };
@@ -140,6 +140,7 @@ void remove(node *&root, int k)
         node *tmp = root;
         if (root->left) root = root->left;
         else root = root->right;
+        delete tmp;
      }
 
    balance(root);
