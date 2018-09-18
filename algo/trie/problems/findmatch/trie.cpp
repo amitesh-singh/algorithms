@@ -80,7 +80,7 @@ void insert(node *&root, char key[])
    tmp->isLeaf = true;
 }
 
-bool  search(node *root, char key[], bool &firstMismatch)
+bool  search(node *root, char key[], int firstMismatch)
 {
    if (root == 0) return false;
 
@@ -94,7 +94,7 @@ bool  search(node *root, char key[], bool &firstMismatch)
           {
              if (!firstMismatch)
                {
-                  firstMismatch = true;
+                  firstMismatch++;
                   for (int j = 0; j < ALPHASIZE; ++j)
                     {
                        if (j != index)
@@ -106,11 +106,17 @@ bool  search(node *root, char key[], bool &firstMismatch)
                          }
                     }
                }
-             else
+             else if (firstMismatch == 1)
                {
-                  return false;
+                  if (!root->children[index])
+                    {
+                       firstMismatch++;
+                       return false;
+                    }
                }
+
           }
+        if (firstMismatch > 1) return false;
         if (root) root = root->children[index];
      }
 
@@ -129,7 +135,7 @@ int main()
    int Q;
    int command;
    int number;
-   bool firstMismatch = false;
+   int firstMismatch = 0;
 
    node *root = 0;
 
@@ -150,7 +156,7 @@ int main()
                {
                   cin >> number;
                   intToString(number);
-                  firstMismatch = false;
+                  firstMismatch = 0;
                   if (!search(root, buf, firstMismatch))
                     insert(root, buf);
                }
