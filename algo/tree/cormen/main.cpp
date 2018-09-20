@@ -142,11 +142,34 @@ void deleteTree(node *&root)
     root = 0;
 }
 
-
 int height(node *root)
 {
    if (root == 0) return 0;
    return std::max(height(root->left), height(root->right)) + 1;
+}
+
+//this finds the nearest number to input number k.
+node *findClosestNode(node *root, int k)
+{
+    if (root == 0) return nullptr;
+    else if (k == root->key)
+    {
+        return root;
+    }
+    else if (k < root->key)
+    {
+        if (!root->left) return root;
+        // find the closest one in left subtree
+        node *p = findClosestNode(root->left, k);
+        return (abs(root->key - k) < abs(p->key - k) ? root : p);
+    }
+    else if (k > root->key)
+    {
+        if (!root->right) return root;
+        //find the closest one in right subtree
+        node *p = findClosestNode(root->right, k);
+        return (abs(root->key - k) < abs(p->key) - k ? root : p);
+    }
 }
 
 int main()
@@ -187,7 +210,9 @@ int main()
        cout << "height=" << height(root) << "\n";
        cout << "delete 9: " << endl;
        remove(root, 9);
-
+       
+       cout << "closest number to 10 is " << findClosestNode(root, 10)->key << endl;
+       
        inorder(root);
        cout << "clean the root: ";
        deleteTree(root);
