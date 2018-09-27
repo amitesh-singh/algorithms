@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "pseudorand.cpp"
 using namespace std;
 
 template<class T>
@@ -40,7 +41,8 @@ int partition(T a[], int low, int high, F f)
 template<typename T, typename F>
 int randomPartition(T a[], int low, int high, F f)
 {
-    int pivot = low + rand() % (high - low + 1);
+    //int pivot = low + rand() % (high - low + 1);
+    int pivot = low + _rand() % (high - low + 1);
 
     _swap(a[high], a[pivot]);
 
@@ -64,6 +66,7 @@ int main()
     int A[] = {1, 0, 9, 2329, -98, 32, 0, 1, 34, 100, 1000, 1002, 32, 324, 34324, 2312, 23443, 323423, 2324311, 234345, 34534, 435345, 2334543, 32423421, -923, 23432, 3321423, 234231, 44, 43435, 2324354,
     23423, 4334545, 4322, 3445, 345545, 3421367, 678798,9999, 78854343, 24354};
 
+    _srand(1001);
     Qsort<int>(A, 0, sizeof(A)/sizeof(int) - 1, comp<int>);
 
     for (int i = 0; i < sizeof(A)/sizeof(int); ++i)

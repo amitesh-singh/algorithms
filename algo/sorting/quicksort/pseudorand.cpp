@@ -15,6 +15,7 @@ int _rand()
 }
 
 
+#if 0
 int main()
 {
   // srand(101);
@@ -25,3 +26,4 @@ int main()
      }
    return 0;
 }
+#endif
