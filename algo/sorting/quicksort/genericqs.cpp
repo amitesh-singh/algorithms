@@ -1,6 +1,18 @@
 #include <iostream>
 
-#include "pseudorand.cpp"
+static unsigned long long seed = 1;
+
+void _srand(unsigned long long s)
+{
+   seed = s;
+}
+
+unsigned long long _rand()
+{
+   seed = 42331*seed + 123457;
+   return seed/101;
+}
+
 using namespace std;
 
 template<class T>
