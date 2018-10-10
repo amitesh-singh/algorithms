@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <cstring> // for strcmp
+
 static unsigned long long seed = 1;
 
 void _srand(unsigned long long s)
@@ -19,6 +21,12 @@ template<class T>
 bool comp(T &l, T &r)
 {
     return l < r;
+}
+
+template<class T>
+bool comp2(T l, T r)
+{
+    return strcmp(l, r) < 0;
 }
 
 template<class T>
@@ -86,6 +94,17 @@ int main()
         cout << A[i] << " ";
     }
     cout << endl;
+
+    char *s[] = {"banana", "anana", "nana", "ana", "na", "n"};
+
+    _srand(1001);
+
+    Qsort<char *>(s, 0, 6 - 1, comp2<char *>);
+    for (register int i = 0; i < 6; ++i)
+    {
+        cout << s[i] << " ";
+    }
+    cout << "\n";
 
     return 0;
 }
