@@ -39,7 +39,7 @@ int partition(T a[], int low, int high, F f)
 
     for (i = low; i < high; ++i)
     {
-        if (a[i] < a[pivot])
+        if (f(a[i], a[pivot]))
         {
             _swap(a[i], a[index]);
             index++;
