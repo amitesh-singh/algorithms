@@ -4,6 +4,11 @@
 using namespace std;
 
 // implements hash like ["AFDD"] = 20;
+enum 
+{
+  EMPTY,
+  FILL
+};
 
 enum
 {
@@ -44,7 +49,7 @@ int getIndex(int initialIndex)
 {
    int finalIndex = initialIndex;
 
-   while (hashTable[finalIndex].statushash == 1)
+   while (hashTable[finalIndex].statushash == FILL)
      {
         //linear probe
         finalIndex = (finalIndex + 1) % HASHTABLESIZE;
@@ -63,7 +68,7 @@ void insert(char *key, int element)
 
    int finalIndex = getIndex(index);
 
-   hashTable[finalIndex].statushash = 1;
+   hashTable[finalIndex].statushash = FILL;
    hashTable[finalIndex].valhash = element;
    strcpy(hashTable[finalIndex].keyhash, key);
 }
@@ -74,7 +79,7 @@ int search(char *key)
 
    int finalIndex = index;
 
-   while (hashTable[finalIndex].statushash == 1)
+   while (hashTable[finalIndex].statushash == FILL)
      {
         if (!strcmp(hashTable[finalIndex].keyhash, key))
           {
@@ -118,14 +123,14 @@ void del(char *key)
 
    if (index == -1)
      return;
-   hashTable[index].statushash = 0; //empty it
+   hashTable[index].statushash = EMPTY; //empty it
 }
 
 void dumpHash()
 {
    for (int i = 0; i <= 1000; ++i)
      {
-        if (hashTable[i].statushash)
+        if (hashTable[i].statushash == FILL)
           {
              cout << hashTable[i].keyhash << "=" << hashTable[i].valhash << endl;
           }
