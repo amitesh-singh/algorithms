@@ -27,8 +27,8 @@ struct hashtable
 };
 
 static const int hashtablesize = 10001;
-static hashtable namehash[10001*100];
-static hashtable emailhash[10001*100];
+static hashtable namehash[hashtablesize*100];
+static hashtable emailhash[hashtablesize*100];
 
 inline unsigned long hashfunc(char *str)
 {
