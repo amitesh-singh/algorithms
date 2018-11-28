@@ -56,6 +56,7 @@ node *iterativeSearch(node *root, int k)
     return root;
 }
 
+//it gives the output in ascending order
 void inorder(node *root)
 {
     if (root == 0) return;

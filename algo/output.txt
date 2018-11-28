@@ -1,0 +1,1 @@
+writing to output.txtvalue read from file input.txt: 12345
