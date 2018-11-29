@@ -64,6 +64,13 @@ void inorder(node *root)
     cout << root->key << endl;
     inorder(root->right);
 }
+void inorderDescendingOrder(node *root)
+{
+    if (root == 0) return;
+    inorderDescendingOrder(root->right);
+    cout << root->key << endl;
+    inorderDescendingOrder(root->left);
+}
 
 void preorder(node *root)
 {
@@ -203,6 +210,9 @@ int main()
 
        cout << "postorder: ";
        postorder(root);
+       
+       cout << "inorder: descending order: ";
+       inorderDescendingOrder(root);
 
        cout << "min is: " << findMin(root)->key << endl;
        
