@@ -79,12 +79,66 @@ void printTrie(node *root)
      }
 }
 
+bool haveChildren(node *root)
+{
+   for (int i = 0; i < ALPHA_SIZE; ++i)
+   {
+      if (root->children[i])
+         return true;
+   }
+
+   return false;
+}
+
+bool remove(node *&root, char *key)
+{
+   if (root == 0)
+   {
+      return false;
+   }
+   int len = strLen(key);
+   if (len)
+   {
+      int index = key[0] - '0';
+      if (root && root->children[index] && remove(root->children[index], key + 1) && root->isLeaf == false)
+      {
+         if (!haveChildren(root))
+         {
+            delete root;
+            root = 0;
+            return true;
+         }
+         else
+            return false;
+      }
+   }
+   if (len == 0 && root->isLeaf == true)
+   {
+      if (!haveChildren(root))
+      {
+         delete root;
+         root = 0;
+         return true;
+      }
+      else
+      {
+         root->isLeaf = false;
+         return false;
+      }
+   }
+
+   return false;
+}
+
 int main()
 {
    node *root = 0;
 
    insert(root, "124");
    insert(root, "124578");
+   insert(root, "123");
+   insert(root, "4567");
+   insert(root, "673456");
 
    cout << "124 exists? " << (search(root, "124") ? "Yes" : "No");
    cout << "\n";
@@ -92,5 +146,11 @@ int main()
    cout << "\n";
 
    printTrie(root);
+   
+   cout << "deleting..." << endl;
+   remove(root, "124");
+
+   printTrie(root);
+
    return 0;
 }
