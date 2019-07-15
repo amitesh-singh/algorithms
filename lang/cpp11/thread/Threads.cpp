@@ -3,23 +3,19 @@
 
 using namespace std;
 
-
 void call_from_thread()
 {
-    cout << __func__ << endl;
+   cout << "another thread" << endl;
 }
+
 int main()
 {
-    thread t[10];
-    for(int i =0;i<10;i++)
-        t[i] = std::thread(call_from_thread);
+   std::thread t(call_from_thread);
 
-    cout << "Launch from main()" << endl;
-    //join the threads with the main thread.
-    for(int i =0;i<10;i++)
-        t[i].join();
+   cout << "Launch from main()" << endl;
 
+   //join the threads with the main thread.
+   t.join();
 
-
-    return 0;
+   return 0;
 }
