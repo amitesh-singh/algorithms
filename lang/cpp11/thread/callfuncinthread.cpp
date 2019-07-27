@@ -10,12 +10,24 @@ class A
         cout << __PRETTY_FUNCTION__ << endl;
     }
 };
-using namespace std;
+
+void callback(int i)
+{
+    cout << __PRETTY_FUNCTION__ << endl;
+}
 
 int main()
 {
     A aa;
+    cout << "main thread---\n";
+    
     thread t(&A::domywork,&aa);
+    thread t2(callback, 10);
+
     t.join();
+    t2.join();
+    
+    cout << "main thread ends..\n";
+
     return 0;
 }
