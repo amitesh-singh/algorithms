@@ -1,7 +1,6 @@
 #include<iostream>
 #include<thread>
 
-
 using namespace std;
 #define F cout << __LINE__ << ":" << __PRETTY_FUNCTION__ <<endl;
 
@@ -24,6 +23,7 @@ struct thread_gaurd
     private:
     thread &_t;
 };
+
 class func
 {
     int &_a;
@@ -38,6 +38,7 @@ class func
     }
 
 };
+
 void f()
 {
     int local_var = 10;
@@ -46,6 +47,7 @@ void f()
     thread t(f2);
     thread_gaurd gg(t);
 }
+
 int main()
 {
     int i =11;

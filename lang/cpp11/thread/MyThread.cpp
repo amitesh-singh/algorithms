@@ -8,6 +8,7 @@ void do_work()
 {
     std::cout << "My work\n";
 }
+
 class A
 {
     public:
@@ -18,8 +19,8 @@ class A
     {
         std::cout << __func__ << std::endl;
     }
-
 };
+
 int main()
 {
     A aa;

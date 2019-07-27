@@ -2,6 +2,7 @@
 
 using namespace std;
 #define F cout << __PRETTY_FUNCTION__ << ":" << __LINE__<< endl
+
 struct A
 {
     A()
@@ -13,6 +14,7 @@ struct A
         F;
     }
 };
+
 template<class A>
 struct gaurd
 {
@@ -27,6 +29,7 @@ struct gaurd
         delete &a;
     }
 };
+
 template<typename T>
 struct wrapper
 {
@@ -41,6 +44,7 @@ struct wrapper
         delete _value;
     }
 };
+
 int main()
 {
 
