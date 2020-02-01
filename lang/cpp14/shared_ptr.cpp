@@ -3,6 +3,13 @@
 
 using namespace std;
 
+
+class Foo
+{
+ public:
+    int a = 0;
+};
+
 int main()
 {
    shared_ptr<int> sp1 (new int());
@@ -38,6 +45,28 @@ int main()
    arr.get()[1] = 11;
    cout << arr.get()[0] << endl;
    cout << arr[1] << endl;
+
+   Foo *foo = new Foo;
+   shared_ptr<Foo> sharedFoo(foo);
+   //shared_ptr<Foo> sharedFoo2(foo); //don't do this
+   // this will result into double free.
+   cout << sharedFoo->a << endl;
+   /*
+    * Ownership Transfer of shared_ptr
+
+By default, shared_ptr increments the reference count and doesn't transfer the ownership. However, it can be made to transfer the ownership using std::move:
+
+shared_ptr<int> up = make_shared<int>();
+// Transferring the ownership
+shared_ptr<int> up2 = move(up);
+// At this point, the reference count of up = 0 and the
+// ownership of the pointer is solely with up2 with reference count = 1
+
+*/
+   shared_ptr<Foo> rightFooOwner = std::move(sharedFoo);
+   cout << sharedFoo.use_count() << endl;
+   cout << rightFooOwner.use_count() << endl;
+
 
    return 0;
 }
