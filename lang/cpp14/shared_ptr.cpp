@@ -30,5 +30,14 @@ int main()
    sp2 = nullptr;
    cout << "ref count = " << sp2.use_count() << endl;
 
+
+   // initializing array - only possible in C++17
+   shared_ptr<int[]> arr(new int[10]);
+
+   arr[0] = 10;
+   arr.get()[1] = 11;
+   cout << arr.get()[0] << endl;
+   cout << arr[1] << endl;
+
    return 0;
 }
