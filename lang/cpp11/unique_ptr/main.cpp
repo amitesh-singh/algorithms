@@ -76,5 +76,9 @@ int main()
         cout << arr[i] << ", ";
     cout << endl;
 
+    //initializing unique_ptr
+    std::unique_ptr<int[]> arr2 {new int[5]{1, 2, 3, 4, 5}};
+
+
     return 0;
 }
