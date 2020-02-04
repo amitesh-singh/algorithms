@@ -15,11 +15,21 @@ public:
   uint16_t _ddr, _port;
 };
 
+constexpr double PI()
+{
+   return 3.14;
+}
+
 int main()
 {
   Pin pin(GPIOC, GPIO13);
-  
+
   cout << pin._ddr << ":" << pin._port << std::endl;
+
+ constexpr int len = 10;
+  constexpr int len_2 = len + 1;
+  
+  cout << PI() << endl;
   
   return 0;
 }
