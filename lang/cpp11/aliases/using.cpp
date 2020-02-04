@@ -26,6 +26,11 @@ class BigNameClass
 
 using BNC = BigNameClass;
 
+int init_process(void *)
+{
+   return 1;
+}
+
 int main()
 {
    String ami("Amitesh Singh");
@@ -34,6 +39,14 @@ int main()
    //can be used for class too.
    //
    BNC bnc(ami);
+
+   //defining function ptr
+   int (*process)(void *); //old way
+   using newprocess = int (*)(void *);
+
+   newprocess init = init_process;
+   cout << init_process(nullptr);
+
 
    return 0;
 }
