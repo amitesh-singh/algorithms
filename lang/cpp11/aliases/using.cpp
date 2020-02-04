@@ -41,7 +41,7 @@ int main()
    BNC bnc(ami);
 
    //defining function ptr
-   int (*process)(void *); //old way
+   typedef int (*process)(void *); //old way
    using newprocess = int (*)(void *);
 
    newprocess init = init_process;
