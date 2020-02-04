@@ -104,6 +104,10 @@ int main()
 
     cout << b2->getDesc() << " : " << b2->cost() << endl;   
     delete b2;
+    //no memory leak, but i can't define local variables.
+    // double free mem corruption
+    // Beverage beverage;
+    // Almond milk (&beverage);
 
     return 0;
 }
