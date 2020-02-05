@@ -79,6 +79,13 @@ int main()
     //initializing unique_ptr
     std::unique_ptr<int[]> arr2 {new int[5]{1, 2, 3, 4, 5}};
 
+    //custom deleter function
+    auto deleter = [](int *x){
+        cout << "deleting " << x << endl;
+        delete x;
+    };
+
+    std::unique_ptr<int, void (*) (int *)> p(new int, deleter);
 
     return 0;
 }
