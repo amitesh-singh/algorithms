@@ -11,10 +11,7 @@ int main()
     cout << "----------------\n\n";
 
     gm.insertCoin();
-    gm.returnCoin();
-
     gm.turnCrank();
-    gm.returnCoin();
 
     return 0;
 }

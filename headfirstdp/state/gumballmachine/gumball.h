@@ -34,6 +34,8 @@ class GumballMachine
         if (count != 0)
             count--;
     }
+
+    void refill(int n);
 };
 
 class NoCoinState: public State
@@ -204,6 +206,12 @@ void SoldOutState::turnCrank()
 void SoldOutState::dispense()
 {
     cout << "Out of gumball\n";
+}
+
+void GumballMachine::refill(int n)
+{
+    count += n;
+    changeState(new NoCoinState(this));
 }
 
 #endif
