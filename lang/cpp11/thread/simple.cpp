@@ -6,14 +6,18 @@ using namespace std;
 void callingThread()
 {
     cout << "Callme when you get time\n";
+    cout << "inside thread function: " << std::this_thread::get_id() << endl;
 }
 
 int main()
 {
-    thread t1(callingThread);
-    // t1.join(); main thread waits for t1 to finish 
-    t1.detach(); // thread is on its own -- daemon process
+    cout << "main thread " << std::this_thread::get_id() << endl;
 
+    thread t1(callingThread);
+    cout << "child thread id: " << t1.get_id() << endl;
+
+    t1.join(); // main thread waits for t1 to finish 
+    //t1.detach(); // thread is on its own -- daemon process
     //after detaching or joininig, we can't rejoin again
 
     //t1.join(); //this  will crash 
