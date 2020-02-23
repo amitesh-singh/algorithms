@@ -5,7 +5,7 @@ int main()
     AtmMachine atm(1000);
     atm.insertCard();
     atm.insertPinAndWithdrawCash(1234, 100);
-
+    atm.ejectCard();
     cout << "ATM balance: " << atm.getBalance() << endl << "\n";
 
     atm.insertCard();
@@ -16,12 +16,13 @@ int main()
 
     atm.insertCard();
     atm.insertPinAndWithdrawCash(1245, 100);
+    atm.ejectCard();
     
     cout << "ATM balance: " << atm.getBalance() << endl<< "\n";
 
     atm.insertCard();
     atm.insertPinAndWithdrawCash(1234, 900);
-
+    atm.ejectCard();
     cout << "ATM balance: " << atm.getBalance() << endl<< "\n";
 
     return 0;

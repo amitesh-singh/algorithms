@@ -11,7 +11,7 @@ class IState
     virtual void insertCard() = 0;
     virtual void ejectCard() = 0;
     virtual void insertPin(int pin) = 0;
-    virtual void dispenseCash(int money) = 0;
+    virtual bool dispenseCash(int money) = 0;
 };
 
 class AtmMachine 
@@ -43,7 +43,7 @@ class CardInsertedState: public IState
     void insertCard() override;
     void ejectCard() override;
     void insertPin(int pin) override;
-    void dispenseCash(int money) override;
+    bool dispenseCash(int money) override;
 };
 
 class NoCardState: public IState
@@ -57,7 +57,7 @@ class NoCardState: public IState
     void insertCard() override;
     void ejectCard() override;
     void insertPin(int pin) override;
-    void dispenseCash(int money) override;
+    bool dispenseCash(int money) override;
 };
 
 class RequestCashState: public IState
@@ -71,7 +71,7 @@ class RequestCashState: public IState
     void insertCard() override;
     void ejectCard() override;
     void insertPin(int pin) override;
-    void dispenseCash(int money) override;
+    bool dispenseCash(int money) override;
 };
 
 class NoCashState: public IState
@@ -85,7 +85,7 @@ class NoCashState: public IState
     void insertCard() override;
     void ejectCard() override;
     void insertPin(int pin) override;
-    void dispenseCash(int money) override;
+    bool dispenseCash(int money) override;
 };
 
 #endif

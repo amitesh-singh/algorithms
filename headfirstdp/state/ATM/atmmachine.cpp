@@ -24,9 +24,10 @@ void CardInsertedState::insertPin(int pin)
     }
 }
 
-void CardInsertedState::dispenseCash(int money)
+bool CardInsertedState::dispenseCash(int money)
 {
     cout << "Enter pin\n";
+    return false;
 }
 
 void NoCardState::insertCard()
@@ -45,9 +46,10 @@ void NoCardState::insertPin(int pin)
     cout << "Enter card first\n";
 }
 
-void NoCardState::dispenseCash(int money)
+bool NoCardState::dispenseCash(int money)
 {
     cout << "Enter card first\n";
+    return false;
 }
 
 void RequestCashState::insertCard()
@@ -65,10 +67,11 @@ void RequestCashState::insertPin(int pin)
     cout << "Cash will come out in a minute\n";
 }
 
-void RequestCashState::dispenseCash(int money)
+bool RequestCashState::dispenseCash(int money)
 {
-    cout << "cash is getting withdrawn\n";
+    cout << "cash " << money << " is getting withdrawn\n";
     atm->changeState(new NoCardState(atm));
+    return true;
 }
 
 void NoCashState::insertCard()
@@ -86,9 +89,10 @@ void NoCashState::insertPin(int pin)
     cout << "ATM went haywire\n";
 }
 
-void NoCashState::dispenseCash(int money)
+bool NoCashState::dispenseCash(int money)
 {
     cout << "ATM went haywire\n";
+    return false;
 }
 
 AtmMachine::AtmMachine(int money)
@@ -112,14 +116,15 @@ void AtmMachine::insertPinAndWithdrawCash(int pin, int amount)
     state->insertPin(pin);
     if (amount > cash)
     {
-        state->ejectCard();
-        changeState(new NoCardState(this));
+        changeState(new RequestCashState(this));
         return;
     }
 
-    state->dispenseCash(amount);
+    if (state->dispenseCash(amount))
+    {
+        cash = cash - amount;
+    }
 
-    cash = cash - amount;
     if (cash <= 0)
     {
         changeState(new NoCashState(this));
