@@ -25,12 +25,12 @@ int main()
 {
     A aa;
     std::thread t1(do_work);
-    t1.join();
+    t1.join(); //main thread waits t1 to finish
 
     //this will call aa.operator()
     //but this one will call copy constructor.. so many calls..
     std::thread t2(aa);
     //use std::thread t2(std::ref(aa)); //instead
-    t2.join();
+    t2.join(); //main thread waits for t2 to finish
     return 0;
 }
