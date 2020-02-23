@@ -12,7 +12,9 @@ void callingThread()
 int main()
 {
     cout << "main thread " << std::this_thread::get_id() << endl;
-
+    //this gives the information on how many threads i can run to
+    // avoid over subscription
+    cout << "how many threads are supported? " << std::thread::hardware_concurrency() << endl;
     thread t1(callingThread);
     cout << "child thread id: " << t1.get_id() << endl;
 
