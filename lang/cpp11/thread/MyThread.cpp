@@ -26,7 +26,11 @@ int main()
     A aa;
     std::thread t1(do_work);
     t1.join();
+
+    //this will call aa.operator()
+    //but this one will call copy constructor.. so many calls..
     std::thread t2(aa);
+    //use std::thread t2(std::ref(aa)); //instead
     t2.join();
     return 0;
 }
