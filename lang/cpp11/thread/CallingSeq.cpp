@@ -33,7 +33,10 @@ int main()
     cout << "before\n";
     //without std::ref, 4 constructor and destructor calls. bad thing, huh!? :P
     thread t(std::ref(f));
+    thread t2(f);
     //wait for thread to finish
     t.join();
+    t2.join();
+
     return 0;
 }
