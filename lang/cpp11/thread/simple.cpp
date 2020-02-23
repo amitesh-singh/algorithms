@@ -9,6 +9,16 @@ void callingThread()
     cout << "inside thread function: " << std::this_thread::get_id() << endl;
 }
 
+class Ftor
+{
+    public:
+    void operator()(string &msg)
+    {
+        cout << "msg from main: " << msg << endl;
+        msg = "msg from thread\n";
+    }
+};
+
 int main()
 {
     cout << "main thread " << std::this_thread::get_id() << endl;
@@ -27,5 +37,15 @@ int main()
 
     if (t1.joinable())
         t1.join(); //it won't  get called though.
+
+    //msg is getting shared among main thread and thread 1
+    string msg = "Hello buddy";
+    //pass msg as reference to thread
+    // or we could pass good old pointers
+    thread t2((Ftor()), std::ref(msg));
+    t2.join();
+
+    cout << "msg from thread: " << msg << endl;
+
     return 0;
 }
