@@ -4,6 +4,8 @@
 using namespace std;
 #define F cout << __LINE__ << ":" << __PRETTY_FUNCTION__ <<endl;
 
+//use std::lock_guard<mutex> guard(mutexVar);
+// or std::unique_lock<mutex> locker(mutexVar);
 struct thread_gaurd
 {
     thread_gaurd(thread &t):_t(t)
