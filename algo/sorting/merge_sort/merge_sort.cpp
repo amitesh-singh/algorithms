@@ -1,67 +1,74 @@
 #include<iostream>
 #include<algorithm>
 #include<iterator>
+
 using namespace std;
 
 template<class T>
-void Merge(T A[],int,int ,int );
-template<class T>
-void MergeSort(T A[],int p,int r)
-{
-    int q = 0;
-    if(p<r)
-    {
-        q = (p+r)/2;
+void Merge(T A[], int low, int mid,int high);
 
-        MergeSort(A,p,q);
-        MergeSort(A,q+1,r);
-        Merge(A,p,q+1,r);
-    }
+template<class T>
+void MergeSort(T A[],int low,int high)
+{
+   if (low >= high) return;
+   int mid = (high + low)/2;
+   MergeSort(A, low, mid);
+   MergeSort(A, mid + 1, high);
+   Merge(A, low, mid, high);
 }
+
 template<class T>
-void Merge(T A[],int p,int q ,int r)
+void Merge(T A[],int low, int mid, int high)
 {
-    cout << "p:" << p << " q:" << q << " r:" << r << endl;
-    int n1 = q-p;
-    int n2 = r-q;
-    T *L = new T[n1];
-    T *R = new T[n2];
+   int left = low, right = mid + 1;
+   int index = 0;
+   int *temp = new int[high - low + 1];
 
-    for(int i =0;i<n1;++i)
-        L[i] = A[p-i];
-    for(int j =0;j<n2;++j)
-        R[j] = A[q+j];
-
-    copy(L,L+n1,ostream_iterator<int>(cout," "));
-    cout << "\n";
-    copy(R,R+n2,ostream_iterator<int>(cout," "));
-    cout << "\n";
-
-    int i = 0,j = 0,k=0;
-    while(i <=(q-1) && j<=(r-1))
-    {
-        if(L[i] <= L[j])
-        {
-            A[k] = L[i];
-            i++;
-        }
+   while (left <= mid && right <= high)
+     {
+        if (A[left] <= A[right])
+          {
+             temp[index++] = A[left++];
+          }
         else
-        {
-            A[k] = R[j];
-            j++;
-        }
-        k++;
-    }
-    delete [] L;
-    delete [] R;
-    
+          {
+             temp[index++] = A[right++];
+          }
+     }
+
+   if (left > mid)
+     {
+        for (int i = right; i <= high; ++i)
+          temp[index++] = A[i];
+     }
+   else
+     {
+        for (int i = left; i <= mid; ++i)
+          temp[index++] = A[i];
+     }
+
+   for (int i = 0; i < high - low + 1; ++i)
+     {
+        A[i + low] = temp[i];
+     }
+
+   delete [] temp;
 }
+
 int main()
 {
-    int A[] = {10,1,3,4,74,2};
-    MergeSort(A,0,6);
-    std::copy(A,A+6,ostream_iterator<int>(cout, " "));
-    cout << endl;
+   int A[] = {10,1,3,4,74,2};
+   int n = sizeof(A)/sizeof(int);
+   for (int i = 0; i < n; ++i)
+     cout << A[i] << ", ";
+   cout << endl;
 
-    return 0;
+   MergeSort(A,0, n - 1);
+   
+   for (int i = 0; i < n; ++i)
+     cout << A[i] << ", ";
+
+   cout << endl;
+
+   return 0;
 }
