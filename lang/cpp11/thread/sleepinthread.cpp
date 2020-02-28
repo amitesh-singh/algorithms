@@ -19,9 +19,10 @@ int main()
     std::thread t1(func);
     t1.detach();
     while (1)
-    {
-        //gonna run forever
-
-    }
+      {
+         //gonna run forever
+         //sleep for reducing cpu cycles
+         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      }
     return 0;
 }
