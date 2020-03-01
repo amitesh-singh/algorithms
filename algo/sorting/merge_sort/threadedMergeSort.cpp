@@ -56,24 +56,32 @@ void printArr(int a[], int n)
 
 int main(int argc, char **argv)
 {
-   if (argc != 2)
+   if (argc != 4)
      {
-        std::cerr << argv[0] << " <option, 2 or 4 threads>\n";
+        std::cerr << argv[0] << "<array size> <option, 2 or 4 threads> <verbose enabled/false, 1 or 0>\n";
         exit(1);
      }
-   int option = atoi(argv[1]);
+   int option = atoi(argv[2]);
    if (option != 2 &&  option != 4)
    {
        std::cerr << "Enter 2 or 4 only.\n";
        exit(2);
    }
 
-   int a[] {1, 2, 6, 3, -1, 890, 234, 345, 123, 43, 222, 44};
-   int b[] {1, 2, 6, 3, -1, 890, 234, 345, 123, 43, 222, 44};
+   int aSize = atoi(argv[1]);
+   int verbose = atoi(argv[3]);
 
-   int aSize = sizeof(a)/sizeof(int);
-
-     {
+   srand(time(NULL));
+   int *a = new int[aSize];
+   int *b = new int[aSize];
+   
+   for (int i = 0; i < aSize; i++)
+   {
+       a[i] = rand();
+       b[i] = rand();
+   }
+   
+    {
         auto t1 = std::chrono::high_resolution_clock::now();
 
         mergeSort(b, 0, aSize - 1);
@@ -82,9 +90,11 @@ int main(int argc, char **argv)
         std::cout << "Took: " 
            << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count()
            << " microseconds." << std::endl;
-        printArr(b, aSize);
-     }
-     {
+        if (verbose)
+            printArr(b, aSize);
+    }
+
+    {
         if (option == 2)
           {
              auto t1 = std::chrono::high_resolution_clock::now();
@@ -124,9 +134,10 @@ int main(int argc, char **argv)
                 << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() 
                 << " microseconds." << std::endl;
           }
-
-        printArr(a, aSize);
-     }
-
+        if (verbose)
+            printArr(a, aSize);
+    }
+    delete [] a;
+    delete [] b;
    return 0;
 }
