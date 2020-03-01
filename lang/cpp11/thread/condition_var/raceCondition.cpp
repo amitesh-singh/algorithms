@@ -63,23 +63,20 @@ int main()
     while (initialSize > 0)
     {
         std::thread t1, t2;
-        bool first = false, second = false;
         if (initialSize > 0)
         {
             t1 = std::move(std::thread(process, std::ref(s), "Thread 1"));
             initialSize--;
-            first = true;
         }
         if (initialSize > 2)
         {
             t2 = std::move(std::thread(process, std::ref(s), "Thread 2"));
             initialSize--;
-            second = true;
         }
-       
-        if (first)
+
+        if (t1.joinable())
             t1.join();
-        if (second)
+        if (t2.joinable())
             t2.join();
     }
 
