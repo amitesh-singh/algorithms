@@ -64,7 +64,7 @@ int main()
     {
         std::thread t1, t2;
         bool first = false, second = false;
-        if (initialSize > 1)
+        if (initialSize > 0)
         {
             t1 = std::move(std::thread(process, std::ref(s), "Thread 1"));
             initialSize--;
@@ -81,10 +81,6 @@ int main()
             t1.join();
         if (second)
             t2.join();
-    }
-    while (1)
-    {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
     return 0;
