@@ -45,8 +45,9 @@ std::mutex mu;
 
 void process(threadsafe::stack &s, std::string threadname)
 {
-    int d = s.top();
-    s.pop();
+   // int d = s.top();
+   // s.pop();
+    int d = s.pop();
 
     std::lock_guard<std::mutex> locker(mu);
     std::cout << threadname << ": " << d << std::endl;
@@ -55,21 +56,35 @@ void process(threadsafe::stack &s, std::string threadname)
 int main()
 {
     threadsafe::stack s;
-    for (int i = 0; i < 9; ++i)
+    for (int i = 0; i < 10; ++i)
         s.push(i);
     std::cout << "stack size: " << s.size() << std::endl;
-    
-    while (s.size() > 0)
+    int initialSize = s.size();
+    while (initialSize > 0)
     {
         std::thread t1, t2;
-        if (s.size() > 0)
+        bool first = false, second = false;
+        if (initialSize > 1)
+        {
             t1 = std::move(std::thread(process, std::ref(s), "Thread 1"));
-        else break;
-        if (s.size() > 0)
+            initialSize--;
+            first = true;
+        }
+        if (initialSize > 2)
+        {
             t2 = std::move(std::thread(process, std::ref(s), "Thread 2"));
-        else break;
-        t1.join();
-        t2.join();
+            initialSize--;
+            second = true;
+        }
+       
+        if (first)
+            t1.join();
+        if (second)
+            t2.join();
+    }
+    while (1)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
     return 0;
