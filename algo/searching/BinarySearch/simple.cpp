@@ -3,6 +3,35 @@
 
 using namespace std;
 
+int binarySearchUsingStack(int a[], int low, int high, int k)
+{
+    int s[10001];
+    int top = -1;
+    s[++top] = low;
+    s[++top] = high;
+    int mid;
+    while (top >= 0)
+    {
+        high = s[top--];
+        low = s[top--];
+        mid = (low + high) / 2;
+
+        if (a[mid] == k) return mid;
+        else if (k > a[mid])
+            {
+                s[++top] = mid + 1;
+                s[++top] = high;
+            }
+        else
+        {
+            s[++top] = low;
+            s[++top] = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
 int binarySearchRecursive(int a[], int low, int high, int k)
 {
    int mid;
@@ -101,7 +130,8 @@ int main()
     cout << "find 11: " << binarySearch(a, 0, n - 1, 11) << endl;
     cout << "find 97 :" << binarySearch(a, 0, n -1, 97) << endl;
     cout << "find 56 using binarySearchRecursive: " << binarySearchRecursive(a, 0, n - 1, 56) << endl;
-
+    cout << "find 97 using binarySearchUsingStack: " << binarySearchUsingStack(a, 0, n - 1, 97) << endl;
+    
     cout << "lower,upper bound of 46: " << lowerbound(a, 0, n - 1, 46) << ", " 
          << upperbound(a, 0, n - 1, 46)<< endl;
     //using std::lower_bound, upper_bound
@@ -116,7 +146,7 @@ int main()
     for (int i = 0; i < v.size(); i++)
         cout << v[i] << ", ";
     cout << "\n";
-    
+
     if (std::binary_search(v.begin(), v.end(), 23))
         cout << "23 is found\n";
     cout << "lower,upper_bound for 23: (" << std::lower_bound(v.begin(), v.end(), 23) - v.begin() << ", "
