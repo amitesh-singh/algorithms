@@ -89,6 +89,7 @@ void printArr(int a[], int n)
         cout << a[i] << ", ";
     cout << "\n";
 }
+#include <vector>
 
 int main()
 {
@@ -107,6 +108,19 @@ int main()
     cout << "index: " << (std::lower_bound(a, a + (n - 1), 46) - a) << " " << *(std::lower_bound(a, a + (n - 1), 46)) << endl;
 
     findRange(a, 0, n - 1, 45, 92);
+
+    vector<int> v {100, 23, 123, -9, 0, 23, 342, 98, 45};
+
+    std::sort(v.begin(), v.end());
+
+    for (int i = 0; i < v.size(); i++)
+        cout << v[i] << ", ";
+    cout << "\n";
+    
+    if (std::binary_search(v.begin(), v.end(), 23))
+        cout << "23 is found\n";
+    cout << "lower,upper_bound for 23: (" << std::lower_bound(v.begin(), v.end(), 23) - v.begin() << ", "
+         << std::upper_bound(v.begin(), v.end(), 23) - v.begin() << ")" << std::endl;
 
     return 0;   
 }
