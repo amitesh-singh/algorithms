@@ -3,25 +3,20 @@
 #include<iterator>
 
 using namespace std;
-template<class T>
-void myswap(T &a,T &b)
+
+void insertion_sort(int a[],int n)
 {
-    T temp;
-    temp = a;
-    a=b;
-    b = temp;
-}
-void insertion_sort(int A[],int n)
-{
-    for(int i = 1;i<n;++i)
+    for(int i = 1; i < n; ++i)
     {
-        int temp = A[i];
+        int temp = a[i];
         int j = i-1;
-        for(;temp < A[j] && j>=0;--j)
+
+        for(;temp < a[j] && j>=0;--j)
         {
-            A[j+1] = A[j];
+            a[j+1] = a[j];
         }
-        A[j+1] = temp;
+
+        a[j+1] = temp;
     }
 }
 
@@ -29,7 +24,10 @@ void insertion_sort(int A[],int n)
 int main()
 {
     int arr[] = {10,11,20,1,2,4,0,10};
-    insertion_sort(arr,8);
+    int arrSize = sizeof(arr)/sizeof(*arr);
+
+    insertion_sort(arr, arrSize);
+
     std::copy(arr,arr+8,std::ostream_iterator<int>(cout," "));
     cout << std::endl;
 
