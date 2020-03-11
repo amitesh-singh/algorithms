@@ -15,13 +15,6 @@ int interpolationSearch(int a[], int low, int high, int key)
     
     while (low <= high && key >= a[low] && key <= a[high])
     {
-        /*
-        if (low == high)
-        {
-            if (a[low] == key) return low;
-            return -1;
-        }
-        */
         pos = low + ((double)(high - low)/(a[high] - a[low])) * (key - a[low]);
         if (a[pos] == key) return pos;
         else if (key > a[pos])
