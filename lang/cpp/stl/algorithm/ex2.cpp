@@ -44,7 +44,7 @@ int main()
    cout << endl;
 
    //lets write your own comarator functor.
-   std::sort(fruits.begin(), fruits.end(), NoCase());
+   std::sort(fruits.begin(), fruits.end(), NoCase{});
    cout << "custom function sorted: ";
    for (int i = 0; i < fruits.size(); ++i)
      {
