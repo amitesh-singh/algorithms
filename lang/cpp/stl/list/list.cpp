@@ -19,10 +19,17 @@ int main()
 
     printList(l);
 
+    //insert at tail
     l.push_back(100);
+    //insert at head
     l.push_front(10);
 
-   printList(l);
+    printList(l);
+
+    l.pop_back(); //delete at back
+    l.pop_front(); //delete at head. //remove head.
+    l.erase(l.begin()); //this also deletes at front
+
     
     //sort list in ascending order.
     l.sort(); //without comparator function
