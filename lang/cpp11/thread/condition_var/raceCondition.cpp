@@ -45,6 +45,7 @@ std::mutex mu;
 
 void process(threadsafe::stack &s, std::string threadname)
 {
+    //these below two lines might create race conditions.. 
    // int d = s.top();
    // s.pop();
     int d = s.pop();
