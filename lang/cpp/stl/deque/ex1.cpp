@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 int main()
 {
    deque<int> d;
@@ -18,8 +17,8 @@ int main()
    // 40, 20, 10, 100
    d.push_back(100);
 
-   cout << "Front:" << d.front() << endl;
-   cout << "Back:" << d.back() << endl;
+   cout << "Head:" << d.front() << endl;
+   cout << "Tail:" << d.back() << endl;
 
    deque<int>::iterator itr = d.begin();
    //traverse
