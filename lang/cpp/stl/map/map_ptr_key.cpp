@@ -25,19 +25,20 @@ addMapValue(map<Ptr *, list<Ptr *> > &mList,
         mList[p1] = l;
     }
 }
+
 int main()
 {
-    map<Ptr *, int> m;
+    map<Ptr *,  Ptr *> m;
 
     Ptr *p1 = new Ptr();
     Ptr *p2 = new Ptr();
 
     p1->val = 1;
     p2->val = 2;
-    m[p1] = (int)p1;
-    m[p2] = (int) p2;
+    m[p1] = p1;
+    m[p2] = p2;
 
-    map<Ptr *, int>::iterator itr = m.begin();
+    map<Ptr *, Ptr *>::iterator itr = m.begin();
 
     for (; itr != m.end(); ++itr)
     {
