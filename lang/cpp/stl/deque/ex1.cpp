@@ -3,6 +3,16 @@
 
 using namespace std;
 
+void print(deque<int> &d)
+{
+   deque<int>::iterator itr = d.begin();
+
+   for (; itr != d.end(); ++itr)
+     std::cout << *itr << ", ";
+
+   std::cout << "\n";
+}
+
 int main()
 {
    deque<int> d;
@@ -20,22 +30,21 @@ int main()
    cout << "Head:" << d.front() << endl;
    cout << "Tail:" << d.back() << endl;
 
-   deque<int>::iterator itr = d.begin();
-   //traverse
-   for (; itr != d.end(); ++itr)
-     {
-        cout << *itr << ",";
-     }
-   cout << endl;
+   //insert at some index
+   d.insert(d.begin() + 2, -5);
 
+   print(d);
+
+   std::cout << "deleting at back and front()\n";
    d.pop_back(); //remove 100
    d.pop_front(); // remove 40
-   itr = d.begin();
-   for (; itr != d.end(); ++itr)
-     {
-        cout << *itr << ",";
-     }
-   cout << endl;
+
+   print(d);
+
+   std::cout << "deleting at index 2\n";
+   d.erase(d.begin() + 2);
+
+   print(d);
 
    return 0;
 }

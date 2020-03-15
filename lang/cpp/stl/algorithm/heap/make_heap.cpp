@@ -3,6 +3,8 @@
 #include <vector>
 #include <iterator>
 
+//std::*_heap only works on C array, std::array and std::vector
+
 int main()
 {
     std::vector<int> v{10, 20, 30, 14};
