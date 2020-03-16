@@ -165,7 +165,7 @@ namespace nonstd
             if (!downward)
                heapify(parent(i));
             else
-               heapify(largest);
+               heapify(largest, true);
          }
       }
 
