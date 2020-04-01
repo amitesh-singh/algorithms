@@ -52,6 +52,26 @@ int main()
      }
    cout << endl;
 
+   //we can use lambda functions too 
+   std::vector<int> v{9, 23, 13, -9, 23, 32};
+   //descending order.
+   //u can declare lambda function like  this as well.
+   // auto mygreater = [](const int &lhs, const int &rhs)-> bool { return lhs > rhs; };
+
+   std::sort(v.begin(), v.end(), [](const int &lhs, const int &rhs)-> bool {
+      return lhs > rhs;
+   });
+
+   for(auto &x:v)
+      std::cout << x << ", ";
+   std::cout << std::endl;
+
+   auto mylesser = [](const int &lhs, const int &rhs)-> bool { return lhs < rhs; };
+   std::sort(begin(v), end(v), mylesser);
+   for(auto &x:v)
+      std::cout << x << ", ";
+   std::cout << std::endl;
+   
    return 0;
 }
 
