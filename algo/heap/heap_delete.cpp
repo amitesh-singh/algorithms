@@ -2,11 +2,11 @@
 #include <iostream>
 #include <algorithm>
 
-void print(std::array<int, 6> &arr)
+void print(std::array<int, 6> &arr, int size = 6)
 {
-    for (auto &x: arr)
-        std::cout << x << ", ";
-    std::cout << std::endl;
+   for (int i = 0; i < size; ++i)
+     std::cout << arr[i] << ", ";
+   std::cout << std::endl;
 }
 
 
@@ -36,11 +36,15 @@ void heapify(int arr[], int size, int i, bool downward = true)
 int main()
 {
     std::array<int, 6> arr{1, 2, 5, 9, 23, -1};
-    
+
     std::make_heap(arr.begin(), arr.end());
     print(arr);
     int i = 4;
+    std::cout << "deleting " << arr[i];
+
     arr[i] = 10;
+    std::cout << " by " << arr[i] << std::endl;
+
     auto parent = [](int i) {return (i-1)/2; };
     if (arr.at(parent(i)) > arr[i])
     {
@@ -52,6 +56,20 @@ int main()
     }
 
     print(arr);
+
+    //deleting 1 
+    
+    i = 1;
+    std::cout << "deleting " << arr[i];
+    std::cout << std::endl;
+    arr[i] = arr[arr.size() - 1];
+
+    if (arr.at(parent(i)) > arr[i])
+      heapify(arr.data(), arr.size() - 1, i);
+    else
+      heapify(arr.data(), arr.size() - 1, parent(i), false);
+
+    print(arr, arr.size() - 1);
 
     return 0;
 }
