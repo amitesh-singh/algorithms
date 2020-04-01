@@ -18,6 +18,12 @@ struct Object
 {
    string _name;
    Object(string name): _name(name) {}
+   bool operator <(const Object &rhs)
+   {
+      int lval = atoi(_name.c_str());
+      int rval = atoi(rhs._name.c_str());
+      return lval < rval;
+   }
 };
 
 ostream &operator<<(std::ostream &s, const Object &obj)
@@ -37,6 +43,8 @@ struct StringSort
 int main()
 {
    vector<int> v;
+   srand(time(nullptr));
+
    for (int i = 0; i < 100; ++i)
      {
         v.push_back(rand() % 123);
@@ -50,7 +58,7 @@ int main()
    vector<string> strList;
    for (int i = 0; i < 100; ++i)
      {
-        char buf[5];
+        char buf[15];
         sprintf(buf, "%d", i);
         strList.push_back(string(buf));
      }
@@ -63,10 +71,12 @@ int main()
    vector<Object> objList;
    for (int i = 0; i < 10; ++i)
      {
-        char buf[5];
-        sprintf(buf, "%d", i);
+        char buf[115];
+        sprintf(buf, "%d", rand() % 119);
         objList.push_back(Object(string(buf)));
      }
+   std::cout << "objects: \n";
+   std::sort(objList.begin(), objList.end());
    std::copy(objList.begin(), objList.end(),
              ostream_iterator<Object>(cout, ", "));
    cout << "\n";
