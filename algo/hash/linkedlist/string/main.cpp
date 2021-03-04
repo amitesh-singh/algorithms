@@ -112,7 +112,7 @@ void del(field f, char str[])
     unsigned long key = hash_func(str);
     int index(0);
     int n = hash_table[f][key][0];
-    for (int i = 0; i < n; ++i)
+    for (int i = 1; i <= n; ++i)
     {
         index = hash_table[f][key][i];
         if (db[index].active && !strcmp(db[index].str[f], str))
@@ -120,7 +120,24 @@ void del(field f, char str[])
     }
 }
 
-void change
+void change(field inf, char str[], field cf, char cstr[])
+{
+    unsigned long key = hash_func(str), key2;
+    int index;
+    int n = hash_table[inf][key][0];
+    for (int i = 1; i <= n; ++i)
+    {
+        index = hash_table[inf][key][i];
+        if (db[index].active && !strcmp(db[index].str[inf], str))
+        {
+            _strcpy(db[index].str[cf], cstr);
+            key2 = hash_func(cstr);
+            hash_table[cf][key2][hash_table[cf][key2][0] + 1] = index;
+            hash_table[cf][key2][0]++;
+        }
+    }
+}
+
 int main()
 {
     insert("ami", "ami@ami.com");
@@ -146,6 +163,13 @@ int main()
             cout << o.str[i] << "\n";
     }
 
-    
+    change(NAME, "ami", NAME, "Amitesh");
+    cout << "Searching for Amitesh: ";
+     {
+        result o = search(NAME, "Amitesh", EMAIL);
+        cout << o.count << " : ";
+        for (int i = 0; i < o.count; ++i)
+            cout << o.str[i] << "\n";
+    }
     return 0;
 }
