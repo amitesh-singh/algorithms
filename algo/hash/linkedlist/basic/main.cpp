@@ -106,6 +106,31 @@ void del(int val)
     
 }
 
+void delAll()
+{
+    for (int i = 0; i < HASH_SIZE; ++i)
+    {
+        if (chain[i])
+        {
+            node *tmp = chain[i];
+            while (tmp)
+            {
+                node *tmp2 = tmp;
+                tmp = tmp->next;
+                delete tmp2;
+                tmp2 = nullptr;
+            }
+            chain[i] = nullptr;
+        }
+    }
+}
+
+void change(int oldval, int newval)
+{
+    del(oldval);
+    insert(newval);
+}
+
 int main()
 {
     init();
@@ -129,6 +154,12 @@ int main()
 
     print();
 
-    
+    change(0, 99);
+
+    print();
+    cout << "deleting all..\n";
+    delAll();
+    cout << "After complete deletion\n";
+    print();
     return 0;
 }
