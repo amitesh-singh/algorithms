@@ -39,7 +39,9 @@ unsigned long hash_func(char *str)
     unsigned long long val = 5381;
     char c;
     while (c = *str++)
-        val = val << 5 + val + c;
+        //val = val << 5 + val + c;
+        //use this kind of hash
+        val = ((val << 5) % TABLE_SIZE + val) % TABLE_SIZE + c;
     
     return val % TABLE_SIZE;
 }
