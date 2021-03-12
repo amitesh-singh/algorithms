@@ -17,7 +17,7 @@ enum field
 struct result 
 {
     int count;
-    char str[5][LEN];
+    char str[FIELD_SIZE][LEN];
     result(): count(0) {}
 };
 
