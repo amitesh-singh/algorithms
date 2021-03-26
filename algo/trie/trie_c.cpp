@@ -67,8 +67,6 @@ bool search(node *&root, const char *key)
    return (tmp && tmp->isLast);
 }
 
-
-
 bool remove(node *&root, const char *key)
 {
    auto hasChildren = [](node *root)->bool {
@@ -115,15 +113,35 @@ bool remove(node *&root, const char *key)
    return false;
 }
 
+void clean(node *&root)
+{
+   if (root == nullptr) return;
+   for (int i = 0; i < ALPHA_SIZE; ++i)
+     {
+        if (root->children[i])
+          clean(root->children[i]);
+     }
+
+   cout << "deleting: " << root->c << " ";
+   delete root;
+   root = nullptr;
+}
+
 int main()
 {
    node *root = 0;
 
    insert(root, "amit");
    insert(root, "ami");
+   insert(root, "avi");
 
    cout << "Searching for ami: " << search(root, "ami") << endl;
    cout << "Searching for amitesh: " << search(root, "amitesh") << endl;
+   insert(root, "rvisfkn");
+
+   clean(root);
+
+   cout << endl;
 
    return 0;
 }
