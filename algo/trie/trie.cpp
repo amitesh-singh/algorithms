@@ -118,6 +118,20 @@ bool remove(node *&curr, string key)
    return false;
 }
 
+void clean(node *&root)
+{
+   if (root == nullptr)
+      return;
+   for (int i = 0; i < ALPHABETIC_SIZE; ++i)
+   {
+      if (root->children[i])
+         clean(root->children[i]);
+   }
+
+   delete root;
+   root = nullptr;
+}
+
 int main()
 {
    node *root = 0;
@@ -138,6 +152,7 @@ int main()
    cout << "searching for amit: " << search(root, "amit") << endl;
 
    printTrie(root);
+   clean(root);
 
    return 0;
 }
