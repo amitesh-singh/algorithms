@@ -26,8 +26,13 @@ class BigNameClass
 
 using BNC = BigNameClass;
 
+//defining function ptr
+typedef int (*process)(void *); //old way
+using newprocess = int (*)(void *);
+
 int init_process(void *)
 {
+   cout << __PRETTY_FUNCTION__ << endl;
    return 1;
 }
 
@@ -40,10 +45,7 @@ int main()
    //
    BNC bnc(ami);
 
-   //defining function ptr
-   typedef int (*process)(void *); //old way
-   using newprocess = int (*)(void *);
-
+  
    newprocess init = init_process;
    cout << init_process(nullptr);
 
