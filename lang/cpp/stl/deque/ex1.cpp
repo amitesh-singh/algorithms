@@ -27,9 +27,9 @@ int main()
    // 40, 20, 10, 100
    d.push_back(100);
 
-   cout << "Head:" << d.front() << endl;
-   cout << "Tail:" << d.back() << endl;
-
+   cout << "Head:" << d.front() << endl; //head = 40
+   cout << "Tail:" << d.back() << endl; // tail = 100
+   cout << "d[2] = " << d.at(2) << endl; // value at index = 2
    //insert at some index
    d.insert(d.begin() + 2, -5);
 
@@ -45,6 +45,8 @@ int main()
    d.erase(d.begin() + 2);
 
    print(d);
-
+   
+   //clear
+   d.clear();
    return 0;
 }
