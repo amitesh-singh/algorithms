@@ -18,7 +18,8 @@ int main()
     std::fill(l.begin(), l.end(), -1);
 
     printList(l);
-
+    //change all values
+    
     //insert at tail
     l.push_back(100);
     //insert at head
@@ -36,6 +37,7 @@ int main()
     std::cout << "After sorting\n";
     printList(l);
 
+    //with a comparator lambda function
     l.sort([](const int &a, const int &b)->bool {
         return a - b;
     });
@@ -44,6 +46,9 @@ int main()
     printList(l);
 
 
+    std::list<int> list2;
+    int index = 2;
+    l.splice(l.begin() + index, list2);
 
     return 0;
 }
