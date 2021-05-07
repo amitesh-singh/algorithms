@@ -19,5 +19,11 @@ int main()
         cout << itr->first << ":" << itr->second << endl;
      }
 
+     //using auto
+     for (auto &x : m)
+     {
+        cout << x.first << " : " << x.second << endl;
+     }
+
    return 0;
 }
