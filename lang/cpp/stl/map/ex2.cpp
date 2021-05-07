@@ -19,5 +19,20 @@ int main()
         cout << itr->first << ":" << itr->second << endl;
      }
 
+   m.erase("A");
+   for (auto &x : m)
+   {
+      cout << x.first << ": " << x.second << "; ";
+   }
+   cout << endl;
+   
+   //count the number of element with a certain key
+   unsigned int count = m.count("H");
+   cout << "count for  key H: " << count << endl;
+
+   //check if the key exists
+   bool exists = (m.find("X") != m.end());
+   cout << "searching for key X: " << exists << endl;
+   
    return 0;
 }
