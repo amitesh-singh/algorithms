@@ -36,6 +36,11 @@ int init_process(void *)
    return 1;
 }
 
+class A
+{
+  public:
+      int meh(int, int) { return 2; }
+};
 int main()
 {
    String ami("Amitesh Singh");
@@ -47,8 +52,12 @@ int main()
 
   
    newprocess init = init_process;
-   cout << init_process(nullptr);
+   cout << init_process(nullptr) << endl;
 
+   using memfuncptr = decltype(&A::meh);//int A::(*)(int, int);
+   using memfuncptr2 = int (A::*)(int, int);
+   std::cout << typeid(memfuncptr).name() << endl;
+   std::cout << typeid(memfuncptr2).name() << endl;
 
    return 0;
 }
