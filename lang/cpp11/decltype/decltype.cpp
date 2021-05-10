@@ -1,4 +1,5 @@
 #include <iostream>
+#include<vector>
 
 using namespace std;
 
@@ -32,6 +33,12 @@ void dummy()
      std::cout << "type is bar2\n";
 }
 
+struct X
+{
+   int i;
+   double bar(short x) { return 33.22;}
+};
+
 // The decltype can be used to determine the type of an expression at compile-type.
 int main()
 {
@@ -45,6 +52,11 @@ int main()
    dummy<foo>(); //meh is of type bar
    dummy<foo2>(); //meh is of type bar2
 
+   //of int
+   std::vector<decltype(X::i)> v;
+
+   //declaring member function pointer
+   using memFuncPtr = decltype(&X::bar); //instead of doing double X::(*bar)(short);
 
    return 0;
 }

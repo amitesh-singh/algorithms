@@ -18,7 +18,7 @@ int main()
    auto v = compose(2, 3.14); // v's type is double
 
    // lambda function
-   auto f = [](int a, int b) { return a + b; };
+   auto f = [](int a, int b) ->int { return a + b; };
 
    cout << "Sum = " << f(10, 20) << "\n";
    cout << c << endl;
