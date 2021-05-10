@@ -13,6 +13,13 @@ void print(deque<int> &d)
    std::cout << "\n";
 }
 
+void print2(deque<int> &d)
+{
+   for (auto i: d)
+      std::cout << i << ", ";
+   std::cout << std::endl;
+}
+
 int main()
 {
    deque<int> d;
@@ -46,6 +53,8 @@ int main()
 
    print(d);
    
+   print2(d);
+
    //clear
    d.clear();
    return 0;

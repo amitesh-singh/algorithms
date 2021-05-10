@@ -1,17 +1,27 @@
 #include<iostream>
 using namespace std;
+
+class A
+{
+	int a;
+public:
+	A():a(0){}
+	int get() const
+	{
+		A *ptr = const_cast<A *>(this);
+		ptr->a = 10;
+		return a;
+	}
+};
 int main()
 {
-    int x = 1;
-    const int *pX  = &x; //pointer to const int
-    //*pX = 10; compilation error
-    cout << *pX << " ," << x << endl;
-    const int x2 = 2;
-    int *pX2 = const_cast<int *>(&x2);
-    cout << *pX2 << " ," << x2 << endl;
-    *pX2 = 11;
-    cout << *pX2 << " ," << x2 << endl; //undefined behavior
+	A aa;
+	cout << aa.get();
 
-    
-    return 0;
+	const A aa1;
+	aa1.get();  //undefined.
+	system("PAUSE");
+
+
+	return 0;
 }

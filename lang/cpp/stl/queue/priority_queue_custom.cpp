@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#define F std::cout << __PRETTY_FUNCTION__ << "\n"
 
 class person
 {
@@ -9,8 +10,13 @@ class person
     std::string _name;
 
     public:
-
+    person &operator=(const person &) = default;
     person(int id, std::string name): _id(id), _name(std::move(name))
+    {
+        F;
+    }
+
+    person(person &&rhs) :_id(rhs._id), _name(std::move(rhs._name))
     {
     }
 

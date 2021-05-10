@@ -40,20 +40,31 @@ struct A
 int main()
 {
     std::vector<A> v;
-    std::cout << "v.push_back(A()): \n";
-    v.push_back(A());
-    std::cout << std::endl;
+    A a1;
+    std::cout << "v.push_back(a1): \n";
+    v.push_back(a1);
+    std::cout << "********" << std::endl;
 
-    std::cout << "v.push_back(std::move(A()): \n";
-    v.push_back(std::move(A()));
-    std::cout << std::endl;
+    A a2;
+    std::cout << "v.push_back(std::move(a2): \n";
+    v.push_back(std::move(a2));
+    std::cout << "*******" << std::endl;
 
-    std::cout << "v.emplace_back(A()): \n";
-    v.emplace_back(A());
+    A a3;
+    std::cout << "v.emplace_back(a3): \n";
+    v.emplace_back(a3);
+    std::cout << "**********\n"; 
 
     A aa;
     std::cout << "A aa; v.push_back(std::move(a));\n";
+    //this seems most efficient.
     v.push_back(std::move(aa));
-    std::cout << "************ main() exiting..\n";
+    std::cout << "************\n";
+
+    A a11;
+    std::cout << "A a1; v.emplace_back(std::move(a1));\n";
+    v.emplace_back(std::move(a11));
+    std::cout << "****\n";
+    
     return 0;
 }
