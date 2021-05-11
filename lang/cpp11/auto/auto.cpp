@@ -23,6 +23,9 @@ int main()
    cout << "Sum = " << f(10, 20) << "\n";
    cout << c << endl;
    cout << v << endl;
+   //in C++14
+   auto f1 = [](auto a, auto b)->auto {return a + b;};
+   cout << "sum1 = " << f1(10, 11) << std::endl;
 
    return 0;
 }
