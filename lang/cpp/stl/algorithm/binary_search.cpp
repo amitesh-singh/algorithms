@@ -22,5 +22,6 @@ int main()
     else
         cout << "6 is absent\n";
     
+    
     return 0;    
 }
