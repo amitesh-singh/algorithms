@@ -11,27 +11,27 @@ namespace nonstd
         public:
         tribool &operator=(std::optional<bool> &&rhs)
         {
-            F;
+            //F;
             _state.emplace(*rhs);
             return *this;
         }
 
         tribool &operator=(bool &&rhs)
         {
-            F;
+            //F;
             _state.emplace(rhs);
             return *this;
         }
 
         bool operator==(bool &&rhs)
         {
-            F;
+            //F;
             return (rhs == *_state);
         }
 
         operator bool() const 
         {
-            F;
+            //F;
             if (_state)
                 return *_state;
             else return false;
