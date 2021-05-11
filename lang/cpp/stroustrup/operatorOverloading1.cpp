@@ -44,6 +44,12 @@ class A
         F;
         return this->_a & aa._a;
     }
+
+    //operator bool  -> if (A()) for this
+    operator bool() const
+    {
+        return _a > 0;
+    }
    
 };
 // ::operator&(aa);
@@ -75,6 +81,10 @@ int main()
     ++bb;
     cout << bb.getA() << endl;
     
+    if (aa) //calls 
+    {
+        std::cout << "greater than 0\n";
+    }
 
     return 0;
 }
