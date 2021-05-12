@@ -50,6 +50,13 @@ class A
     {
         return _a > 0;
     }
+
+    A &operator=(int &&r)
+    {
+        F;
+        _a = r;
+        return *this;
+    }
    
 };
 // ::operator&(aa);
@@ -66,11 +73,12 @@ void operator+(A a,A b)
 {
     F;
 }
+
 int main()
 {
     A aa(2);
     aa+1;
-    1+aa;
+    //1+aa;
     A bb(1);
     bool ret= aa & bb;
     cout << ret;
@@ -85,6 +93,8 @@ int main()
     {
         std::cout << "greater than 0\n";
     }
+    aa = 4;
+    
 
     return 0;
 }
