@@ -9,6 +9,7 @@ std::mutex mu;
 
 void sharedPrint(string msg, int id)
 {
+    //or std::lock_guard<std::mutex> g(mu);
     mu.lock();
     cout << msg << id << endl;
     mu.unlock();
