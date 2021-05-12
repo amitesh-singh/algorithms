@@ -50,6 +50,7 @@ int main()
    v.push_back(100);
    v.push_back(101);
 
+   v.emplace_back(1992); // emplace_back(T &&);
    print(v);
 
    int head = v.front(); //head or v[0]

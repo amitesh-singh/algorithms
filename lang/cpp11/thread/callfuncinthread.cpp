@@ -9,6 +9,11 @@ class A
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
+
+    void domyworkwitharg(int x)
+    {
+        cout << x << endl;
+    }
 };
 
 void callback(int i)
@@ -23,9 +28,11 @@ int main()
     
     thread t(&A::domywork,&aa);
     thread t2(callback, 10);
+    thread t3(&A::domyworkwitharg, &aa, 10);
 
     t.join();
     t2.join();
+    t3.join();
     
     cout << "main thread ends..\n";
 
