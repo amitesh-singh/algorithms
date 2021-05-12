@@ -19,7 +19,7 @@ try {
 }
 
 catch(std::exception &e)
-
+{
     cout << "error\n";
 }
 
