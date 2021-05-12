@@ -7,10 +7,11 @@
 std::mutex mu;
 std::condition_variable cond;
 std::deque<int> d;
+int count = 10;
 
-void f()
+void push_data()
 {
-    int count = 10;
+    //int count = 10;
     while (count > 0)
     {
         std::unique_lock<std::mutex> locker(mu);
@@ -23,10 +24,10 @@ void f()
     }
 }
 
-void g()
+void pop_data()
 {
     int data = 0;
-    while (data != 1)
+    while (count > 0)
     {
         std::unique_lock<std::mutex> locker(mu);
         cond.wait(locker, [&]() -> bool { return !d.empty(); });
@@ -40,8 +41,8 @@ void g()
 
 int main()
 {
-    std::thread t1(f);
-    std::thread t2(g);
+    std::thread t1(push_data);
+    std::thread t2(pop_data);
 
     t1.join();
     t2.join();

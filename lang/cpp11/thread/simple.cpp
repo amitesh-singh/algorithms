@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <mutex>
 
 using namespace std; 
 
@@ -12,9 +13,10 @@ void callingThread()
 class Ftor
 {
     public:
-    void operator()(string &msg)
+    void operator()(string &msg, int id)
     {
         cout << "msg from main: " << msg << endl;
+        cout << "thread number: " << id << endl;
         msg = "msg from thread\n";
     }
 };
@@ -40,12 +42,41 @@ int main()
 
     //msg is getting shared among main thread and thread 1
     string msg = "Hello buddy";
-    //pass msg as reference to thread
-    // or we could pass good old pointers
-    thread t2((Ftor()), std::ref(msg));
-    t2.join();
+    {
+        thread t2(Ftor(), std::ref(msg), 1); //<-- this will pass Ftor.operator()(msg) instead
+        t2.join();
+    }
+    {
+        //pass msg as reference to thread
+        // or we could pass good old pointers
+        thread t2((Ftor()), std::ref(msg), 2);  //<-- because of extra (), this will pass it as variable
+        t2.join();
+    }
+    {
+        thread t2 {Ftor(), std::ref(msg), 3}; // <== uses uniform initialization std::initializer_list<>, pass as a variable.
+        t2.join();
+    }
 
     cout << "msg from thread: " << msg << endl;
+
+    //using lambda function
+    thread t3([]
+    {
+        std::cout << "hello from thread 3:\n";
+    });
+
+    t3.join();
+
+    {
+        std::mutex m;
+        thread tt ([&m] ()
+        {
+            std::lock_guard<std::mutex> lg(m);
+            std::cout << "caling from tt\n";
+        });
+
+        tt.join();
+    }
 
     return 0;
 }
