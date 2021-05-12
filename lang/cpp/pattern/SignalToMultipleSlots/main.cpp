@@ -1,13 +1,12 @@
 #include "Signal.h"
 #include<iostream>
-#include<boost/function.hpp>
-#include<boost/bind.hpp>
+#include <functional>
 
 void func()
 {
 	std::cout << __FUNCTION__ << std::endl;
-
 }
+
 class Hello
 {
 public:
@@ -16,6 +15,7 @@ public:
 		std::cout << "Hello ";
 	}
 };
+
 class World
 {
 public:
@@ -24,18 +24,19 @@ public:
 		std::cout << "World";
 	}
 };
+
 int main()
 {
-	typedef boost::function<void (void)> __f;
+	using __f = std::function<void(void)>; 
+
 	Hello hello;
 	World world;
-	ami::signal<__f> sig;
-	sig.connect(__f(boost::bind(&func)));
-	sig.connect(__f(boost::bind(&Hello::operator (),&hello)));
-	sig.connect(__f(boost::bind(&World::operator (),&world)));
+	nonstd::signal<__f> sig;
+	sig.connect(std::bind(&func));
+	sig.connect(std::bind(&Hello::operator (),&hello));
+	sig.connect(std::bind(&World::operator (),&world));
 	//connect to all slots
 	sig();
-	int i;
-	std::cin >> i;
+
 	return 0;
 }

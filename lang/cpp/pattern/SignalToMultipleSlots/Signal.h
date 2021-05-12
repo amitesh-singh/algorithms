@@ -1,17 +1,11 @@
-//
-// V 0.1
-//
-
 #include<vector>
 #include<algorithm>
 
-
-namespace ami
+namespace nonstd
 {
 	template<class function>
 		class signal
 		{
-
 			std::vector<function> _list;
 			public:
 
