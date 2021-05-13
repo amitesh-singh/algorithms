@@ -1,70 +1,77 @@
 #include <iostream>
-#define F std::cout << __PRETTY_FUNCTION__ << std::endl
+#include <vector>
 
-struct A
+#define F std::cout << __PRETTY_FUNCTION__ << std::endl
+/*
+in other words, when you use std::move(x), you're allowing the compiler to cannibalize x.
+ Thus if x has, say, its own buffer 
+in memory - after std::move()ing the compiler can have another object own it instead
+*/
+
+class A
 {
-    A()
+    int *a;
+    public:
+    A() = delete;
+    A(int x): a(new int(x))
     {
-        _ptr = new int;
         F;
+    }
+    A(const A &)  = delete;
+    //move ctor
+    A(A &&rhs)
+    {
+        F;
+        a = rhs.a;
+        rhs.a = nullptr;
+    }
+
+    //move = operator
+    A &operator=(A &&rhs)
+    {
+        delete a;
+        a = rhs.a;
+        rhs.a = nullptr;
+        F;
+        return *this;
     }
 
     ~A()
     {
+        delete a;
+        a = nullptr;
         F;
-        delete _ptr;
     }
-
-    //copy constructor 
-    A(const A &rhs)
+    void print()
     {
-        _ptr = new int;
-        //deep copy
-        *_ptr = *rhs._ptr;
-        F;
+        std::cout << a << std::endl;
     }
-
-    //move contructor
-    A(A &&rhs)
-    {
-        _ptr = rhs._ptr;
-        rhs._ptr = nullptr;
-        F;
-    }
-
-    private:
-    int *_ptr;
 };
-#include <vector>
 
+void f(A &&rval)
+{
+    rval.print();
+    std::cout << "printed\n";
+}
 int main()
 {
-    std::vector<A> v;
-    A a1;
-    std::cout << "v.push_back(a1): \n";
-    v.push_back(a1);
-    std::cout << "********" << std::endl;
-
-    A a2;
-    std::cout << "v.push_back(std::move(a2): \n";
-    v.push_back(std::move(a2));
-    std::cout << "*******" << std::endl;
-
-    A a3;
-    std::cout << "v.emplace_back(a3): \n";
-    v.emplace_back(a3);
-    std::cout << "**********\n"; 
-
-    A aa;
-    std::cout << "A aa; v.push_back(std::move(a));\n";
-    //this seems most efficient.
-    v.push_back(std::move(aa));
-    std::cout << "************\n";
-
-    A a11;
-    std::cout << "A a1; v.emplace_back(std::move(a1));\n";
-    v.emplace_back(std::move(a11));
-    std::cout << "****\n";
+    A a1(2);
+    A a2(3);
+    A a3(4);
     
+    //calls A(A &&);
+    A a4 = std::move(a1);
+    //a1 is set to 0 now.. not usable.
+    //Calls A &operator=(A &&rhs)
+    a3 = std::move(a2);
+    //a2 is unusable now.
+
+    std::vector<A> v;
+    //takes rvalue.
+    v.emplace_back(std::move(a4)); //a4.a is nullptr here
+    a4.print();
+    v.emplace_back(A(10));
+    f((A(11)));
+    std::cout << "meh!\n";
     return 0;
 }
