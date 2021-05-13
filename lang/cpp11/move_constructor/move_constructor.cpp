@@ -29,6 +29,7 @@ class A
     //move = operator
     A &operator=(A &&rhs)
     {
+        if (this == &rhs) return *this;
         delete a;
         a = rhs.a;
         rhs.a = nullptr;
@@ -65,7 +66,7 @@ int main()
     //Calls A &operator=(A &&rhs)
     a3 = std::move(a2);
     //a2 is unusable now.
-
+    a3 = std::move(a3);
     std::vector<A> v;
     //takes rvalue.
     v.emplace_back(std::move(a4)); //a4.a is nullptr here
