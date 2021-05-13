@@ -3,6 +3,7 @@
 
 int main()
 {
+    //or std::future<int> f1 = 
     auto f1 = std::async(std::launch::async, []() -> int {
         std::cout << "trying to finish stuff\n";
         std::this_thread::sleep_for(std::chrono::seconds(5));
