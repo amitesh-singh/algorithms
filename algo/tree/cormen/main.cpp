@@ -64,6 +64,7 @@ void inorder(node *root)
     cout << root->key << endl;
     inorder(root->right);
 }
+//it gives output in descending order
 void inorderDescendingOrder(node *root)
 {
     if (root == 0) return;
@@ -178,6 +179,32 @@ node *findClosestNode(node *root, int k)
         node *p = findClosestNode(root->right, k);
         return (abs(root->key - k) < abs(p->key) - k ? root : p);
     }
+
+    return nullptr;
+}
+
+template <class T>
+void printBT(const std::string& prefix, const T* node, bool isLeft)
+{
+    if( node != nullptr )
+    {
+        std::cout << prefix;
+
+        std::cout << (isLeft ? "├──" : "└──" );
+
+        // print the value of the node
+        std::cout << node->key << std::endl;
+
+        // enter the next tree level - left and right branch
+        printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
+        printBT( prefix + (isLeft ? "│   " : "    "), node->right, false);
+    }
+}
+
+template <class T>
+void printBT(const T *root)
+{
+   printBT("", root, false);
 }
 
 int main()
@@ -220,7 +247,9 @@ int main()
        cout << "successor(9) is: " << successor(search(root, 9))->key << endl;
        cout << "height=" << height(root) << "\n";
        cout << "delete 9: " << endl;
+       printBT(root);
        remove(root, 9);
+       printBT(root);
        
        cout << "closest number to 10 is " << findClosestNode(root, 10)->key << endl;
        
@@ -228,6 +257,7 @@ int main()
        cout << "clean the root: ";
        deleteTree(root);
        cout << "root address is : " << root << endl;
+
    }
 
    return 0;
