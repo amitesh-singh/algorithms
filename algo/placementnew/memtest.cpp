@@ -5,6 +5,13 @@ using namespace std;
 char mempool[101];
 int memIndex = 0;
 
+//overload delete
+
+void operator delete(void *ptr)
+{
+   //don't do anything
+}
+
 int main()
 {
     int *p1 = new (mempool + memIndex) int;
@@ -20,6 +27,7 @@ int main()
     *c = 'A';
 
     cout << "mem index: " << memIndex << endl;
+    delete c;
 
     //print the mempool
     cout << std::hex;
