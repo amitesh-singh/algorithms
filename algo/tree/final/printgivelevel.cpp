@@ -21,6 +21,11 @@ struct mytree: public myds::tree<int, myds::basicnode<int> >
     public:
     void printgivenlevel(int level)
     {
+        if (level > height())
+        {
+            std::cout << "level does not exist\n";
+            return;
+        }
         _printgivenlevel(root, level);
     }
 
@@ -37,7 +42,8 @@ int main()
     }
     
     mt.print();
-    mt.printgivenlevel(2);
-    
+
+    mt.printgivenlevel(12);
+    mt.printgivenlevel(3);
     return 0;
 }
