@@ -12,13 +12,14 @@ int main()
    t.insert(12);
    for (int i = 0; i < 25; ++i)
      {
-        t.insert(i);
+        t.insert(rand() % 31);
      }
 
    auto *ptr = t.search(11);
    std::cout << "found " << ptr->data  << " parent: " << ptr->parent->data << std::endl;
 
    t.inorder();
+   t.print();
 
    return 0;
 }

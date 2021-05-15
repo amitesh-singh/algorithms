@@ -79,6 +79,18 @@ namespace myds
                 delete p;
                 p = nullptr;
              }
+
+           void _print(const node *p, const std::string &prefix, bool isLeft)
+           {
+             if (!p) return;
+             std::cout << prefix; 
+             std::cout << (isLeft ? "├──" : "└──" );
+             std::cout << p->data << std::endl;
+
+             _print(p->left, prefix + (isLeft ? "│   " : "    "), true);
+             _print(p->right, prefix + (isLeft ? "│   ": "    "), false);
+           }
+
            public:
             tree(): root(nullptr) {}
             ~tree()
@@ -113,6 +125,12 @@ namespace myds
               {
                  return _search(root, d);
               }
+            
+            void print()
+            {
+              std::cout << "\n";
+              _print(root, "", false);
+            }
          };
 }
 
