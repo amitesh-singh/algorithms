@@ -25,15 +25,17 @@ struct mytree: public myds::tree<int, mynode<int>>
         go_up(p->parent);
     }
 };
-
+#include <ctime>
 int main()
 {
     mytree mt;
-    
+    srand(time(nullptr));
     for (int i = 0; i < 100; ++i)
-        mt.insert(i);
+        mt.insert(rand() % 101);
     mytree::tnode *p = mt.search(90);
     mt.go_up(p->parent);
+
+    mt.print();
 
     return 0;
 }
