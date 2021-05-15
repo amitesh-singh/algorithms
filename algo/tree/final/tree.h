@@ -91,6 +91,12 @@ namespace myds
              _print(p->right, prefix + (isLeft ? "│   ": "    "), false);
            }
 
+           size_t _count(node *p)
+           {
+             if (!p) return 0;
+             return _count(p->left) + _count(p->right) + 1;
+           }
+
            public:
             tree(): root(nullptr) {}
             ~tree()
@@ -130,6 +136,11 @@ namespace myds
             {
               std::cout << "\n";
               _print(root, "", false);
+            }
+
+            size_t size()
+            {
+              return _count(root);
             }
          };
 }

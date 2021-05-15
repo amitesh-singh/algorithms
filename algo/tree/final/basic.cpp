@@ -21,6 +21,7 @@ int main()
 
    t.inorder();
    t.print();
+   std::cout << "nodes  count: " << t.size() << std::endl;
 
    return 0;
 }
