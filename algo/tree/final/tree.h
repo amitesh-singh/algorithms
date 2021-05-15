@@ -103,6 +103,20 @@ namespace myds
              return std::max(_height(p->left), _height(p->right)) + 1;
            }
 
+           void _preorder_copy(node *p, const tree<T, node> &t2)
+           {
+             if (!p) return;
+             //t2.insert(p->data);
+             insert(p->data);
+             _preorder_copy(p->left, t2);
+             _preorder_copy(p->right, t2);
+           }
+
+           void _copy(const tree &t)
+           {
+             _preorder_copy(t.root, t);
+           }
+
            public:
             tree(): root(nullptr) {}
             ~tree()
@@ -114,6 +128,23 @@ namespace myds
                  for (auto &x: l)
                    insert(x);
               }
+            
+            tree(const tree<T, node> &rhs) : root(nullptr)
+            {
+              _copy(rhs);
+            }
+
+            tree &operator=(const tree<T, node> &rhs)
+            {
+              _copy(rhs);
+
+              return *this;
+            }
+
+            tree &operator=(tree<T, node> &&rhs)
+            {
+
+            }
             void insert(const T &d)
               {
                  _insert(root, d);
