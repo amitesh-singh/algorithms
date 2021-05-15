@@ -22,6 +22,7 @@ int main()
    t.inorder();
    t.print();
    std::cout << "nodes  count: " << t.size() << std::endl;
+   std::cout << "height: " << t.height() << std::endl;
 
    return 0;
 }

@@ -97,6 +97,12 @@ namespace myds
              return _count(p->left) + _count(p->right) + 1;
            }
 
+           size_t _height(node *p)
+           {
+             if (!p) return 0;
+             return std::max(_height(p->left), _height(p->right)) + 1;
+           }
+
            public:
             tree(): root(nullptr) {}
             ~tree()
@@ -142,6 +148,11 @@ namespace myds
             size_t size()
             {
               return _count(root);
+            }
+
+            size_t height()
+            {
+              return _height(root);
             }
          };
 }
