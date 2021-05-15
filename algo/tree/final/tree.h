@@ -112,16 +112,17 @@ namespace myds
               {
                  _insert(root, d);
               }
-
+            // Left, root, right
             void inorder()
               {
                  _inorder(root);
               }
-
+            //Root, left, right 
             void preorder()
               {
                  _preorder(root);
               }
+            //Left, right, root
             void postorder()
               {
                  _postorder(root);
