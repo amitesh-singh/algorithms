@@ -4,18 +4,20 @@
 
 namespace myds
 {
-   template<class T>
-       class tree
+  template <class T>
+   struct basicnode
+    {
+                 basicnode<T> *left, *right;
+                 T data;
+                 basicnode<T> *parent;
+                 basicnode(const T &d): data(d), left(nullptr), right(nullptr), parent(nullptr) {}
+    };
+
+   template<class T, class node>
+       class tree   
          {
            public:
-            struct node
-              {
-                 node *left, *right;
-                 T data;
-                 node *parent;
-                 node(const T &d): data(d), left(nullptr), right(nullptr), parent(nullptr) {}
-              };
-
+          
            protected:
             node *root;
             void _insert(node *&p,T d, node *par = nullptr)
