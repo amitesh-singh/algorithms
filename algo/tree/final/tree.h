@@ -121,7 +121,7 @@ namespace myds
                  _postorder(root);
               }
 
-            node *search(const T &d)
+            node *find(const T &d)
               {
                  return _search(root, d);
               }
