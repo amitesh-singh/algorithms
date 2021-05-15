@@ -106,13 +106,12 @@ namespace myds
            void _preorder_copy(node *p, const tree<T, node> &t2)
            {
              if (!p) return;
-             //t2.insert(p->data);
              insert(p->data);
              _preorder_copy(p->left, t2);
              _preorder_copy(p->right, t2);
            }
 
-           void _copy(const tree &t)
+           void _copy(const tree<T, node> &t)
            {
              _preorder_copy(t.root, t);
            }
@@ -133,8 +132,13 @@ namespace myds
             {
               _copy(rhs);
             }
-
-            tree &operator=(const tree<T, node> &rhs)
+            tree(tree<T, node> &&rhs) : root(nullptr)
+            {
+              root = rhs.root;
+              rhs.root = nullptr;
+            }
+            
+            tree &operator=(tree<T, node> &rhs)
             {
               _copy(rhs);
 
@@ -142,9 +146,12 @@ namespace myds
             }
 
             tree &operator=(tree<T, node> &&rhs)
-            {
-
+            { 
+              root = rhs.root;
+              rhs.root = nullptr;
+              return *this;
             }
+
             void insert(const T &d)
               {
                  _insert(root, d);

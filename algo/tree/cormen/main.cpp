@@ -184,7 +184,7 @@ node *findClosestNode(node *root, int k)
 }
 
 template <class T>
-void printBT(const std::string& prefix, const T* node, bool isLeft)
+void printBT(const std::string&& prefix, const T* node, bool isLeft)
 {
     if( node != nullptr )
     {
