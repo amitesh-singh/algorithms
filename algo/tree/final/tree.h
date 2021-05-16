@@ -14,7 +14,7 @@ namespace myds
     };
 
    template<class T, class node>
-       class tree   
+       class tree
          {
            public:
 
@@ -116,6 +116,23 @@ namespace myds
              _preorder_copy(t.root, t);
            }
 
+           bool __isequal(const node *p1, const node *p2)
+             {
+                if (!p1 && !p2) return true;
+                else if (p1 && !p2) return false;
+                else if (!p1 && p2) return false;
+                else if (p1 && p2)
+                  {
+                     return p1->data == p2->data && __isequal(p1->left, p2->left) && __isequal(p1->right, p2->right);
+                  }
+                return false;
+             }
+
+           bool _isequal(const tree<T, node> &t1, const tree<T, node> &t2)
+             {
+                return __isequal(t1.root, t2.root);
+             }
+
            public:
             tree(): root(nullptr) {}
             ~tree()
@@ -176,7 +193,7 @@ namespace myds
               {
                  return _search(root, d);
               }
-            
+
             void print()
             {
               std::cout << "\n";
@@ -192,6 +209,11 @@ namespace myds
             {
               return _height(root);
             }
+
+            bool operator==(const tree &rhs)
+              {
+                 return _isequal(*this, rhs);
+              }
          };
 }
 

@@ -34,6 +34,7 @@ int main()
    auto t2 = t; //copy of t2
 
    std::cout << "equal check: " << issame(t, t2) << std::endl;
+   std::cout << "native code: " << (t == t2) << std::endl;
 
    return 0;
 }
