@@ -7,7 +7,7 @@ struct mytree: public myds::tree<int, myds::basicnode<int> >
     using node = myds::basicnode<int>;
     private:
 
-    void _printgivenlevel(node *p, int level, int &requiredLevel)
+    void _printgivenlevel(node *p, int &&level, int &requiredLevel)
     {
         if (!p) return;
         if (level == requiredLevel) std::cout << p->data << " ";
@@ -23,8 +23,7 @@ struct mytree: public myds::tree<int, myds::basicnode<int> >
             std::cout << "level does not exist\n";
             return;
         }
-        int l = 1;
-        _printgivenlevel(root, l, level);
+        _printgivenlevel(root, 1, level);
     }
 
 };
