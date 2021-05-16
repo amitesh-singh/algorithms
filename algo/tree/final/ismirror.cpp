@@ -1,6 +1,9 @@
 #include <iostream>
 #include "tree.h"
 #include <ctime>
+#include <thread>
+#include <future>
+
 
 using tree = myds::tree<int, myds::basicnode<int>> ;
 using node = myds::basicnode<int>;
@@ -36,6 +39,18 @@ int main()
    auto t2 = t; //copy of t2
 
    std::cout << "mirror check: " << ismirror(t, t2) << std::endl;
+
+   auto leftSideWork = std::async(std::launch::async, (bool (*)(node *, node *)) ismirror, t.root->left, t2.root->right);
+   auto rightSideWork = std::async(std::launch::async, (bool (*)(node *, node *)) ismirror, t.root->right, t2.root->left);
+
+   //blocking calls
+   auto l = leftSideWork.get();
+   auto r = rightSideWork.get();
+
+
+   bool isMirrorFlag = t.root->data == t2.root->data && l && r;
+   std::cout << "is mirror: " << isMirrorFlag << std::endl;
+
 
    return 0;
 }
