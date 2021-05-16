@@ -17,9 +17,9 @@ namespace myds
        class tree   
          {
            public:
-          
-           protected:
+
             node *root;
+           protected:
             void _insert(node *&p,T d, node *par = nullptr)
               {
                  if (p == nullptr)
