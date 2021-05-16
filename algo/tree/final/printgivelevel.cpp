@@ -40,7 +40,7 @@ int main()
     {
         mt.insert(rand() % 101);
     }
-    
+
     mt.print();
 
     mt.printgivenlevel(12);
