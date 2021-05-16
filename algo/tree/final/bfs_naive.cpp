@@ -6,24 +6,20 @@ struct mytree: public myds::tree<int, myds::basicnode<int> >
 {
     using node = myds::basicnode<int>;
     private:
-   
-
-    void _printgivenlevel(node *p, int level)
+    void _printgivenlevel(node *p, int level, int &actuallevel)
     {
         if (!p) return;
-        if (level == 1) std::cout << p->data << std::endl;
-        else if (level > 1)
-        {
-            _printgivenlevel(p->left, level - 1);
-            _printgivenlevel(p->right, level - 1);
-        }
+        if (level == actuallevel) std::cout << p->data << std::endl;
+
+        _printgivenlevel(p->left, level + 1, actuallevel);
+        _printgivenlevel(p->right, level + 1, actuallevel);
     }
     public:
     void bfs()
     {
         int levels = height();
         for (int i = 1; i <= levels; ++i)
-            _printgivenlevel(root, i);
+            _printgivenlevel(root, 1, i);
     }
   
 };
