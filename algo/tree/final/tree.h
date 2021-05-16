@@ -206,6 +206,42 @@ namespace myds
               {
                  _insert(root, d);
               }
+            void insert2(const T &d)
+              {
+                 node *curr = root;
+                 if (curr == nullptr)
+                   {
+                      root = new node(d);
+                      return;
+                   }
+                 while (curr != nullptr)
+                   {
+                      if (d < curr->data)
+                        {
+                           if (curr->left)
+                             curr = curr->left;
+                           else
+                             {
+                                //insert here
+                                curr->left = new node(d);
+                                curr->left->parent = curr;
+                                break;
+                             }
+                        }
+                      else if (d > curr->data)
+                        {
+                           if (curr->right)
+                             curr = curr->right;
+                           else
+                             {
+                                //insert here
+                                curr->right = new node(d);
+                                curr->right->parent = curr;
+                                break;
+                             }
+                        }
+                   }
+              }
             // Left, root, right
             void inorder()
               {
