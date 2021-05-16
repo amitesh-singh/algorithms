@@ -12,7 +12,7 @@ int main()
    t.insert(12);
    for (int i = 0; i < 25; ++i)
      {
-        t.insert(rand() % 31);
+        t.insert(rand() % 131);
      }
 
    auto *ptr = t.find(11);
@@ -23,6 +23,9 @@ int main()
    t.print();
    std::cout << "nodes  count: " << t.size() << std::endl;
    std::cout << "height: " << t.height() << std::endl;
+
+   std::cout << "get min: " << t.getMin() << std::endl;
+   std::cout << "get max: " << t.getMax() << std::endl;
 
    return 0;
 }

@@ -133,6 +133,39 @@ namespace myds
                 return __isequal(t1.root, t2.root);
              }
 
+           void __getMin(node *p, node *&res)
+             {
+                if (p && !p->left) { res = p;  return; }
+                else
+                  __getMin(p->left, res);
+             }
+           const T& _getMin(node *p)
+             {
+                node *res;
+                //go left side.
+                __getMin(p, res);
+
+                return res->data;
+             }
+
+           void __getMax(node *p, node *&res)
+             {
+                if (p && !p->right)
+                  {
+                     res = p;
+                     return;
+                  }
+                else
+                  __getMax(p->right, res);
+             }
+
+           const T& _getMax(node *p)
+             {
+                node *res;
+                __getMax(p, res);
+                return res->data;
+             }
+
            public:
             tree(): root(nullptr) {}
             ~tree()
@@ -213,6 +246,16 @@ namespace myds
             bool operator==(const tree &rhs)
               {
                  return _isequal(*this, rhs);
+              }
+
+            const T &getMin()
+              {
+                 return _getMin(root);
+              }
+
+            const T &getMax()
+              {
+                 return _getMax(root);
               }
          };
 }
