@@ -27,5 +27,20 @@ int main()
    std::cout << "get min: " << t.getMin() << std::endl;
    std::cout << "get max: " << t.getMax() << std::endl;
 
+
+   decltype(t) t1;
+   t1.insert(10);
+   t1.insert(11);
+   t1.insert(0);
+   t1.print();
+
+   std::cout << "print iteratie insert:\n";
+   decltype(t) t2;
+   t2.insert2(10);
+   t2.insert2(11);
+   t2.insert2(0);
+
+   t2.print();
+
    return 0;
 }
