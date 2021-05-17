@@ -139,13 +139,13 @@ namespace myds
                 else
                   __getMin(p->left, res);
              }
-           const T& _getMin(node *p)
+           node *_getMin(node *p)
              {
                 node *res;
                 //go left side.
                 __getMin(p, res);
 
-                return res->data;
+                return res;
              }
 
            void __getMax(node *p, node *&res)
@@ -159,11 +159,11 @@ namespace myds
                   __getMax(p->right, res);
              }
 
-           const T& _getMax(node *p)
+           node* _getMax(node *p)
              {
                 node *res;
                 __getMax(p, res);
-                return res->data;
+                return res;
              }
 
            public:
@@ -247,6 +247,38 @@ namespace myds
                         }
                    }
               }
+            
+            void _erase(node *&p, const T &d)
+            {
+              if (p == nullptr) return;
+              if (d > p->data)
+              {
+                _erase(p->right, d);
+              }
+              else if (d < p->data)
+              {
+                _erase(p->left, d);
+              }
+              else if (p->left && p->right)
+              {
+                p->data = _getMin(p->right)->data;
+                _erase(p->right, p->data);
+              }
+              else
+              {
+                node *tmp = p;
+                if (p->left)
+                  p = p->left;
+                else
+                  p = p->right;
+                delete tmp;
+                tmp = nullptr;
+              }
+            }
+            void erase(const T &d)
+            {
+              _erase(root, d);
+            }
             // Left, root, right
             void inorder()
               {
@@ -289,12 +321,12 @@ namespace myds
                  return _isequal(*this, rhs);
               }
 
-            const T &getMin()
+            node *getMin()
               {
                  return _getMin(root);
               }
 
-            const T &getMax()
+            node *getMax()
               {
                  return _getMax(root);
               }
