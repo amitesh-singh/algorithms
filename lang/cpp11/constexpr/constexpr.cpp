@@ -28,6 +28,18 @@ constexpr double PI()
 {
    return 3.14;
 }
+struct meh
+{
+  int i;
+  constexpr meh(int x)  : i(x) {}
+  meh()  {} 
+  meh(const meh&) = default;
+};
+
+constexpr meh returnme(int i)
+{
+  return meh(i);
+}
 
 int main()
 {
@@ -40,5 +52,6 @@ int main()
   
   cout << PI() << endl;
   
+  std::cout << returnme(10).i << std::endl;
   return 0;
 }
