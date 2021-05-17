@@ -4,6 +4,12 @@
 
 namespace myds
 {
+  enum class tree_type
+    {
+       BST,
+       AVL
+    };
+
   template <class T>
    struct basicnode
     {
@@ -13,7 +19,7 @@ namespace myds
                  basicnode(const T &d): data(d), left(nullptr), right(nullptr), parent(nullptr) {}
     };
 
-   template<class T, class node>
+   template<class T, class node, tree_type treeType = tree_type::BST >
        class tree
          {
            public:
