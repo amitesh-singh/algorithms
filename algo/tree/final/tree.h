@@ -240,6 +240,11 @@ namespace myds
                                 break;
                              }
                         }
+                        else
+                        {
+                          //not adding dupilicates
+                          break;
+                        }
                    }
               }
             // Left, root, right

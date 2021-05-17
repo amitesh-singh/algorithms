@@ -42,5 +42,11 @@ int main()
 
    t2.print();
 
+    for (int i = 0; i < 25; ++i)
+     {
+        t2.insert(rand() % 131);
+     }
+
+   t2.print();
    return 0;
 }
