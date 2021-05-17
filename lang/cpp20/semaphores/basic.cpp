@@ -2,6 +2,7 @@
 #include <semaphore>
 #include <thread>
 #include <vector>
+#include <chrono>
 
 std::vector<int> v{};
 
@@ -13,8 +14,10 @@ binary_semaphore prepareSignal(0);
 
 void prepareWork()
 {
+   std::cout << "Sender: Data is getting prepared" << std::endl;
    v.insert(v.end(), {1, 2, 3, 4});
-   std::cout << "Sender: Data Prepated. " << "\n";
+   std::this_thread::sleep_for(std::chrono::seconds(3));
+   std::cout << "Sender: Data Prepared. " << std::endl;
    prepareSignal.release();
 }
 
