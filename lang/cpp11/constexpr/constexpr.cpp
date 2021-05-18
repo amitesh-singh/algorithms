@@ -17,6 +17,8 @@ using namespace std;
 class Pin
 {
 public:
+   Pin() = default;
+   //constexpr Pin() = default;
   //const expr constructor must have empty function body
   constexpr Pin(uint16_t ddr, uint16_t port): _ddr(ddr), _port(port)
   {
