@@ -18,12 +18,16 @@ namespace myds
                  basicnode<T> *parent;
                  basicnode(const T &d): data(d), left(nullptr), right(nullptr), parent(nullptr) {}
     };
-
+   template<class node>
+   void defaultPrint(node *p)
+   {
+     std::cout << p->data << std::endl;
+   }
    template<class T, class node, tree_type treeType = tree_type::BST >
        class tree
          {
            public:
-
+           using fp = void (*)(node *);
             node *root;
            protected:
             void _insert(node *&p,T d, node *par = nullptr)
@@ -86,15 +90,15 @@ namespace myds
                 p = nullptr;
              }
 
-           void _print(const node *p, const std::string &prefix, bool isLeft)
+           void _print(node *p, const std::string &prefix, bool isLeft, fp f)
            {
              if (!p) return;
              std::cout << prefix; 
              std::cout << (isLeft ? "├──" : "└──" );
-             std::cout << p->data << std::endl;
-
-             _print(p->left, prefix + (isLeft ? "│   " : "    "), true);
-             _print(p->right, prefix + (isLeft ? "│   ": "    "), false);
+             //std::cout << p->data << std::endl;
+             f(p);
+             _print(p->left, prefix + (isLeft ? "│   " : "    "), true, f);
+             _print(p->right, prefix + (isLeft ? "│   ": "    "), false, f);
            }
 
            size_t _count(node *p)
@@ -305,11 +309,11 @@ namespace myds
               {
                  return _search(root, d);
               }
-
-            void print()
+            
+            void print(fp f = defaultPrint<node>)
             {
               std::cout << "\n";
-              _print(root, "", false);
+              _print(root, "", false, f);
             }
 
             size_t size()
