@@ -19,8 +19,8 @@ class mytree: public myds::tree<int, basicnode<int>>
     {
         if (p == 0) return;
         v.push_back(p);
-        _getRandom(p, v);
-        _getRandom(p, v);
+        _getRandom(p->left, v);
+        _getRandom(p->right, v);
         std::cout << "meh\n";
     }
     public:
