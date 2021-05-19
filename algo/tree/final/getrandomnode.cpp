@@ -13,6 +13,10 @@
                  basicnode<T> *parent;
                  int children_count {0};
                  basicnode(const T &d): data(d), left(nullptr), right(nullptr), parent(nullptr) {}
+                 int getChildrenCount()
+                 {
+                     return children_count - 1;
+                 }
     };
 
 using node = basicnode<int>;
@@ -67,11 +71,37 @@ class mytree: public myds::tree<int, basicnode<int>>
     int   populateChildrenCount(node *&p)
     {    
         if (p == nullptr) return 0;
-        if (!p->left && !p->right) {p->children_count = 1; return 1;}
+       // if (!p->left && !p->right) {p->children_count = 1; return 1;}
        
          p->children_count = populateChildrenCount(p->left) + populateChildrenCount(p->right) + 1;
          return p->children_count;
     }
+
+    int children(node *p)
+    {
+        if (!p) return 0;
+        return p->children_count;
+    }
+
+    node *getRandom3(node *p, int count)
+    {
+        if (p == nullptr) return nullptr;
+        if (count == children(p->left))
+            return p;
+        if (count < children(p->left))
+            return getRandom3(p->left, count);
+        return getRandom3(p->right, count - children(p->left) - 1);
+    }
+
+    node *getRandom3()
+    {
+        std::cout << "root->childtren: " << root->children_count << std::endl;
+        int count = rand() % root->children_count;
+        std::cout << "count: " << count << std::endl;
+        return getRandom3(root, count);
+    }
+
+
 
 };
 
@@ -97,5 +127,8 @@ int main()
     mt.print(printChildren);
     n = mt.getRandom2();
     std::cout << "random node2 : " << n->data << std::endl;
+    n = mt.getRandom3();
+    std::cout << "random node 3: " << n->data << std::endl;
+
     return 0;
 }
