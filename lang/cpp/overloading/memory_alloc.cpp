@@ -1,8 +1,14 @@
 #include <iostream>
 #define F std::cout << __PRETTY_FUNCTION__ << std::endl
 
-//won't work for class objects
 
+class A
+{
+    int a = 4;
+    public:
+    A() {F;}
+    ~A() {F;}
+};
 //global mem
 void *operator new(size_t size)
 {
@@ -47,5 +53,7 @@ int main()
     int *p2 = new (10) int;
     delete p2;
 
+    A *aa = new A;
+    delete aa;
     return 0;
 }

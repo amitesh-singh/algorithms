@@ -94,10 +94,9 @@ class mytree: public myds::tree<int, basicnode<int>>
     }
 
     node *getRandom3()
-    {
-        std::cout << "root->childtren: " << root->children_count << std::endl;
+    {   
         int count = rand() % root->children_count;
-        std::cout << "count: " << count << std::endl;
+        
         return getRandom3(root, count);
     }
 
@@ -120,8 +119,7 @@ int main()
     
     mt.print();
     basicnode<int> *n = mt.getRandom();
-    std::cout << "random node: " << n->data << std::endl;
-    std::cout << "print children heiratch:\n";
+   
     mt.populateChildrenCount(mt.root);
 
     mt.print(printChildren);
