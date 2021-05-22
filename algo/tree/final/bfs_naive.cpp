@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tree.h"
+#include <queue>
 
 
 struct mytree: public myds::tree<int, myds::basicnode<int> >
@@ -21,6 +22,24 @@ struct mytree: public myds::tree<int, myds::basicnode<int> >
         for (int i = 1; i <= levels; ++i)
             _printgivenlevel(root, 1, i);
     }
+
+    void bfs2()
+      {
+         std::queue<node *> q;
+         node *p = root;
+
+         q.push(p);
+         while (!q.empty())
+           {
+              node *curr = q.front();
+              q.pop();
+              std::cout << curr->data << ", ";
+
+              if (curr->left) q.push(curr->left);
+              if (curr->right) q.push(curr->right);
+           }
+         std::cout << '\n';
+      }
   
 };
 
@@ -35,6 +54,8 @@ int main()
     mt.print();
     
     mt.bfs();
+    std::cout << "bfs using queue:\n";
+    mt.bfs2();
     
     return 0;
 }
