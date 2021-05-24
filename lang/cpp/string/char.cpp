@@ -1,5 +1,6 @@
 #include<iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,6 +17,18 @@ int main()
    // int i = c - '0'; ///-> 9
 
    cout << s << endl; //s would be 1
+
+   s = "";
+   //sort the string
+   for (int i = 9; i >= 0; --i)
+   {
+      s += ('0' + i);
+   }
+
+   std::cout << s << std::endl;
+   std::sort(begin(s), end(s));
+   
+   std::cout << s << std::endl;
 
    return 0;
 }
