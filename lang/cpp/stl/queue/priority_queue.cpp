@@ -4,32 +4,37 @@
 #include <list>
 #include <array>
 #include <algorithm>
+#define F std::cout << __PRETTY_FUNCTION__ << std::endl
 
 void f1()
 {
    std::priority_queue<int> pq;
-
+   
+   F;
    for (int i = 0; i < 10; ++i)
       pq.push(i);
 
    for (int i = 0; i < 10; ++i)
    {
-         std::cout << pq.top() << std::endl;
+         std::cout << pq.top() << ", ";
          pq.pop();
    }
+   std::cout << std::endl;
 }
 
 void f2()
 {
+   F;
    std::priority_queue<int, std::vector<int>, std::greater<int> > pq;
    for (int i = 0; i < 10; ++i)
       pq.push(i);
 
    for (int i = 0; i < 10; ++i)
       {
-         std::cout << pq.top() << std::endl;
+         std::cout << pq.top() << ", ";
          pq.pop();
       }
+      std::cout << std::endl;
 }
 
 //pq for fixed size lets say 5

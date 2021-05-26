@@ -56,5 +56,23 @@ int main()
     }
     std::cout << std::endl;
 
+    //or use lambda function
+    auto comp = [](const person& l, const person &r)->bool { return l.getId() > r.getId(); };
+
+    std::priority_queue<person, std::vector<person>, decltype(comp)> pq2 (comp);
+
+    pq2.push(std::move(person(1, "Ami")));
+    pq2.push(std::move(person(2, "Poo")));
+    pq2.push(std::move(person(3, "Avi")));
+    pq2.push(std::move(person(4, "Aarav")));
+
+    size = pq2.size();
+    for (int i = 0; i < size; ++i)
+    {
+        pq2.top().print();
+        pq2.pop();
+    }
+    std::cout << std::endl;
+
     return 0;
 }
