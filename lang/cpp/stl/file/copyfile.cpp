@@ -27,5 +27,7 @@ int main(int argc, char **argv)
         fout << s << "\n";
     }
 
+    fin.close();
+    fout.close();
     return 0;
 }
