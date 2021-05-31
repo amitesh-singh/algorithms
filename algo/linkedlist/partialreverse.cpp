@@ -46,11 +46,14 @@ node *reverseList(node *left, node *right)
         prev = curr;
         curr = next;
     }
-    if (curr == right)
+    if (curr && curr == right)
     {
         node *next = curr->next;
         curr->next = prev;
     }
+    
+    curr = curr ? curr : prev;
+
     return curr;
 }
 node *partialReverse(node *&head, int l, int r)
@@ -99,7 +102,7 @@ int main()
 
     prepareList(head);
     print(head);
-    node *newhead = partialReverse(head, 2, 5);
+    node *newhead = partialReverse(head, 2, 12);
     print(newhead);
     return 0;
 }
