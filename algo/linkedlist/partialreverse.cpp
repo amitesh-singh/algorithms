@@ -16,7 +16,7 @@ void prepareList(node *&head)
     head = new node(0);
     node *p = head;
 
-    for (int i = 1; i < 10; ++i)
+    for (int i = 1; i < 2; ++i)
     {
         p->next = new node(std::move(i));
         p = p->next;
@@ -63,25 +63,28 @@ node *partialReverse(node *&head, int l, int r)
    // we need prevToLeft and nextToRight ptr too
    node *curr = head;
    node *left = 0, *right = 0, *prevToLeft = 0, *nextToRight = 0;
+    size_t count = 1;
 
    while (curr)
    {
-       if (curr->data == l)
+       if (count == l)
        {
            left = curr;
            break;
        }
+       count++;
        prevToLeft = curr;
        curr = curr->next;
    }
 
    while (curr)
    {
-       if (curr->data == r)
+       if (count == r)
        {
            right = curr;
            break;
        }
+       count++;
        curr = curr->next;
    }
 
@@ -89,9 +92,13 @@ node *partialReverse(node *&head, int l, int r)
     nextToRight = right->next;
     
     node *p = reverseList(left, right);
+    if (prevToLeft)
+        prevToLeft->next = p;
+    else
+        head = right;
 
-    prevToLeft->next = p;
-    left->next = nextToRight;
+    if (left)
+        left->next = nextToRight;
 
     return head;
 }
@@ -102,7 +109,7 @@ int main()
 
     prepareList(head);
     print(head);
-    node *newhead = partialReverse(head, 2, 12);
+    node *newhead = partialReverse(head, 1, 2);
     print(newhead);
     return 0;
 }
