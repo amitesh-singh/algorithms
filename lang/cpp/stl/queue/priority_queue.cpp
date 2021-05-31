@@ -25,7 +25,8 @@ void f1()
 void f2()
 {
    F;
-   std::priority_queue<int, std::vector<int>, std::greater<int> > pq;
+   std::cout << "min heap: ";
+   std::priority_queue<int, std::vector<int>, std::greater<int> > pq; //min heap
    for (int i = 0; i < 10; ++i)
       pq.push(i);
 
