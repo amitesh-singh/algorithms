@@ -1,5 +1,6 @@
 #include<iostream>
 #include<set>
+
 using namespace std;
 
 
@@ -12,7 +13,8 @@ class client
 
 struct clientcomp
 {
-   bool operator()(const client &lhs, const client &rhs)
+   //the set comparator should be const, or else it won't compile
+   bool operator()(const client &lhs, const client &rhs) const
      {
         return lhs.id < rhs.id;
      }
@@ -33,8 +35,11 @@ int main()
    S.insert(2);
    S.insert(12);
    S.insert(0);
-   for(std::set<int>::iterator itr = S.begin(); itr!=S.end(); ++itr)
-     cout << *itr << endl;
+
+   for (auto &x: S)
+     std::cout << x << ", ";
+   std::cout << std::endl;
+
 
    std::set<client, clientcomp> s1;
    s1.insert(client(10));
