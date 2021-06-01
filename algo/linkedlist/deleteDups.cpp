@@ -79,6 +79,7 @@ node *deleteAllDups(node *&head)
              node *next2 = p->next;
              delete p;
              p = next2;
+             deleteLastNode = false;
           }
         else
           p = p->next;
