@@ -62,9 +62,6 @@ node<int> *reverse(node<int> *&p)
     return res;
 }
 
-
-
-
 node<int> * reverse2(node<int> *&p)
 {
     node<int> *curr = p;
