@@ -50,24 +50,24 @@ std::vector<int> getFactors(int n)
 int sumOddFactors(int n)
 {
    int sum {0};
+
+   if (n % 2 == 1) sum += n;
    //divide by 2 to make it odd
    while (n % 2 == 0)
      {
         n = n/2;
      }
 
-   for (int x = 3; x <= sqrt(n); x += 2)
+   for (int x = 3; x < (n); x += 2)
      {
-        while (n % x == 0)
+        if (n % x == 0)
           {
-             n = n/x;
              sum += x;
           }
      }
-   if (n > 2)
-     sum += n;
    //add 1
    sum++;
+
 
    return sum;
 }
@@ -96,6 +96,6 @@ int main()
 
    std::cout << std::endl;
 
-   std::cout << "sumof odd factors 1001: " << sumOddFactors(1001) << std::endl;
+   std::cout << "sumof odd factors 18: " << sumOddFactors(9) << std::endl;
    return 0;
 }
