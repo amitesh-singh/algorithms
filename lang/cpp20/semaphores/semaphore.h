@@ -1,27 +1,35 @@
 #ifndef __semaphore_h__
 #define __semaphore_h__
 
+#include <thread>
 #include <mutex>
 #include <condition_variable>
 
 namespace nonstd
 {
+   template<int MAX_VAL = 1024>
    class semaphore
      {
-        const static int BUFFER_SIZE = 1024;
+        int val = 0;
+        std::mutex m;
+        std::condition_variable cond;
+
        public:
-           semaphore(int init): m_value(init) { }
+        semaphore(int init = 0): val(init) {}
 
-           /* Semaphore down operation. */
-           void acquire();
+        void acquire()
+          {
+             std::unique_lock<std::mutex> l(m);
+             cond.wait(l, [this]()->bool { return val > 0; });
+             --val;
+          }
 
-           /* Semaphore up operation. */
-           void release();
-       private:
-           int m_value;                    // Value of semaphore.
-           std::mutex m_mux;               // Controls access.
-           std::condition_variable m_waitcond; // Controls waiting and restart
-           int max_value = BUFFER_SIZE;
+        void release()
+          {
+             std::unique_lock<std::mutex> l(m);
+             if (val < MAX_VAL)
+               ++val, cond.notify_one();
+          }
      };
 }
 
