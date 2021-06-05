@@ -14,21 +14,21 @@ namespace nonstd
             std::condition_variable cond;
             int val = 0;
            public:
-            counting_semaphore(int v = 0): val(0) {}
+            counting_semaphore(int v = 0): val(v) { }
 
             void acquire()
               {
                  std::unique_lock<std::mutex> l(m);
-                 if (--val < 0)
-                   cond.wait(l);
+
+                 cond.wait(l, [this]()->bool {return val > 0; });
+                 val--;
               }
 
             void release()
               {
                  std::unique_lock<std::mutex> l(m);
-
-                 if (++val <= MAX_VAL)
-                   cond.notify_one();
+                 if (val < MAX_VAL)
+                   val++, cond.notify_one();
               }
          };
    using binary_semaphore = counting_semaphore<1>;
