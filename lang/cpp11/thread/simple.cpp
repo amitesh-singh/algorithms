@@ -10,6 +10,14 @@ void callingThread()
     cout << "inside thread function: " << std::this_thread::get_id() << endl;
 }
 
+struct Foo
+{
+   void foo()
+     {
+        std::cout << "Foo:foo()\n";
+     }
+};
+
 class Ftor
 {
     public:
@@ -27,6 +35,8 @@ int main()
     //this gives the information on how many threads i can run to
     // avoid over subscription
     cout << "how many threads are supported? " << std::thread::hardware_concurrency() << endl;
+    //remember main thread is also a thread, so in reality, we've only three
+    // threads available.
     thread t1(callingThread);
     cout << "child thread id: " << t1.get_id() << endl;
 
@@ -78,5 +88,10 @@ int main()
         tt.join();
     }
 
-    return 0;
+
+  Foo obj;
+  thread t4(&Foo::foo, std::ref(obj));
+  t4.join();
+
+  return 0;
 }
