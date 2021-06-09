@@ -9,6 +9,7 @@
 #include <queue>
 #include <iostream>
 
+template<int MAX_THREADS = std::thread::hardware_concurrency - 1>
 class threadpool
 {
    std::mutex m;
@@ -19,7 +20,7 @@ class threadpool
    volatile bool working[3];
   public:
    threadpool() {
-        for(int i = 0; i < 3; ++i)
+        for(int i = 0; i < MAX_THREADS; ++i)
           working[i] = false;
    }
 
@@ -48,7 +49,7 @@ class threadpool
      }
    void start()
      {
-        int n = std::thread::hardware_concurrency() - 1;
+        int n = MAX_THREADS;
         std::cout << "available threads are: " << n << std::endl;
         for (int i = 0; i < n; ++i)
           {

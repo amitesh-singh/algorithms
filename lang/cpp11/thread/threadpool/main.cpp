@@ -11,7 +11,7 @@ void doJob()
 
 int main()
 {
-    threadpool tpool;
+    threadpool<10> tpool;
 
     tpool.start();
     for (int i = 0; i < 10; ++i)
