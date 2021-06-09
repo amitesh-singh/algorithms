@@ -75,14 +75,15 @@ class threadpool
 
        //delete the jobs if it's there
        while (!jobs.empty())
-	       jobs.pop();
-       
+         jobs.pop();
      }
 
    void addJob(std::function<void()> f)
      {
         std::unique_lock<std::mutex> l(m);
         jobs.push(std::move(f));
+        //we need to notify one of thread to do the job
+        cond.notify_one();
      }
 };
 #endif
