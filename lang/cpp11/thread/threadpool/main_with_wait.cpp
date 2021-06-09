@@ -6,7 +6,16 @@ void doJob()
 {
     std::cout << "id: " << std::this_thread::get_id() << "-> doing an importand job" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(4));
-    std::cout << "-> job is finished" << std::endl;
+    std::cout << "id: " << std::this_thread::get_id() << "-> job is finished" << std::endl;
+}
+
+void setNum(int &x)
+{
+    std::cout << "id: " << std::this_thread::get_id() << "-> doing an importand job" << std::endl;
+
+    x++;
+    std::cout << "setting x\n";
+    std::cout << "id: " << std::this_thread::get_id() << "-> job is finished" << std::endl;
 }
 
 int main()
@@ -20,12 +29,18 @@ int main()
         tpool.addJob(doJob);
     }
     */
-    myfuture<void> fobj;
-    tpool.addJob(doJob, fobj);
-    
+    myfuture<void> fobj2;
+    myfuture<void> fobj[3];
+    int x = 0;
+    tpool.addJob(std::bind(setNum, std::ref(x)), fobj2);
+    for (int i = 0; i < 3; ++i)
+      tpool.addJob(doJob, fobj[i]);
     //waiting for the result
-    fobj.get();
-
+    fobj2.get();
+    std::cout << "x= " << x << std::endl;
+    tpool.addJob(std::bind(setNum, std::ref(x)), fobj2);
+    fobj2.get();
+    std::cout << "x= " << x << std::endl;
     while (1)
     {
         std::cout << "main: idle..." << std::endl;

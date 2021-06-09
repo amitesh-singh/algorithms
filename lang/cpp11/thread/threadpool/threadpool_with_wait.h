@@ -65,7 +65,7 @@ class threadpool
                 job->fobject->m.lock();
                 job->f();
                 job->fobject->m.unlock();
-                job->fobject->cond.notify_all();
+                job->fobject->cond.notify_one();
                 delete job;
             }
 
@@ -109,6 +109,7 @@ class threadpool
      {
         std::unique_lock<std::mutex> l(m);
         jobs.push(new job_info(f, &fobject));
+        cond.notify_one();
      }
 };
 #endif
