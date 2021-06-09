@@ -14,7 +14,7 @@ class threadpool
 {
    std::mutex m;
    std::condition_variable cond;
-   std::vector<std::thread> thread_list;
+   std::vector<std::thread *> thread_list;
    std::queue<std::function<void()>> jobs;
    bool terminate = false;
    volatile bool working[MAX_THREADS];
@@ -47,13 +47,14 @@ class threadpool
              working[id] = false;
           }
      }
+
    void start()
      {
         int n = MAX_THREADS;
         std::cout << "available threads are: " << n << std::endl;
         for (int i = 0; i < n; ++i)
           {
-             thread_list.emplace_back(std::move(std::thread(&threadpool::worker, this, i)));
+             thread_list.emplace_back(new std::thread(&threadpool::worker, this, i));
           }
      }
    void end()
@@ -64,14 +65,15 @@ class threadpool
        cond.notify_all();
 
        //join all threads
-       int n = std::thread::hardware_concurrency() - 1;
+       int n = MAX_THREADS;
        for (int i = 0; i < n; ++i)
           {
-             thread_list[i].join();
+             thread_list[i]->join();
           }
 
        //clear the thread
-       thread_list.clear();
+       for (auto &x: thread_list)
+         delete x;
 
        //delete the jobs if it's there
        while (!jobs.empty())

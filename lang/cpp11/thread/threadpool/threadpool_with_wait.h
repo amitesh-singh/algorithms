@@ -20,10 +20,10 @@ class myfuture
     //blocking call
     std::unique_lock<std::mutex> l(m);
     cond.wait(l);
-
   }
 };
 
+template<int MAX_THREADS = std::thread::hardware_concurrency() - 1>
 class threadpool
 {
    struct job_info
@@ -38,7 +38,7 @@ class threadpool
 
    std::mutex m;
    std::condition_variable cond;
-   std::vector<std::thread> thread_list;
+   std::vector<std::thread *> thread_list;
    std::queue<job_info *> jobs;
    bool terminate = false;
   public:
@@ -73,13 +73,14 @@ class threadpool
      }
    void start()
      {
-        int n = std::thread::hardware_concurrency() - 1;
+        int n = MAX_THREADS;
         std::cout << "available threads are: " << n << std::endl;
         for (int i = 0; i < n; ++i)
           {
-             thread_list.emplace_back(std::move(std::thread(&threadpool::worker, this)));
+             thread_list.push_back(new std::thread(std::thread(&threadpool::worker, this)));
           }
      }
+
    void end()
      {
        m.lock();
@@ -88,21 +89,23 @@ class threadpool
        cond.notify_all();
 
        //join all threads
-       int n = std::thread::hardware_concurrency() - 1;
+       int n = MAX_THREADS;
        for (int i = 0; i < n; ++i)
           {
-             thread_list[i].join();
+             thread_list[i]->join();
           }
 
-       thread_list.clear();
 
+       for (auto &x: thread_list)
+         {
+            delete x;
+         }
        while (!jobs.empty())
-       {
-	 auto job = jobs.front();
-	 jobs.pop();
-	 delete job;
-       }
-
+         {
+            auto job = jobs.front();
+            jobs.pop();
+            delete job;
+         }
      }
 
    void addJob(std::function<void()> f, myfuture<void> &fobject)
