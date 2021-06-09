@@ -2,6 +2,11 @@
 #include <thread>
 #include <mutex>
 
+/*
+ *
+ *  A threat creation means: 1. allocating a stack, 2. performing a syscall, 3. creating data structures in the kernel and linking them up, grapping locks along the way, 4. waiting for the scheduler to execute the thread, 5. switching context to the thread.
+ */
+
 using namespace std; 
 
 void callingThread()
