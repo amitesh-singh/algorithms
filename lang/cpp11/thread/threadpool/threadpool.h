@@ -62,6 +62,13 @@ class threadpool
              thread_list[i].join();
           }
 
+       //clear the thread
+       thread_list.clear();
+
+       //delete the jobs if it's there
+       while (!jobs.empty())
+	       jobs.pop();
+       
      }
 
    void addJob(std::function<void()> f)

@@ -6,6 +6,7 @@ void doJob()
 {
     std::cout << "id: " << std::this_thread::get_id() << "-> doing an importand job" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(4));
+    std::cout << "id: " << std::this_thread::get_id() << "-> finished the job" << std::endl;
 }
 
 int main()
