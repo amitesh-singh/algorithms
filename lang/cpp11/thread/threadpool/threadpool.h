@@ -42,6 +42,7 @@ class threadpool
    void start()
      {
         int n = std::thread::hardware_concurrency() - 1;
+        std::cout << "available threads are: " << n << std::endl;
         for (int i = 0; i < n; ++i)
           {
              thread_list.emplace_back(std::move(std::thread(&threadpool::worker, this)));
@@ -49,7 +50,9 @@ class threadpool
      }
    void end()
      {
+       m.lock();
        terminate = true;
+       m.unlock();
        cond.notify_all();
 
        //join all threads
