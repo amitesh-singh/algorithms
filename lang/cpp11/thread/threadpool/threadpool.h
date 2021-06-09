@@ -16,18 +16,24 @@ class threadpool
    std::vector<std::thread> thread_list;
    std::queue<std::function<void()>> jobs;
    bool terminate = false;
+   volatile bool working[3];
   public:
-   threadpool() {}
+   threadpool() {
+        for(int i = 0; i < 3; ++i)
+          working[i] = false;
+   }
 
-   void worker()
+   void worker(int id)
      {
-        std::cout << "starting thread: " << std::this_thread::get_id() << std::endl;       
+        std::cout << "starting thread: (" << id << "): " <<  std::this_thread::get_id() << std::endl;
         while (1)
           {
              std::function<void()> job;
                {
                   std::unique_lock<std::mutex> l(m);
-                  cond.wait(l, [this]()->bool { return !jobs.empty() || terminate; });
+                  std::cout << "waiting here: " << id << "working flag: " << working[id]  << std::endl;
+                  cond.wait(l, [this, id]()->bool { return (!working[id] && !jobs.empty()) || terminate; });
+                  working[id] = true;
                   if (!terminate)
                   {
                     job = jobs.front();
@@ -35,8 +41,9 @@ class threadpool
                   }
                   else break;
                }
-            if (!terminate)
-                job();
+             if (!terminate)
+               job();
+             working[id] = false;
           }
      }
    void start()
@@ -45,7 +52,7 @@ class threadpool
         std::cout << "available threads are: " << n << std::endl;
         for (int i = 0; i < n; ++i)
           {
-             thread_list.emplace_back(std::move(std::thread(&threadpool::worker, this)));
+             thread_list.emplace_back(std::move(std::thread(&threadpool::worker, this, i)));
           }
      }
    void end()
