@@ -7,48 +7,64 @@
 #include <vector>
 #include <functional>
 #include <queue>
+#include <iostream>
 
 class threadpool
 {
    std::mutex m;
    std::condition_variable cond;
    std::vector<std::thread> thread_list;
-   std::queue<std::function<void()> jobs;
-
+   std::queue<std::function<void()>> jobs;
+   bool terminate = false;
   public:
    threadpool() {}
 
    void worker()
      {
+        std::cout << "starting thread: " << std::this_thread::get_id() << std::endl;       
         while (1)
           {
-             auto job;
+             std::function<void()> job;
                {
                   std::unique_lock<std::mutex> l(m);
                   cond.wait(l, [this]()->bool { return !jobs.empty() || terminate; });
-                  job = jobs.top();
-                  jobs.pop();
+                  if (!terminate)
+                  {
+                    job = jobs.front();
+                    jobs.pop();
+                  }
+                  else break;
                }
-             job();
+            if (!terminate)
+                job();
           }
      }
    void start()
      {
-        int n = std::thread::hardware_concurrency - 1;
+        int n = std::thread::hardware_concurrency() - 1;
         for (int i = 0; i < n; ++i)
           {
-             thread_list.push_back(std::thread(worker));
+             thread_list.emplace_back(std::move(std::thread(&threadpool::worker, this)));
           }
      }
    void end()
      {
+       terminate = true;
+       cond.notify_all();
+
+       //join all threads
+       int n = std::thread::hardware_concurrency() - 1;
+       for (int i = 0; i < n; ++i)
+          {
+             thread_list[i].join();
+          }
+
      }
+
    void addJob(std::function<void()> f)
      {
         std::unique_lock<std::mutex> l(m);
-        jobs.push_back(std::move(f));
+        jobs.push(std::move(f));
      }
-
-
 };
 #endif
