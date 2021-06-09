@@ -17,7 +17,7 @@ class threadpool
    std::vector<std::thread> thread_list;
    std::queue<std::function<void()>> jobs;
    bool terminate = false;
-   volatile bool working[3];
+   volatile bool working[MAX_THREADS];
   public:
    threadpool() {
         for(int i = 0; i < MAX_THREADS; ++i)
@@ -33,7 +33,7 @@ class threadpool
                {
                   std::unique_lock<std::mutex> l(m);
                   std::cout << "waiting here: " << id << "working flag: " << working[id]  << std::endl;
-                  cond.wait(l, [this, id]()->bool { return (!working[id] && !jobs.empty()) || terminate; });
+                  cond.wait(l, [this, id]()->bool { return (!jobs.empty()) || terminate; });
                   working[id] = true;
                   if (!terminate)
                   {
