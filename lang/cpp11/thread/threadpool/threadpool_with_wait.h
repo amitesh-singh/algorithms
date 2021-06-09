@@ -94,6 +94,15 @@ class threadpool
              thread_list[i].join();
           }
 
+       thread_list.clear();
+
+       while (!jobs.empty())
+       {
+	 auto job = jobs.front();
+	 jobs.pop();
+	 delete job;
+       }
+
      }
 
    void addJob(std::function<void()> f, myfuture<void> &fobject)
