@@ -77,7 +77,7 @@ class threadpool
         std::cout << "available threads are: " << n << std::endl;
         for (int i = 0; i < n; ++i)
           {
-             thread_list.push_back(new std::thread(std::thread(&threadpool::worker, this)));
+             thread_list.push_back(new std::thread(&threadpool::worker, this));
           }
      }
 
