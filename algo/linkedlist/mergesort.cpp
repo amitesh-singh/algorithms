@@ -68,15 +68,11 @@ node *mergesort(node *&head)
     node *slow = head;
     node *fast = head;
     node *prev = nullptr;
-    while (fast != nullptr)
+    while (slow && fast && fast->next)
     {
-        fast = fast->next;
-        if (fast)
-        {
-            fast = fast->next;
-            prev = slow;
-            slow = slow->next;
-        }
+        prev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
     }
 
     //slow -> mid
