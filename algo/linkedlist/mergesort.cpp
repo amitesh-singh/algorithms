@@ -29,6 +29,37 @@ node *merge(node *left, node *right)
     return result;
 }
 
+//iterative
+node *merge2(node *left, node *right)
+{
+    if (left == nullptr) return right;
+    if (right == nullptr) return left;
+
+    node dummy(0);
+    node *result = &dummy;
+    
+    while (left && right)
+    {
+        if (left->data <= right->data)
+        {
+            result->next = left;
+            left = left->next;
+        }
+        else
+        {
+            result->next = right;
+            right = right->next;
+        }
+
+        result = result->next;
+    }
+    if (left) result->next = left;
+    else
+        result->next = right;
+        
+    return dummy.next;
+}
+
 node *mergesort(node *&head)
 {
     if (head == nullptr || head->next == nullptr) return head;
@@ -54,7 +85,7 @@ node *mergesort(node *&head)
     node *left_side = mergesort(head);
     node *right_side = mergesort(slow);
 
-    return merge(left_side, right_side);
+    return merge2(left_side, right_side);
 }
 
 void print(node *head)
