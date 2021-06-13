@@ -24,3 +24,5 @@ CMakeCache.txt
 *.vcxproj*
 cmake_install.cmake
 *.sln
+vgcore*
+.vscode
