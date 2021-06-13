@@ -110,7 +110,7 @@ int main()
 
    if (foundLoop)
      {
-        std::cout << "found loop at " << loop_node->val << std::endl;
+        std::cout << "using slow and Fast pointers, found loop at " << loop_node->val << std::endl;
      }
 
    return 0;
