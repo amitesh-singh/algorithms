@@ -24,7 +24,7 @@ int main()
    sigaction(SIGTERM, &handler, NULL);
    sigaction(SIGINT, &handler, NULL);
 
-   while (1) pause();
+   while (1){ pause(); printf("WOKEUP\n"); pause(); }
    return 0;
 }
 

@@ -39,6 +39,7 @@ int main()
 
    circular_array<int> arr2  {1, 2, 3, 4, 5};
    std::cout << arr2[12] << std::endl;
+   std::cout << "size: " << arr2.size() << std::endl;
 
    return 0;
 }
