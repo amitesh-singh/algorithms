@@ -11,6 +11,16 @@ class circular_array
      {
         v.reserve(size);
      }
+
+   circular_array(const std::initializer_list<T> &rhs)
+     {
+        v.reserve(rhs.size());
+        mSize = rhs.size();
+        for (auto &x: rhs)
+          {
+             v.push_back(x);
+          }
+     }
    T& operator[](int i)
      {
         return v[i % mSize];
@@ -25,7 +35,10 @@ int main()
 {
    circular_array<int> ca(10);
    ca[0] = 0;
-   std::cout << ca[0] << std::endl;
+   std::cout << ca[12] << std::endl;
+
+   circular_array<int> arr2  {1, 2, 3, 4, 5};
+   std::cout << arr2[12] << std::endl;
 
    return 0;
 }
