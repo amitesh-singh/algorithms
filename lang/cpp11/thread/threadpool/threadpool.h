@@ -9,7 +9,7 @@
 #include <queue>
 #include <iostream>
 
-template<int MAX_THREADS = std::thread::hardware_concurrency - 1>
+template<int MAX_THREADS>
 class threadpool
 {
    std::mutex m;
