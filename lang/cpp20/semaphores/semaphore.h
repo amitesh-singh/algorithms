@@ -20,7 +20,9 @@ namespace nonstd
         void acquire()
           {
              std::unique_lock<std::mutex> l(m);
-             cond.wait(l, [this]()->bool { return val > 0; });
+             //both lines work fine. 2nd line is much clearer to understand.
+             //cond.wait(l, [this]()->bool { return val > 0; });
+             while (!(val > 0)) cond.wait(l);
              --val;
           }
 
