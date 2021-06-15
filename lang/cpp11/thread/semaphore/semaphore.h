@@ -20,7 +20,11 @@ namespace nonstd
               {
                  std::unique_lock<std::mutex> l(m);
 
-                 cond.wait(l, [this]()->bool {return val > 0; });
+                 //both lines work fine. later one is much clearer.
+                 //cond.wait(l, [this]()->bool {return val > 0; }); -> while (!lambda()) cond.wait(l);
+                 while (!(val > 0))
+                   cond.wait(l);
+
                  val--;
               }
 
