@@ -42,11 +42,27 @@ bool ispermute(const String &s1, const String &s2)
 
 }
 
+bool ispermute2(const String &s1, const String &s2)
+{
+    int x = 0;
+    for  (int i = 0; i < s1.size(); ++i)
+    {
+        x = x ^ s1[i] ^ s2[i];
+    }
+
+    return (x == 0);
+}
+
+
+
+
 int main()
 {
     //check if two strings are permutation of each other
     //e.g. abcc accb
     std::cout << ispermute("abcc", "accb") << std::endl;
     std::cout << ispermute("abccd", "abddc") << std::endl;
+    std::cout << ispermute2("accb", "abcc") << std::endl;
+
     return 0;
 }
