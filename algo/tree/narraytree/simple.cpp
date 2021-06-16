@@ -47,7 +47,7 @@ class n_tree
     {
         if (p == nullptr)
             return;
-
+        int level = 0;
         std::queue<node *> q;
         q.push(p);
 
@@ -63,8 +63,9 @@ class n_tree
                     q.push(x);
 
                 std::cout << curr->data << ", ";
-                
             }
+            level++;
+            std::cout << "     level: " << level;
             std::cout << std::endl;
         }
         
