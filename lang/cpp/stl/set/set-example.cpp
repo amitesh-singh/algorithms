@@ -29,6 +29,7 @@ void print(std::set<int> &s)
 
 int main()
 {
+  //elements are in sorted order
    std::set<int, std::greater<int>> S;
 
    S.insert(1);
@@ -40,6 +41,13 @@ int main()
      std::cout << x << ", ";
    std::cout << std::endl;
 
+   //lower bound
+   auto index = S.lower_bound(2);
+
+   if (index != S.end())
+    {
+        std::cout << "lower_bound(2): " << *index << std::endl;
+    }
 
    std::set<client, clientcomp> s1;
    s1.insert(client(10));

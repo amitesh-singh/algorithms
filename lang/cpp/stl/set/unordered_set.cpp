@@ -3,8 +3,8 @@
 
 int main()
 {
-   //uses hash, no duplicate elements allowed but sorted
-   // but elements are sorted
+   //uses hash, no duplicate elements allowed but not sorted
+   // but elements are not sorted
    std::unordered_set<int> s;
    s.insert(10);
    s.insert(20);
@@ -16,5 +16,6 @@ int main()
      }
    std::cout << std::endl;
 
+   std::cout << *s.lower_bound(10) << std::endl;
    return 0;
 }
