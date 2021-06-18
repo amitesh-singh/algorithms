@@ -86,6 +86,15 @@ int main()
    v.erase(v.begin() + 2); //remove at an index
    v.pop_back(); //remove tail
 
+   //how to find max in vector using std::max
+   int maxVal = 0;
+   for (auto &x: v)
+      std::cout << x << "->";
+   std::cout << std::endl;
+   
+   for (auto &x: v)
+      maxVal = std::max(maxVal, x);
+   std::cout << "max value: " << maxVal << std::endl;
    //delete all elements.
    v.clear();
 
