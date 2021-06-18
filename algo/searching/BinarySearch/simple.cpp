@@ -14,7 +14,7 @@ int binarySearchUsingStack(int a[], int low, int high, int k)
     {
         high = s[top--];
         low = s[top--];
-        mid = (low + high) / 2;
+        mid = low + (high - low)/2;
 
         if (a[mid] == k) return mid;
         else if (k > a[mid])
@@ -37,7 +37,7 @@ int binarySearchRecursive(int a[], int low, int high, int k)
    int mid;
    if (low <= high)
    {
-        mid = (low + high) / 2;
+        mid = low + (high - low) / 2;
         if (a[mid] == k)
             return mid;
         if (k > a[mid])
@@ -71,37 +71,47 @@ int binarySearch(int a[], int low, int high, int key)
 int lowerbound(int a[], int low, int high, int key)
 {
     int mid;
-    int l = low;
-    int h = high + 1;
-
-    while (l < h)
+    int ret = -1;
+    while (low <= high)
     {
-        mid = (l + h)/2;
-        if (key <= a[mid])
-            h = mid;
+        mid = low + (high - low)/2;
+        
+        if (a[mid] >= key)
+        {
+            ret = mid;
+            high = mid - 1;
+        }
         else
-            l = mid + 1;
+        {
+            low = mid + 1;
+        }
     }
 
-    return l;
+    return ret;
 }
 
 int upperbound(int a[], int low, int high, int key)
 {
     int mid;
-    int l = low;
-    int h = high + 1;
+    int ret {-1};
 
-    while (l < h)
+    while (low <= high)
     {
-        mid = (l + h) / 2;
-        if (key >= a[mid])
-            l = mid + 1;
+        mid = low + (high - low)/2;
+
+        // <= key
+        if (a[mid] <= key)
+        {
+            ret = mid;
+            low = mid + 1;
+        }
         else
-            h = mid;
+        {
+            high = mid - 1;
+        }
     }
 
-    return l;
+    return ret;
 }
 
 void findRange(int a[], int low, int high, int leftVal, int rightVal)
@@ -151,6 +161,7 @@ int main()
         cout << "23 is found\n";
     cout << "lower,upper_bound for 23: (" << std::lower_bound(v.begin(), v.end(), 23) - v.begin() << ", "
          << std::upper_bound(v.begin(), v.end(), 23) - v.begin() << ")" << std::endl;
+
 
     return 0;   
 }
