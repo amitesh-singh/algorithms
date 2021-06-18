@@ -11,7 +11,7 @@ namespace nonstd
         int b = -1;
         int capacity = 0;
         int count = 0;
-        std::vector<int> data;
+        std::vector<T> data;
 
        public:
         queue(int capacity): capacity(capacity)
