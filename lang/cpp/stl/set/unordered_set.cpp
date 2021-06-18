@@ -16,6 +16,5 @@ int main()
      }
    std::cout << std::endl;
 
-   std::cout << *s.lower_bound(10) << std::endl;
    return 0;
 }
