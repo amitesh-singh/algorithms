@@ -17,6 +17,8 @@ namespace nonstd
         queue(int capacity): capacity(capacity)
         {
            data.reserve(capacity);
+           for(int i = 0; i < capacity; ++i)
+              data.push_back(0);
         }
 
         bool isEmpty()
@@ -46,9 +48,9 @@ namespace nonstd
                   std::cerr << "no more space left\n";
                   return;
                }
-
-             data.push_back(d);
+             
              b = (b + 1) % capacity;
+             data[b] = d;
              count++;
           }
 

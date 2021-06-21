@@ -10,6 +10,8 @@ class circular_array
    circular_array(int size):mSize(size)
      {
         v.reserve(size);
+        for (int i = 0; i < size; ++i)
+            v.push_back(0);
      }
 
    circular_array(const std::initializer_list<T> &rhs)
