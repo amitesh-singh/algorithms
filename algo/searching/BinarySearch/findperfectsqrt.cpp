@@ -8,7 +8,7 @@ bool isPerfectSquare(int n)
 
     //2 to n - 1
     int low = 2, high = n - 1;
-    int mid;
+    unsigned long mid;
     while (low <= high)
     {
         mid = low + (high - low)/2;
