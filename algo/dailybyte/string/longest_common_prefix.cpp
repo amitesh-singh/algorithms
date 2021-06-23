@@ -22,7 +22,7 @@ std::string getLCP(char *strList[], int strings_count)
      {
         for (int i = 1; i < strings_count; ++i)
           {
-             if (strList[i - 1][index] == strList[i][index])
+             if (strList[i - 1][index] != '\0' && strList[i][index] != '\0' && strList[i - 1][index] == strList[i][index])
                continue;
              else
                {
@@ -60,6 +60,13 @@ int main()
         std::string lcp = getLCP(strList, strings_count);
         std::cout << lcp << std::endl;
      }
+     {
+        char *strList[] = {"", "", ""};
+        int strings_count = 3;
+        std::string lcp = getLCP(strList, strings_count);
+        std::cout << lcp << std::endl;
+     }
+
 
    return 0;
 }
