@@ -16,7 +16,6 @@ using namespace std;
 std::string getLCP(char *strList[], int strings_count)
 {
    int index = 0;
-   std::string ret;
    bool isDone = false;
 
    while (1)
@@ -35,11 +34,10 @@ std::string getLCP(char *strList[], int strings_count)
           break;
         else
           {
-            ret += strList[0][index];
             index++;
           }
      }
-   return ret;
+   return std::string(strList[0], index) ;
 }
 
 int main()
