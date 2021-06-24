@@ -32,10 +32,24 @@ bool isPermuteSame(const String &s1, const String &s2)
     return true;
 }
 
+bool isPermuteSame2(const std::string &str1, const std::string &str2)
+{
+    if (str1.size() != str2.size()) return false;
+
+    int res = 0;
+
+    for (int i = 0; i < str1.size(); ++i)
+    {
+        res ^= str1[i] ^ str2[i];
+    }
+
+    return (res == 0) ? true: false;
+}
 int main()
 {
     // abcc ccba
     std::cout << isPermuteSame("abcc", "ccba") << std::endl;
+    std::cout << isPermuteSame2("abcc", "ccba") << std::endl;
     
     return 0;
 }
