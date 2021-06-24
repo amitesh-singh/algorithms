@@ -7,9 +7,7 @@ std::string reverseStr(std::string str)
 
     while (start < end)
     {
-        std::swap(str[start], str[end]);
-        ++start;
-        --end;
+        std::swap(str[start++], str[end--]);
     }
 
     return str;
