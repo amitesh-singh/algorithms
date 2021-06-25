@@ -7,11 +7,10 @@ namespace threadsafe
     class Singleton
     {
         static Singleton *_instance;
-        
+        static std::once_flag flag;
         public:
         static Singleton *getInstance()
         {
-            static std::once_flag flag;
             std::call_once(flag, [&]() { _instance = new Singleton();});
 
             return _instance;
@@ -20,11 +19,12 @@ namespace threadsafe
 }
 
 threadsafe::Singleton *threadsafe::Singleton::_instance = nullptr;
+std::once_flag threadsafe::Singleton::flag;
 
 std::mutex mu;
 void func(std::string s)
 {
-    std::lock_guard<std::mutex> locker(mu);
+    //std::lock_guard<std::mutex> locker(mu);
     std::cout << s << " : " << threadsafe::Singleton::getInstance() << std::endl;
 }
 
