@@ -71,28 +71,22 @@ class Graph
    void AddEdges(std::string src, std::string dest, int w)
      {
         Vertex *vSrc = 0, *vDest = 0;
-        bool is_src = false;
-        bool is_dest = false;
+
         if (!find(src))
           vSrc = new Vertex(src);
         else
-          is_src = true;
+          vSrc = vertices[src];
+
         if (!find(dest))
           vDest = new Vertex(dest);
         else
-          is_dest = true;
+          vDest = vertices[dest];
 
         Edge *edge = new Edge(vSrc, vDest, w);
 
-        if (!is_src)
-          vSrc->addEdge(edge);
-        else
-          vertices[src]->addEdge(edge);
+        vSrc->addEdge(edge);
 
-        if (!is_dest)
-          vDest->addEdge(edge);
-        else
-          vertices[dest]->addEdge(edge);
+        vDest->addEdge(edge);
 
         addVertex(vSrc);
         addVertex(vDest);
