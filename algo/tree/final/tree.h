@@ -182,6 +182,10 @@ namespace myds
               {
                  _deleteTree(root);
               }
+            void clear()
+            {
+              _deleteTree(root);
+            }
             tree(const std::initializer_list<int> &l): root (nullptr)
               {
                  for (auto &x: l)
