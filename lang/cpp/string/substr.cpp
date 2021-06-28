@@ -12,6 +12,12 @@ int main()
    int pos = str.find(":");
    s1 = str.substr(pos + 1);
    std::cout << str << ": " << s1 << std::endl;
+
+
+   //form a string after deleting a char
+   int index = pos;
+   s1 = str.substr(0, index) + str.substr(index+1);
+   std::cout << str << ": " << s1 << std::endl;
    
    return 0;
 }
