@@ -1,3 +1,4 @@
+
 #include "tree.h"
 #include <ctime>
 #include <vector>
@@ -53,11 +54,11 @@ void upper_bound(node *root, int key, node *&res)
    if (root->data <= key)
      {
         res = root;
-        return upper_bound(root->right, key, res);
+        upper_bound(root->right, key, res);
      }
    else
      {
-        return upper_bound(root->left, key, res);
+        upper_bound(root->left, key, res);
      }
 }
 
