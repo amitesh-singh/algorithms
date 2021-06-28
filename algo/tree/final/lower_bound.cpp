@@ -53,11 +53,11 @@ void lower_bound(node *root, int key, node *&res)
    if (root->data >= key)
      {
         res = root;
-        return lower_bound(root->left, key, res);
+        lower_bound(root->left, key, res);
      }
    else
      {
-        return lower_bound(root->right, key, res);
+        lower_bound(root->right, key, res);
      }
 }
 
