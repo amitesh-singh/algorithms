@@ -90,6 +90,37 @@ class n_tree
     {
         _preorder(root);
     }
+
+    int _maxDepth_DFS(node *root)
+    {
+        if (root == nullptr)
+        {
+            return 0;
+        }
+
+        int maxDepth = 0;
+        for (auto x: root->children)
+        {
+            // or maxDepth = std::max(maxDepth, _maxDepth_DFS);
+            int h = _maxDepth_DFS(x);
+            if (h > maxDepth)
+                maxDepth = h;
+        }
+
+        return maxDepth + 1;
+    }
+
+    //it is the height of the tree.
+    int maxDepth_DFS()
+    {
+        return _maxDepth_DFS(root);
+    }
+
+    int maxDepth_BFS()
+    {
+        int level = 0;
+        
+    }
 };
 
 int main()
@@ -100,5 +131,6 @@ int main()
     t.preorder();
     std::cout << "BFS: \n";
     t.bfs();
+    std::cout << "max depth: " << t.maxDepth_DFS() << std::endl;
     return 0;
 }

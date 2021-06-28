@@ -13,6 +13,7 @@
 // output: sting 
 // left, right, data --> post order.
 // X X 2 X X 4 X X 5 3 1
+// we will use stack here for holding the data
 
 using node = myds::basicnode<int>;
 

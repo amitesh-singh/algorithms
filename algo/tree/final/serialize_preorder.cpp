@@ -4,6 +4,7 @@
 #include <string>
 #include <queue>
 
+//only perorder and post order traversal would work.
 //serialize the data in preorder format
 // 
 //                   1
