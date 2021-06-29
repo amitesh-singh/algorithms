@@ -64,17 +64,41 @@ class ntree
         _preorder(root);
     }
 
+    void bfs()
+    {
+        std::queue<node<T> *> q;
+
+        q.push(root);
+        int level = 0;
+        std::cout << std::endl;
+        while (!q.empty())
+        {
+            int n = q.size();
+            level++;
+            std::cout << "level: " << level << ": ";
+            for (int i = 0; i < n; ++i)
+            {
+                node<T> *curr = q.front();
+                std::cout << curr->data << ", ";
+                q.pop();
+
+                for (auto &x: curr->children)
+                {
+                    q.push(x);
+                }
+            }
+            std::cout << std::endl;
+        }
+    }
+
 
     std::string _serialize(node<T> *p)
     {
+        if (p->children.size() == 0) return std::to_string(p->data) + ",#,#,";
         std::string ret = std::to_string(p->data) + ",";
-        int i = 0;
         for (auto &x: p->children)
         {
             ret += _serialize(x);
-            i++;
-            if (i == (p->children.size()))
-              ret += "#,";
         }
 
         return ret;
@@ -101,16 +125,17 @@ class ntree
       {
          if (q.empty()) return nullptr;
          if (q.front() == "#") { q.pop(); return nullptr;}
-         node<T> *root = new node<T>(std::stoi(q.front()));
+         node<T> *p = new node<T>(std::stoi(q.front()));
          q.pop();
 
-         for (int i = 0; i < 3; ++i)
-           {
-              node<T> *tmp = _deserialize(q);
-              if (tmp)
-                root->children.push_back(tmp);
-           }
-         return root;
+         while (q.front() != "#")
+         {
+             node<T> *tmp = _deserialize(q);
+             if (tmp)
+                p->children.push_back(tmp);
+         }
+
+         return p;
       }
 
     node<T> *deserialize(std::string str)
@@ -138,7 +163,7 @@ int main()
         tree.insert(i);
     }
     tree.preorder();
-
+    tree.bfs();
     std::string serial_data = tree.serialize();
     std::cout << "serial data: ";
     std::cout << serial_data << std::endl;
@@ -146,6 +171,6 @@ int main()
     ntree<3, int> tree2;
     tree2.root = tree.deserialize(serial_data);
     tree2.preorder();
-
+    tree2.bfs();
     return 0;
 }
