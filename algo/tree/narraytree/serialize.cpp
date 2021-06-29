@@ -94,13 +94,13 @@ class ntree
 
     std::string _serialize(node<T> *p)
     {
-        if (p->children.size() == 0) return std::to_string(p->data) + ",#,#,";
+        if (p->children.size() == 0) return std::to_string(p->data) + ",#,";
         std::string ret = std::to_string(p->data) + ",";
         for (auto &x: p->children)
         {
             ret += _serialize(x);
         }
-
+        ret += "#,";
         return ret;
     }
 
@@ -123,8 +123,8 @@ class ntree
 
     node<T> *_deserialize(std::queue<std::string> &q)
       {
-         if (q.empty()) return nullptr;
-         if (q.front() == "#") { q.pop(); return nullptr;}
+        if (q.empty()) return nullptr;
+    
          node<T> *p = new node<T>(std::stoi(q.front()));
          q.pop();
 
@@ -135,6 +135,7 @@ class ntree
                 p->children.push_back(tmp);
          }
 
+         q.pop();
          return p;
       }
 
