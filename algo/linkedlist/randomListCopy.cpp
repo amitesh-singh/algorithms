@@ -133,6 +133,29 @@ void copyList(list<T> &l1, list<T> &l2)
     l1.print();
 }
 
+/**
+ *  using dummy head nodes
+ *  Node *separateList(Node *&head)
+    {
+        Node dummy1(0), dummy2(0);
+        
+        Node *p = head;
+        Node *prev1 = &dummy1, *prev2 = &dummy2;
+        while (p and p->next)
+        {
+            prev1->next = p;
+            prev2->next = p->next;
+            
+            prev1 = prev1->next;
+            prev2 = prev2->next;
+            p = p->next->next;
+        }
+        prev1->next = nullptr;
+        return dummy2.next;
+    }
+
+    */
+
 int main()
 {
     list<int> l;

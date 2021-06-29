@@ -152,6 +152,46 @@ class ntree
         if (root == nullptr) return "";
         return _serialize(root);
     }
+
+    void insert_bfs(const T &d)
+    {
+        std::queue<node<T> *> q;
+        if (root == nullptr)
+        {
+            root = new node<T>(d);
+            return;
+        }
+
+        q.push(root);
+        bool isDone = false;
+        while (!q.empty())
+        {
+            int n = q.size();
+            for (int i = 0; i < n; ++i)
+            {
+                node<T> *curr = q.front();
+                q.pop();
+
+                if (curr->children.size() < N)
+                {
+                    curr->children.push_back(new node<T>(d));
+                    isDone = true;
+                    break;
+                }
+                else
+                {
+                    //choose one node.
+                    //check which one is not filled.
+                    for (auto &x: curr->children)
+                    {
+                        q.push(x);
+                    }
+                }
+            }
+            if (isDone) break;
+        }
+    }
+
 };
 
 int main()
@@ -159,9 +199,9 @@ int main()
     std::srand(std::time(nullptr));
     ntree<3, int> tree;
 
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 20; ++i)
     {
-        tree.insert(i);
+        tree.insert_bfs(i);
     }
     tree.preorder();
     tree.bfs();
