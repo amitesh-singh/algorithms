@@ -18,8 +18,9 @@ void tokenize(const std::string &str, std::string delim, std::vector<std::string
 
         end = s.find(delim, start);
     }
-
+    //get the last one if dog:cat:monkey
     ans.push_back(s.substr(start));
+    //in case of dog:cat:monkey: , we don't need it.
 }
 
 int main()
