@@ -10,5 +10,11 @@ int main()
 
    std::cout << num << std::endl;
 
+   s = "01";
+   std::cout << std::stoi(s) << std::endl;
+
+   s = "-134";
+   std::cout << std::stoi(s) << std::endl;
+
    return 0;
 }
