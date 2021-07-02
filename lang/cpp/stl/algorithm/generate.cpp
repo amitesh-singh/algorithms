@@ -2,11 +2,13 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
+   std::srand(std::time(nullptr));
     vector<int> v(10);
     
     std::generate(v.begin(), v.end(), rand);
