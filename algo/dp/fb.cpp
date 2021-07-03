@@ -1,33 +1,24 @@
 #include <iostream>
-
+#include <unordered_map>
 using namespace std;
+//using top down approach
 
-unsigned int fib(unsigned int N)
+int fib_topdown(int i, unordered_map<int, int> &hash)
 {
-   if (N == 0)
-     return 1;
+   if (i == 0 or i == 1) return i;
 
-   unsigned int a = 1, b = 1;
+   if (hash.find(i) == hash.end())
+     hash[i] = fib_topdown(i - 1, hash) + fib_topdown(i - 2, hash);
 
-   unsigned int sum = 0;
-
-   for (unsigned int i = 3; i <= N; ++i)
-     {
-        sum = a + b;
-        a = b;
-        b = sum;
-     }
-
-   return b;
+   return hash[i];
 }
-
-using namespace std;
 
 int main()
 {
-   cout << "fib(2): " << fib(2) << endl;
-   cout << "fib(5): " << fib(5) << endl;
-   cout << "fib(10): " << fib(10) << endl;
+   std::unordered_map<int, int> hash;
+   cout << "fib(2): " << fib_topdown(2, hash) << endl;
+   cout << "fib(5): " << fib_topdown(5, hash) << endl;
+   cout << "fib(10): " << fib_topdown(10, hash) << endl;
 
    return 0;
 }
