@@ -34,7 +34,8 @@ int main()
         cout << x.first << " : " << x.second << endl;
      }
 
-   cout << "unordered_map: \n";
+   cout << "unordered_map: size: " << m2.size() <<  "\n";
+
    for (auto &x: m2)
       cout << x.first << ": " << x.second << endl;
  
