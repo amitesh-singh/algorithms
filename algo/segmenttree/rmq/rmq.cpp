@@ -28,6 +28,7 @@ class segment_tree
         return (idx - 1)/2;
      }
 
+   //Top to bottom approach
    void build(int idx, int L, int R)
      {
         if (L == R)
@@ -57,23 +58,6 @@ class segment_tree
          return A[p1] <= A[p2] ? p1 : p2;
       }
 
-    void findPosInTree_util(int idx, int L, int R, int array_index, int &ans)
-      {
-         if (array_index > R or array_index < L) return;
-         if (array_index == L and L == R)
-           {
-              ans = idx;
-              return;
-           }
-         if (ans == -1 and array_index >= L and array_index <= (L + R)/2)
-           {
-              findPosInTree_util(left(idx), L, (L + R)/2, array_index, ans);
-           }
-         else if ( ans == -1 and array_index >= (L + R)/2 and array_index <= R)
-           {
-              findPosInTree_util(right(idx), (L + R)/2 + 1, R, array_index, ans);
-           }
-      }
 
   public:
     segment_tree(vi &input): n(input.size()), A(input)
@@ -84,21 +68,25 @@ class segment_tree
       build(0, 0, n - 1);
    }
 
+   void rebuild(vi &input)
+     {
+        n = input.size();
+        A = input;
+
+        build(0, 0, n - 1);
+     }
+
    int rmq(int i, int j)
      {
         return rmq(0, 0, n - 1, i, j);
      }
 
-   int findPosInTree(int array_index)
-     {
-        int ans = -1;
-        findPosInTree_util(0, 0, n - 1, array_index, ans);
-        return ans;
-     }
+   //bottom to top
    void update(int array_index)
      {
         if (array_index >= n) return;
-        int pos = findPosInTree(array_index);
+        //position of array element in segment tree would be +n of index
+        int pos = array_index + n;
 
         pos = parent(pos);
         while (pos != 0)
@@ -119,13 +107,12 @@ class segment_tree
           }
         std::cout << "\n";
      }
-
 };
 
 
 int main()
 {
-   std::vector<int> v{18, 17, 12, 19, 15, 11, 20};
+   std::vector<int> v{18, 17, 12, 19, 15, 11, 2};
    for (auto &x: v)
      std::cout << x << "->";
    std::cout << std::endl;
@@ -140,5 +127,14 @@ int main()
    std::cout << std::endl;
 
    std::cout << "index: rmq(0, 3): " << stree.rmq(0, 3) << std::endl;
+
+   v.pop_back();
+
+   stree.rebuild(v);
+
+   std::cout << "index: rmq(0, 3): " << stree.rmq(0, 6) << std::endl;
+   for (auto &x: v)
+     std::cout << x << "->";
+   std::cout << std::endl;
    return 0;
 }
