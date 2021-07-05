@@ -1,14 +1,20 @@
 #include <iostream>
-#include <vector>
+
+#define SIZE 2*100000
+
+//using vi = std::vector<int>;
+
+int tree[4*SIZE];
+int idx = 0;
+int input[SIZE];
 
 
-using vi = std::vector<int>;
 class segment_tree
 {
-    vi tree;
-    vi &A;
+    //vi tree;
+    int (&A)[SIZE];
     int n;
-
+    int tree_idx = 0;
     int left(int idx)
     {
         return (idx << 1) + 1;
@@ -47,10 +53,9 @@ class segment_tree
     }
 
     public:
-    segment_tree(vi &input): A(input), n (input.size())
+    segment_tree(int (&input)[SIZE]): A(input)
     {
-        tree.reserve(4*n);
-        tree.assign(4*n, 0);
+        n = idx;
         build(0, 0, n -1);
    }
 
@@ -65,14 +70,13 @@ int main()
    //this makes std::cin/cout faster
     std::cin.sync_with_stdio(false);
     int n, q;
-    vi input;
-    int val;
+    //vi input;
+    idx = 0;
 
     std::cin >> n >> q;
     for (int i = 0; i < n; ++i)
     {   
-        std::cin >> val;
-        input.push_back(val);
+        std::cin >> input[idx++];
     }
     int a, b;
     segment_tree stree(input);

@@ -93,7 +93,6 @@ class segment_tree
              pos = parent(pos);
              st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
           }
-       // st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
      }
 
    void print()
