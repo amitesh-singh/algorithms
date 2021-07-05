@@ -15,17 +15,17 @@ class segment_tree
 
    int left(int idx)
      {
-        return (idx << 1) + 1;
+        return (idx << 1);
      }
 
    int right (int idx)
      {
-        return (idx << 1) + 2;
+        return (idx << 1) + 1;
      }
 
    int parent(int idx)
      {
-        return (idx - 1)/2;
+        return (idx)/2;
      }
 
    //Top to bottom approach
@@ -65,7 +65,7 @@ class segment_tree
       st.reserve(4 *n);
       st.assign(4 * n, 0);
 
-      build(0, 0, n - 1);
+      build(1, 0, n - 1);
    }
 
    void rebuild(vi &input)
@@ -73,25 +73,28 @@ class segment_tree
         n = input.size();
         A = input;
 
-        build(0, 0, n - 1);
+        build(1, 0, n - 1);
      }
 
    int rmq(int i, int j)
      {
-        return rmq(0, 0, n - 1, i, j);
+        return rmq(1, 0, n - 1, i, j);
      }
 
    //bottom to top
-   void update(int array_index)
+   void update(int array_index, int val)
      {
         if (array_index >= n) return;
         //position of array element in segment tree would be +n of index
         int pos = array_index + n;
-        
-        while (pos != 0)
+        //st[pos] = val;
+        A[array_index] = val;
+        while (pos >= 1)
           {
-             pos = parent(pos);
+             
+             std::cout << "pos: " << pos << std::endl;
              st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
+             pos = parent(pos);
           }
      }
 
@@ -119,7 +122,7 @@ int main()
 
    std::cout << "updating an element:\n";
    v[0] = 1;
-   stree.update(0);
+   stree.update(0, 1);
    for (auto &x: v)
      std::cout << x << "->";
    std::cout << std::endl;

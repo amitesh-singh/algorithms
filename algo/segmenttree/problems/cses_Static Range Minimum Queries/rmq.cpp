@@ -1,8 +1,6 @@
-#include <iostream>
+#include <cstdio>
 
 #define SIZE 2*100000
-
-//using vi = std::vector<int>;
 
 int tree[4*SIZE];
 int idx = 0;
@@ -11,18 +9,17 @@ int input[SIZE];
 
 class segment_tree
 {
-    //vi tree;
     int (&A)[SIZE];
     int n;
     int tree_idx = 0;
     int left(int idx)
     {
-        return (idx << 1) + 1;
+        return (idx << 1);
     }
 
     int  right(int idx)
     {
-        return (idx << 1) + 2 ;
+        return (idx << 1)+ 1;
     }
 
     void build(int idx, int L, int R)
@@ -56,34 +53,31 @@ class segment_tree
     segment_tree(int (&input)[SIZE]): A(input)
     {
         n = idx;
-        build(0, 0, n -1);
+        build(1, 0, n -1);
    }
 
    int rmq(int a, int b)
    {
-       return rmq(0, 0, n -1, a, b);
+       return rmq(1, 0, n -1, a, b);
    }
 };
 
 int main()
 {
-   //this makes std::cin/cout faster
-    std::cin.sync_with_stdio(false);
     int n, q;
-    //vi input;
     idx = 0;
 
-    std::cin >> n >> q;
+    scanf("%d %d", &n, &q);
     for (int i = 0; i < n; ++i)
     {   
-        std::cin >> input[idx++];
+        scanf("%d", &input[idx++]);
     }
     int a, b;
     segment_tree stree(input);
     for (int i = 0; i < q; ++i)
     {
-        std::cin >> a >> b;
-        std::cout << input[stree.rmq(a - 1, b - 1)] << '\n';
+        scanf("%d %d", &a, &b);
+        printf("%d\n", input[stree.rmq(a - 1, b - 1)]);
     }
 
     return 0;
