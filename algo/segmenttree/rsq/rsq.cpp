@@ -65,6 +65,20 @@ class segment_tree
           std::cout << x << ",";
         std::cout << std::endl;
      }
+
+     void update(int array_idx, int val)
+     {
+        A[array_idx] = val;
+        //index of array element in segment tree
+        int idx = array_idx + n;
+        auto parent = [](int i) { return ((i + 1) >> 1);};
+        while (idx != 0)
+        {
+           idx = parent(idx);
+           tree[idx] = tree[left(idx)] + tree[right(idx)];
+        }
+        
+     }
 };
 
 int main()

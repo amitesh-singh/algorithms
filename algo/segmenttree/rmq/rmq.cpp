@@ -87,15 +87,13 @@ class segment_tree
         if (array_index >= n) return;
         //position of array element in segment tree would be +n of index
         int pos = array_index + n;
-
-        pos = parent(pos);
+        
         while (pos != 0)
           {
-             st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
              pos = parent(pos);
+             st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
           }
-        st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
-
+       // st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
      }
 
    void print()
@@ -112,27 +110,29 @@ class segment_tree
 
 int main()
 {
-   std::vector<int> v{18, 17, 12, 19, 15, 11, 2};
+   std::vector<int> v{18, 17, 12, 19, 15, 11, -2};
    for (auto &x: v)
      std::cout << x << "->";
    std::cout << std::endl;
    segment_tree stree(v);
 
-   std::cout << "index: rmq(0, 3): " << stree.rmq(0, 3) << std::endl;
+   std::cout << "index: rmq(0, 6): " << stree.rmq(0, 6) << std::endl;
 
+   std::cout << "updating an element:\n";
    v[0] = 1;
    stree.update(0);
    for (auto &x: v)
      std::cout << x << "->";
    std::cout << std::endl;
 
-   std::cout << "index: rmq(0, 3): " << stree.rmq(0, 3) << std::endl;
-
+   std::cout << "index: rmq(0, 6): " << stree.rmq(0, 6) << std::endl;
+   //we need to rebuild the segment tree if an element is deleted or added
+   std::cout << "deleting an element\n";
    v.pop_back();
 
    stree.rebuild(v);
 
-   std::cout << "index: rmq(0, 3): " << stree.rmq(0, 6) << std::endl;
+   std::cout << "index: rmq(0, 5): " << stree.rmq(0, 5) << std::endl;
    for (auto &x: v)
      std::cout << x << "->";
    std::cout << std::endl;
