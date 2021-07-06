@@ -44,6 +44,20 @@ class segment_tree
         return A[p1] <= A[p2] ? p1: p2;
      }
 
+   void update(int idx, int L, int R, int array_index, int val)
+     {
+        if (L == R and array_index == L)
+          {
+             tree[idx] = L;
+             return;
+          }
+        if (array_index >= L and array_index <= mid(L, R))
+          update(left(idx), L, mid(L, R), array_index, val);
+        else
+          update(right(idx), mid(L, R) + 1, R, array_index, val);
+
+        tree[idx] = A[tree[left(idx)]] <= A[tree[right(idx)]] ? tree[left(idx)] : tree[right(idx)];
+     }
 
   public:
    segment_tree(int *in): A(in), n(input_idx)
@@ -58,15 +72,10 @@ class segment_tree
 
    void update(int k, int u)
      {
-        int pos = k + n;
-    
         A[k] = u;
 
-        while (pos >= 1)
-          {
-             pos = parent(pos);
-             tree[pos] = A[tree[left(pos)]] <= A[tree[right(pos)]] ? tree[left(pos)] : tree[right(pos)];
-          }
+        update(1, 0, n - 1, k, u);
+
      }
    void print()
      {
