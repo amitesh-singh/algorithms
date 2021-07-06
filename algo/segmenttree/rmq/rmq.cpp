@@ -28,6 +28,11 @@ class segment_tree
         return (idx)/2;
      }
 
+   int mid(int L, int R)
+     {
+        return L + (R-L)/2;
+     }
+
    //Top to bottom approach
    void build(int idx, int L, int R)
      {
@@ -81,19 +86,30 @@ class segment_tree
         return rmq(1, 0, n - 1, i, j);
      }
 
+   void update(int idx, int L, int R, int array_idx, int val)
+     {
+        if (L == R and array_idx == R)
+          {
+             st[idx] = val;
+             return;
+          }
+        if (array_idx >= L and array_idx <= mid(L, R))
+             update(left(idx), L, mid(L, R), array_idx, val);
+        else if (array_idx >= (mid(L,R) + 1) and array_idx <= R)
+          update(right(idx), mid(L, R) + 1, R, array_idx, val);
+
+        st[idx] = A[st[left(idx)]] <= A[st[right(idx)]] ? st[left(idx)] : st[right(idx)];
+     }
+
    //bottom to top
    void update(int array_index, int val)
      {
         if (array_index >= n) return;
         //position of array element in segment tree would be +n of index
-        int pos = array_index + n;
         //st[pos] = val;
         A[array_index] = val;
-        while (pos >= 1)
-          {
-             pos = parent(pos);
-             st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
-          }
+
+        update(1, 0, n - 1, array_index, val);
      }
 
    void print()
