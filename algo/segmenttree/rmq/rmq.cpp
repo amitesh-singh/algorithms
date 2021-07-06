@@ -90,7 +90,7 @@ class segment_tree
      {
         if (L == R and array_idx == R)
           {
-             st[idx] = val;
+             st[idx] = R;
              return;
           }
         if (array_idx >= L and array_idx <= mid(L, R))

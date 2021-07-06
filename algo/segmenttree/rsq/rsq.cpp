@@ -22,6 +22,11 @@ class segment_tree
         return (idx << 1) + 2;
      }
 
+   inline int mid(int L, int R)
+     {
+        return L + (R - L)/2;
+     }
+
    void build(int idx, int L, int R)
      {
         if (L == R)
@@ -45,6 +50,23 @@ class segment_tree
         int mid = L + (R - L)/2;
         return rsq(left(idx), L, mid, a, b) + rsq(right(idx), mid + 1, R, a, b);
      }
+
+   void update(int idx, int L, int R, int array_idx, int val)
+     {
+        if (L == R and array_idx == L)
+          {
+             tree[idx] = val;
+             return;
+          }
+
+        if (array_idx >= L and array_idx <= mid(L, R))
+          update(left(idx), L, mid(L, R), array_idx, val);
+        else
+          update(right(idx), mid(L, R) + 1, R, array_idx, val);
+
+        tree[idx] = tree[left(idx)] + tree[right(idx)];
+     }
+
   public:
    segment_tree(vi &input): A(input), n (input.size())
    {
@@ -66,18 +88,11 @@ class segment_tree
         std::cout << std::endl;
      }
 
+   //don't mix Top to bottom and bottom to top approaches
      void update(int array_idx, int val)
      {
         A[array_idx] = val;
-        //index of array element in segment tree
-        int idx = array_idx + n;
-        auto parent = [](int i) { return ((i + 1) >> 1);};
-        while (idx != 0)
-        {
-           idx = parent(idx);
-           tree[idx] = tree[left(idx)] + tree[right(idx)];
-        }
-        
+        update(0, 0, n - 1, array_idx, val);
      }
 };
 
@@ -89,5 +104,10 @@ int main()
    tree.print();
 
    std::cout << tree.rsq(0, 2) << std::endl;
+   std::cout << tree.rsq(0, 3) << std::endl;
+
+   tree.update(0, -1);
+   std::cout << tree.rsq(0, 2) << std::endl;
+   std::cout << tree.rsq(0, 3) << std::endl;
    return 0;
 }
