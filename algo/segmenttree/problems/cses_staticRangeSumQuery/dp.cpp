@@ -15,10 +15,10 @@ void build()
 
 ll getSum(int a, int b)
 {
+    if (a == b) return input[a];
     if (a == 0) return hash[b];
     return hash[b] - hash[a - 1];
 }
-
 
 int main()
 {
