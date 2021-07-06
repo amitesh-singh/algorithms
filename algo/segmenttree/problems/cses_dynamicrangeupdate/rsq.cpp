@@ -17,7 +17,7 @@ class segment_tree
     
     inline int left(int idx) { return (idx << 1);}
     inline int right(int idx) { return (idx << 1)+ 1;}
-    inline int mid(int L, int R) { return L + (R-L)/2;}
+    inline int mid(int L, int R) { return (L + (R-L)/2);}
 
     void build(int idx, int L, int R)
     {
@@ -41,7 +41,21 @@ class segment_tree
         return rsq(left(idx), L, mid(L, R), a, b) +
                rsq(right(idx), mid(L, R) + 1, R, a, b);
     }
-    
+
+    void update(int idx, int L, int R, int array_idx, int val)
+      {
+         if (L == R and array_idx == L)
+           {
+              tree[idx] = val;
+              return;
+           }
+         if (array_idx >= L and array_idx <= mid(L, R))
+           update(left(idx), L, mid(L, R), array_idx, val);
+         else
+           update(right(idx), mid(L, R) + 1, R, array_idx, val);
+
+         tree[idx] = tree[left(idx)] + tree[right(idx)];
+      }
     public:
     segment_tree(int *in) : A(in), n(input_idx)
     {
@@ -55,15 +69,9 @@ class segment_tree
 
     void update(int array_idx, int val)
     {
-        int pos = array_idx + n;
-        //tree[pos] = val;
-        auto parent = [](int idx) { return (idx) >> 1;};
-        //pos = parent(pos);
-        while (pos >= 1)
-        {
-            tree[pos] += val;
-            pos = parent(pos);
-        }
+       A[array_idx] = val;
+
+       update(1, 0, n - 1, array_idx, val);
     }
 };
 
@@ -84,8 +92,7 @@ int main()
         scanf("%d %d %d", &q_type, &a, &b);
         if (q_type == 1)
         {
-            int x = tree[a - 1 + n];
-            stree.update(a - 1, b - x);
+            stree.update(a - 1, b);
         }
         else
         {
