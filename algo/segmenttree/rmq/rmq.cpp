@@ -91,10 +91,8 @@ class segment_tree
         A[array_index] = val;
         while (pos >= 1)
           {
-             
-             std::cout << "pos: " << pos << std::endl;
-             st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
              pos = parent(pos);
+             st[pos] = A[st[left(pos)]] <= A[st[right(pos)]] ? st[left(pos)]: st[right(pos)];
           }
      }
 
