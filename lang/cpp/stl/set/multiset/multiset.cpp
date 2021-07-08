@@ -21,6 +21,8 @@ int main()
         print(s);
 
         auto itr = s.find(100);
+        std::cout << "occurrence of 100: " << s.count(100) << "\n";
+
         std::cout << "found " << *itr << std::endl;
         s.erase(itr);
         print(s);
