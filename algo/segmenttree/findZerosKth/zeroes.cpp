@@ -9,6 +9,8 @@ and additionally find the index of the k-th zero using a
                    std::cin.tie(nullptr)
 #include <vector>
 using vi = std::vector<int>;
+
+static int calls = 0;
 class segment_tree
 {
     vi tree;
@@ -39,6 +41,7 @@ class segment_tree
         if (a > R or b < L) return 0;
         if (a <= L and b >= R) return tree[idx];
         
+        calls++;
         return count_zeroes(left(idx), L, middle(L, R), a, b) +
                 count_zeroes(right(idx), middle(L, R) + 1, R, a, b);
     }
@@ -54,6 +57,23 @@ class segment_tree
         else
             return find_kthZero(right(idx), mid + 1, R, k - tree[left(idx)]);
     }
+
+    void update(int idx, int L, int R, int k)
+      {
+         if (L == R and k == L)
+           {
+              tree[idx] = 1;
+              A[L] = 0;
+              return;
+           }
+
+         if (k >= L and k <= middle(L, R))
+           update(left(idx), L, middle(L, R), k);
+         else
+           update(right(idx), middle(L, R) + 1, R, k);
+
+         tree[idx] = tree[left(idx)] + tree[right(idx)];
+      }
     public:
 
     segment_tree(vi &in): A(in), n(in.size())
@@ -71,6 +91,12 @@ class segment_tree
     {
         return find_kthZero(1, 0, n -1, k);
     }
+
+    //this changes that pos to 0
+    void update(int k)
+      {
+         update(1, 0, n - 1, k);
+      }
 };
 
 int main()
@@ -99,13 +125,19 @@ int main()
             std::cin >> a >> b;
             std::cout << stree.count_zeroes(a, b) << "\n";
         }
-        else
+        else if (q_type == 1)
         {
             std::cin >> k;
             int pos = stree.find_kthZero(k); 
             std::cout << pos << std::endl;
         }
+        else if (q_type == 3)
+          {
+             std::cin >> k;
+             stree.update(k);
+          }
     }
+    std::cout << "calls: " << calls << std::endl;
 
     return 0;
 }
