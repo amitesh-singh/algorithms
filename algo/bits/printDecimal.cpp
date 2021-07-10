@@ -1,6 +1,6 @@
 #include <iostream>
 
-//from 0  to 1, e,g, print decimal of 0.72
+//from 0  to 1, e,g, print decimal of 0.72 in binary format.
 // also if it can't be printed show error..
 std::string printDecimal(double num)
 {
