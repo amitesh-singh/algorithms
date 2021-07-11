@@ -3,7 +3,7 @@
 
 using ll = long long;
 static const unsigned int SIZE = 2*1e5;
-ll tree[4*SIZE];
+static ll tree[4*SIZE];
 int input[SIZE + 10];
 int input_idx = 0;
 
@@ -26,32 +26,29 @@ class segment_tree
 
         build(left(idx), L, mid(L, R));
         build(right(idx), mid(L, R) + 1, R);
-        
+
         tree[idx] = 0;
     }
 
     void update(int idx, int L, int R, int a, int b, int u)
-    {
-        if (a > b) return;
-        if (L == a and R == b)
-        {
-            tree[idx] += u;
-        }
-        else
-        {
-            update(left(idx), L, mid(L, R), a, std::min(b, mid(L, R)) , u);
-            update(right(idx), mid(L, R) + 1, R, std::max(a, mid(L, R) + 1), b , u);
-        }
-    }
+      {
+         if (a > R or b < L) return;
+         if (a <= L and b >= R)
+           {
+              tree[idx] += u;
+              return;
+           }
+         update(left(idx), L, mid(L, R), a, b, u);
+         update(right(idx), mid(L, R) + 1, R, a, b, u);
+      }
 
-
-    int at(int idx, int L, int R, int k)
+    ll at(int idx, int L, int R, int k)
     {
         if (L == R)
         {
             return tree[idx];
         }
-        if (k <= mid(L, R))
+        if (k >= L and k <= mid(L, R))
             return tree[idx] + at(left(idx), L, mid(L, R), k);
         else
             return tree[idx] + at(right(idx), mid(L, R) + 1, R, k);
@@ -67,7 +64,7 @@ class segment_tree
         update(1, 0, n - 1, a, b, u);
     }
 
-    int at(int k)
+    ll at(int k)
     {
         return at(1, 0, n - 1, k);
     }
@@ -102,15 +99,15 @@ int main()
         {
            // stree.print();
             scanf("%d", &k);
-            printf("%d\n", stree.at(k - 1));
+            printf("%ld\n", stree.at(k - 1));
             //stree.print();
         }
         else
         {
-            //stree.print();
+//            stree.print();
             scanf("%d %d %d", &a, &b, &u);
             stree.update(a - 1, b - 1, u);
-            //stree.print();
+ //           stree.print();
         }
     }
     return 0;
