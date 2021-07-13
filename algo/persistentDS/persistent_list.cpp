@@ -16,7 +16,7 @@ template<typename T>
 class persistent_list
 {
     node<T> *head = nullptr;
-    persistent_list(node const *t): head(t) {}
+    persistent_list(node<T> const *t): head(t) {}
 
     public:
     persistent_list() {}
