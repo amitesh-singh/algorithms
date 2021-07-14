@@ -6,20 +6,18 @@ using namespace std;
 
 void insertion_sort(int a[],int n)
 {
-    for(int i = 1; i < n; ++i)
+    int j;
+
+    for (int i = 1; i < n; ++i)
     {
-        int temp = a[i];
-        int j = i-1;
-
-        for(;temp < a[j] && j>=0;--j)
+        j = i;
+        while (j > 0 and a[j] < a[j-1])
         {
-            a[j+1] = a[j];
+            std::swap(a[j], a[j-1]);
+            j--;
         }
-
-        a[j+1] = temp;
     }
 }
-
 
 int main()
 {
