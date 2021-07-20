@@ -1,5 +1,15 @@
 #include <iostream>
 
+void bubblesort_rec(int *a, int n)
+{
+    if (n == 1) return;
+    for (int i = 0; i < n -1; ++i)
+        if (a[i]> a[i+1])
+            std::swap(a[i], a[i+1]);
+    
+    bubblesort_rec(a, n -1);
+}
+
 void bubblesort(int *a, int n)
 {
     for (int i = 0; i < n - 1; ++i)
@@ -15,7 +25,7 @@ int main()
         std::cout << x << " ";
     std::cout << '\n';
 
-    bubblesort(a, sizeof(a)/sizeof(int));
+    bubblesort_rec(a, sizeof(a)/sizeof(int));
 
     for (auto &x: a)
         std::cout << x << " ";
