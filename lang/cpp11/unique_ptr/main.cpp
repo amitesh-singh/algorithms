@@ -1,7 +1,8 @@
 #include <iostream>
 #include <memory> //for unique_ptr
 //unique_ptr is the replacement of auto_ptr, don't use auto_ptr anymore.
-
+//note: std::unique_ptr<> can't be passed by value, so it's usually moved around with
+// the use of special function std::move()
 using namespace std;
 
 class Base
@@ -27,6 +28,13 @@ class  Derived: public Base
         return x;
     }
 };
+
+//pass by copy is not allowed.
+void compute(std::unique_ptr<int> ptr)
+{
+
+}
+
 int main()
 {
     std::unique_ptr<int> ptr(new int); //ok
@@ -43,6 +51,12 @@ int main()
     ptr = std::move(ptr2); // ptr2 is now nullptr now.
     cout << *ptr << endl;
     *ptr = 10;
+    //copy by value is not allowed
+    //compute(ptr); //ERROR! copy by value is not allowed.
+    compute(std::move(ptr));
+    //ptr is invalid here
+    // will crash since ptr is now nullptr.
+    // std::cout << *ptr << std::endl;
     ptr.reset(new int(101)); // there is no need of temp variable, just reset and use it.
     //*ptr2 = 11; //Error! Seg Fault. ptr2 is now nullptr
 
