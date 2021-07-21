@@ -4,6 +4,16 @@
 #include <list>
 #include <algorithm>
 
+struct cell
+{
+    int x, y;
+    bool isVisited;
+
+    void print()
+    {
+        std::cout << "x: " << x << " y: " << y << " visited: " << isVisited << std::endl;
+    }
+};
 int main()
 {
     std::vector<int> v {10, 220, 23, 45, 450, -1};
@@ -27,6 +37,18 @@ int main()
 
     std::cout << "min(10, 20): " << std::min(10, 20) << std::endl;
     std::cout << "max(20, 34): " << std::max(20, 34) << std::endl;
+
+    //custom std::max/min
+    cell c1 {2, 5, true};
+    cell c2 {5, 5, false};
+    cell c3 {6,8, true};
+
+    cell res = std::max(c1, c2, [](const cell &lhs, const cell &rhs)->bool 
+    {
+        return lhs.x == rhs.x and rhs.y == rhs.y;
+    });
+
+    res.print();
 
     return 0;
 }
