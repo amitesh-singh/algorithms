@@ -22,6 +22,7 @@ int main()
 {
    std::unordered_map<int, unsigned long> hash;
    std::cout << steps_count(370, hash) << std::endl;
+   std::cout << steps_count(4, hash) << std::endl;
    //TODO: handle overflow
    return 0;
 }
