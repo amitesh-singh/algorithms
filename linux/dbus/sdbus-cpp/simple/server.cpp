@@ -23,6 +23,8 @@ int main()
         const char *intfName = "org.sdbuscpp.Add";
         add->emitSignal("addition").onInterface(intfName).withArguments(result);
 
+        std::cerr << "got a request from client\n";
+
         return result;
      };
 
