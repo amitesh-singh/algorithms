@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<node name="/org/cpu/getid">
+    <interface name="org.cpu.getid">
+        <property name="id" type="i" access="read" />
+    </interface>
+</node>
