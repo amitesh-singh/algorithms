@@ -6,6 +6,7 @@ int main()
 
    cpu cpu(*connection, "/org/cpu/getid");
 
+   //emit the signal "getCalled"
    connection->enterEventLoop();
 
    return 0;

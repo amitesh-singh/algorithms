@@ -1,4 +1,4 @@
-#include "cpu-server-intf.h"
+#include "server-intf.h"
 
 class cpu : public sdbus::AdaptorInterfaces<org::cpu::getid_adaptor>
 {
@@ -16,6 +16,7 @@ class cpu : public sdbus::AdaptorInterfaces<org::cpu::getid_adaptor>
 
       int32_t id() override
         {
+           emitGetCalled();
            return 7;
         }
 };

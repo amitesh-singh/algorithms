@@ -22,9 +22,12 @@ protected:
     getid_proxy(sdbus::IProxy& proxy)
         : proxy_(proxy)
     {
+        proxy_.uponSignal("getCalled").onInterface(INTERFACE_NAME).call([this](){ this->onGetCalled(); });
     }
 
     ~getid_proxy() = default;
+
+    virtual void onGetCalled() = 0;
 
 public:
     int32_t id()

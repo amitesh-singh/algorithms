@@ -3,5 +3,7 @@
 <node name="/org/cpu/getid">
     <interface name="org.cpu.getid">
         <property name="id" type="i" access="read" />
+        <signal name="getCalled">
+        </signal>
     </interface>
 </node>
