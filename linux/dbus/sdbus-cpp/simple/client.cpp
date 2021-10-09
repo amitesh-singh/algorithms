@@ -3,7 +3,7 @@
 
 void onAdd(const std::string &str)
 {
-   std::cout << "onAdd: " << str << std::endl;
+   std::cout << "Got signal, onAdd: " << str << std::endl;
 }
 int main()
 {

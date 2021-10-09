@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 3.21)
+
+project(simple)
 find_package(sdbus-c++ REQUIRED)
 
 add_executable(server server.cpp)
