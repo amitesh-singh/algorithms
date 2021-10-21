@@ -22,7 +22,7 @@ class signal
             return current_id_;
         }
 
-      void disconnet(int id) const
+      void disconnect(int id) const
         {
            slots_.erase(id);
         }
