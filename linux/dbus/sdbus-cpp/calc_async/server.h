@@ -1,6 +1,11 @@
 #include <sdbus-c++/sdbus-c++.h>
 #include "server-intf.h"
 #include <thread>
+#include <chrono>
+#include <string>
+//for 1s stuffs
+//
+using namespace std::literals::chrono_literals;
 
 class calculator: public sdbus::AdaptorInterfaces<com::amitesh::calculator_adaptor>
 {
@@ -22,7 +27,7 @@ class calculator: public sdbus::AdaptorInterfaces<com::amitesh::calculator_adapt
         std::thread([this, methodResult = std::move(result), a1, a2] ()
                     {
                         int res = a1 + a2;
-                        sleep(1);
+                        std::this_thread::sleep_for(1s);
                         methodResult.returnResults(res);
                         this->emitADD(res);
                     }).detach();
