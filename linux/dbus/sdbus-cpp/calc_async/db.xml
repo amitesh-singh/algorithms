@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<node name="/com/amitesh/calculator">
+    <interface name="com.amitesh.calculator">
+
+        <method name="add_async">
+            <annotation name="org.freedesktop.DBus.Method.Async" value="server" />
+            <arg type="i" name="a1" direction="in" />
+            <arg type="i" name="a2" direction="in" />
+            <arg type="i" name="result" direction="out" />
+        </method>
+        <method name="add">
+            <arg type="i" name="a1" direction="in" />
+            <arg type="i" name="a2" direction="in" />
+            <arg type="i" name="result" direction="out" />
+        </method>
+        <signal name="ADD">
+            <arg type="i" name="result" />
+        </signal>
+        <method name="subtract">
+            <arg type="i" name="a1" direction="in" />
+            <arg type="i" name="a2" direction="in" />
+            <arg type="i" name="result" direction="out" />
+        </method>
+        <signal name="SUBTRACT">
+            <arg type="i" name="result" />
+        </signal>
+    </interface>
+</node>
