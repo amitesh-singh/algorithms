@@ -22,4 +22,9 @@ class calc_proxy : public sdbus::ProxyInterfaces<com::amitesh::calculator_proxy>
     {
        std::cout << "Subtract Signal\n";
     }
+
+  void onAdd_asyncReply(const int32_t& result, const sdbus::Error* error) override
+    {
+       std::cout << "got the result: " << result << std::endl;
+    }
 };

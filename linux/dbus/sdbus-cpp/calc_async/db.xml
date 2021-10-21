@@ -4,7 +4,7 @@
     <interface name="com.amitesh.calculator">
 
         <method name="add_async">
-            <annotation name="org.freedesktop.DBus.Method.Async" value="server" />
+            <annotation name="org.freedesktop.DBus.Method.Async" value="clientserver" />
             <arg type="i" name="a1" direction="in" />
             <arg type="i" name="a2" direction="in" />
             <arg type="i" name="result" direction="out" />

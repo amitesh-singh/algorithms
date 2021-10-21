@@ -1,5 +1,6 @@
 #include <sdbus-c++/sdbus-c++.h>
 #include "server-intf.h"
+#include <thread>
 
 class calculator: public sdbus::AdaptorInterfaces<com::amitesh::calculator_adaptor>
 {
@@ -20,10 +21,10 @@ class calculator: public sdbus::AdaptorInterfaces<com::amitesh::calculator_adapt
      {
         std::thread([this, methodResult = std::move(result), a1, a2] ()
                     {
-                        result = a1 + a2;
+                        int res = a1 + a2;
                         sleep(1);
-                        methodResult.returnReply(result);
-                        this->emitADD(result);
+                        methodResult.returnResults(res);
+                        this->emitADD(res);
                     }).detach();
      }
    int32_t add(const int32_t& a1, const int32_t& a2) override

@@ -9,7 +9,7 @@ add_custom_target(header
     COMMENT "Header files are generated for client and server.")
 
 add_executable(server server.cpp)
-target_link_libraries(server PRIVATE SDBusCpp::sdbus-c++)
+target_link_libraries(server PRIVATE SDBusCpp::sdbus-c++ pthread)
 
 add_executable(client client.cpp)
 target_link_libraries(client PRIVATE SDBusCpp::sdbus-c++)
