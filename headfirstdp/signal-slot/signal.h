@@ -15,7 +15,6 @@ class signal
       signal() = default;
       ~signal() = default;
 
-
       int connect(std::function<void(Args...)> const &slot) const
         {
             slots_.insert(std::make_pair(++current_id_, slot));
