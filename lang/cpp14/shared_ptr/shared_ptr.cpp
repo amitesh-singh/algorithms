@@ -8,10 +8,17 @@ class Foo
 {
  public:
     int a = 0;
+    shared_ptr<int> p;
+    Foo(): p(make_shared<int>())
+   {
+      std::cout << "Foo()\n";
+   }
 };
 
 int main()
 {
+   Foo f;
+
    shared_ptr<int> sp1 (new int());
    *sp1 = 100;
 
