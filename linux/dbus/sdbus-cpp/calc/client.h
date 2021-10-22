@@ -23,3 +23,16 @@ class calc_proxy : public sdbus::ProxyInterfaces<com::amitesh::calculator_proxy>
        std::cout << "Subtract Signal\n";
     }
 };
+
+class info_proxy : public sdbus::ProxyInterfaces<com::amitesh::calculator::info_proxy>
+{
+  public:
+      info_proxy(std::string dest, std::string objPath): ProxyInterfaces(std::move(dest), std::move(objPath))
+   {
+      registerProxy();
+   }
+      ~info_proxy()
+        {
+           unregisterProxy();
+        }
+};

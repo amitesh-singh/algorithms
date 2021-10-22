@@ -29,3 +29,23 @@ class calculator: public sdbus::AdaptorInterfaces<com::amitesh::calculator_adapt
         return res;
    }
 };
+
+class calc_info: public sdbus::AdaptorInterfaces<com::amitesh::calculator::info_adaptor>
+{
+  public:
+      calc_info(sdbus::IConnection &connection, std::string objectPath) :
+          AdaptorInterfaces(connection, std::move(objectPath))
+   {
+      registerAdaptor();
+   }
+      ~calc_info()
+        {
+           unregisterAdaptor();
+        }
+
+  private:
+      std::string getName()
+        {
+           return "Calculator";
+        }
+};

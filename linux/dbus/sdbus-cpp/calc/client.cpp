@@ -15,6 +15,9 @@ int main(int argc, char **argv)
    res = client.subtract(1000, 1);
    std::cout << "result: " << res << std::endl;
 
+   info_proxy info(destName, objectPath);
+   std::cout << "Name: " << info.getName() << std::endl;
+
    sleep(2);
 
    return 0;

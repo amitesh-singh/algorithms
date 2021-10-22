@@ -19,4 +19,9 @@
             <arg type="i" name="result" />
         </signal>
     </interface>
+    <interface name="com.amitesh.calculator.info">
+        <method name="getName">
+            <arg type="s" name="name" direction="out" />
+        </method>
+    </interface>
 </node>
