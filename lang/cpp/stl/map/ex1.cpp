@@ -4,6 +4,13 @@
 
 using namespace std;
 
+void getMap(const std::map<int, int> &m)
+{
+   //this will result into compilation error since operator[] is not a const function, use at() instead
+   //if (m[1] == 10)
+   if (m.at(1) == 10)
+     std::cout << "10 is found\n";
+}
 
 int main()
 {
@@ -15,6 +22,8 @@ int main()
    m[1] = 10;
    m[22] = 34;
    m[2] = 20;
+
+   getMap(m);
 
    m2[1] = 10;
    m2[22] = 34;
