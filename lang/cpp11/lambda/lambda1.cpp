@@ -35,13 +35,13 @@ int main()
    std::vector<A> a = { {1, 2}, {3, 4} };
 
    //access both x, and y.
-   for (auto &[id, id2]: a)
-     std::cout << id << ", " << id2 << ", ";
+   for (auto &[x, y]: a)
+     std::cout << x << ", " << y << ", ";
    std::cout << '\n';
 
    //we ignore the first parameter.
-   for (auto &[_, id2]: a)
-     std::cout << id2 << ",";
+   for (auto &[_, y]: a)
+     std::cout << y << ",";
 
    std::cout << '\n';
 
