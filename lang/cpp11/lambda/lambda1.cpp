@@ -9,6 +9,11 @@ void callback(funcptr f)
    f();
 }
 
+struct A
+{
+   int x, y;
+};
+
 int main()
 {
    int result = [](int input)->int { return input * input; }(10);
@@ -27,7 +32,18 @@ int main()
    callback([]()->void{cout << "Hey! what's up!\n";});
 
    std::vector<int> v = {1, 2, 3, 4};
-   
+   std::vector<A> a = { {1, 2}, {3, 4} };
+
+   //access both x, and y.
+   for (auto &[id, id2]: a)
+     std::cout << id << ", " << id2 << ", ";
+   std::cout << '\n';
+
+   //we ignore the first parameter.
+   for (auto &[_, id2]: a)
+     std::cout << id2 << ",";
+
+   std::cout << '\n';
 
    return 0;
 }
