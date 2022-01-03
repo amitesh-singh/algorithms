@@ -21,7 +21,7 @@ int main()
                                   });
 
         io.run();
-        io.restart();
+        io.reset();
         std::cout << "polling\n";
         //io.poll();
      }
