@@ -2,6 +2,7 @@ project(basic)
 
 add_executable(basic basic.cpp)
 add_executable(timer timer.cpp)
+add_executable(timer2 class_timer.cpp)
 target_include_directories(basic PRIVATE /usr/include/)
 target_link_libraries(basic PRIVATE pthread)
 target_link_libraries(timer PRIVATE pthread)
