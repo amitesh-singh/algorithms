@@ -5,3 +5,4 @@ dbus-send --system  --type=signal --dest=org.sdbuscpp.add /org/sdbuscpp/ext org.
 dbus-send --system  --type=signal --dest=org.sdbuscpp.add /org/sdbuscpp/ext org.sdbuscpp.ext.ext5 string:"ext5" int32:5 array:byte:5,6,7
 dbus-send --system  --type=signal --dest=org.sdbuscpp.add /org/sdbuscpp/ext org.sdbuscpp.ext.ext6 string:"ext6" int32:5 array:string:"A","B","C","D"
 dbus-send --system  --type=signal --dest=org.sdbuscpp.add /org/sdbuscpp/ext org.sdbuscpp.ext.ext7 string:"ext7" int32:5 dict:int32:string:1,"A",2,"B",3,"C"
+dbus-send --system  --type=signal --dest=org.sdbuscpp.add /org/sdbuscpp/ext org.sdbuscpp.ext.ext8 string:"ext8" int32:5 objpath:/org/sdbuscpp/add

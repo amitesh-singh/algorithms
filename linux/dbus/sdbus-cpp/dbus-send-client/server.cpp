@@ -51,6 +51,10 @@ int main()
                                                             std::cout << y.first<<":" << y.second << ",";
                                                             std::cout << '\n';
                                                           });
+   proxy->uponSignal("ext8").onInterface(intfName).call([](const std::string &sig, int x, sdbus::ObjectPath &v) {
+                                                          std::cerr << "Got Signal: " << sig << " x: " << x  << "\n";
+                                                          std::cout << "object path: " << v << std::endl;
+                                                          });
    //TODO: obj path by dbus-send?
    proxy->finishRegistration();
 
