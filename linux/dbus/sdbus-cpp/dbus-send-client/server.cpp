@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include <sdbus-c++/sdbus-c++.h>
 
 int main()
@@ -36,6 +37,21 @@ int main()
                                                             std::cout << int(y) <<" ,";
                                                             std::cout << '\n';
                                                           });
+   proxy->uponSignal("ext6").onInterface(intfName).call([](const std::string &sig, int x, std::vector<std::string> &v) {
+                                                          std::cerr << "Got Signal: " << sig << " x: " << x  << "\n";
+                                                          std::cout << "array size: " << v.size() << "\n";
+                                                          for (auto &y: v)
+                                                            std::cout << y <<" ,";
+                                                            std::cout << '\n';
+                                                          });
+   proxy->uponSignal("ext7").onInterface(intfName).call([](const std::string &sig, int x, std::map<int, std::string> &v) {
+                                                          std::cerr << "Got Signal: " << sig << " x: " << x  << "\n";
+                                                          std::cout << "array size: " << v.size() << "\n";
+                                                          for (auto &y: v)
+                                                            std::cout << y.first<<":" << y.second << ",";
+                                                            std::cout << '\n';
+                                                          });
+   //TODO: obj path by dbus-send?
    proxy->finishRegistration();
 
    std::cout << "Enterig into Event loop\n";
