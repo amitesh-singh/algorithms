@@ -8,15 +8,16 @@ int main()
    asio::ip::udp::endpoint receiver(asio::ip::udp::v4(), port);
    asio::ip::udp::socket socket(io, receiver);
 
-   //for (;;)
-   //{
+   for (;;)
+   {
       char buf[1024];
       asio::ip::udp::endpoint sender;
 
       std::size_t bytes_transferred = socket.receive_from(asio::buffer(buf), sender);
+      std::cout << sender << std::endl;
       socket.send_to(asio::buffer(buf, bytes_transferred), sender);
-      io.run();
-   //}
+   }
+   io.run();
 
    return 0;
 }

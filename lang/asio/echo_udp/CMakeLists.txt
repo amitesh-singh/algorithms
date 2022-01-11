@@ -1,6 +1,6 @@
 project(basic)
 
-add_executable(basic basic.cpp)
+add_executable(basic sync_echo_server.cpp)
 add_executable(async_echo_server async_echo.cpp)
 add_executable(async_echo_server2 async_udp_echo_server.cpp)
 add_executable(client client.cpp)

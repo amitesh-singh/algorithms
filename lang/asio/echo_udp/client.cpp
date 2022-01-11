@@ -24,13 +24,18 @@ class udpclient
     }
 };
 
-int main()
+int main(int argc, char **argv)
 {
     asio::io_context io;
+    if (argc != 2)
+      {
+         std::cerr << argv[0] << " <msg>\n";
+         return -1;
+      }
 
     udpclient client(io, 15001);
 
-    client.send("Hello World");
+    client.send(argv[1]);
     io.run();
     return 0;
 }
