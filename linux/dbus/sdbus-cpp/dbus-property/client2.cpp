@@ -51,7 +51,10 @@ int _cb(sd_bus_message *message, void *user_data, sd_bus_error *ret_err)
 
             std::cout << "name: " << name << " contents: " << contents << std::endl;
             if (strcmp(name, "state")) return 0;
-            bool val = true;
+            //bool val = true;
+            int val; /* Do not use C99 'bool' type here, it's typically smaller
+          in memory and would cause memory corruption */
+
             error_code = sd_bus_message_read(message, "b", &val);
             if (error_code < 0)
             {
