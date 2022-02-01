@@ -20,3 +20,5 @@ pkg_check_modules(
 
 add_executable(client2 client2.cpp)
 target_link_libraries(client2 PRIVATE PkgConfig::Systemd)
+add_executable(client3 client3.cpp)
+target_link_libraries(client3 PRIVATE PkgConfig::Systemd)
