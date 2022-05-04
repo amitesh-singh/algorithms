@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+//or use pthread_mutex_init(&m1, NULL);
 pthread_mutex_t m1 = PTHREAD_MUTEX_INITIALIZER;
 int counter = 0;
 
