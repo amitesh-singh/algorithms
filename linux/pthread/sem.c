@@ -27,5 +27,7 @@ int main()
 	sem_post(&sem);
 	pthread_join(t, NULL);
 
+	sem_destroy(&sem);
+
 	return 0;
 }
