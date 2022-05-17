@@ -18,3 +18,5 @@ target_link_libraries(server PRIVATE SDBusCpp::sdbus-c++)
 
 add_executable(client client.cpp)
 target_link_libraries(client PRIVATE SDBusCpp::sdbus-c++)
+add_executable(client2 client2.cpp)
+target_link_libraries(client2 PRIVATE SDBusCpp::sdbus-c++)
