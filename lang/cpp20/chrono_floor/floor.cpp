@@ -17,6 +17,7 @@ int main()
 
    using fifteenMins = std::chrono::duration<int, std::ratio<15 * 60>>;
    auto now = std::chrono::floor<fifteenMins>(std::chrono::system_clock::now());
+   auto ceil = std::chrono::ceil<fifteenMins>(std::chrono::system_clock::now());
 //   std::cout << std::format("{:%Y-%m-%d %H:%M}\n", now);
 
    auto duration = std::chrono::system_clock::now() -  now;
@@ -30,6 +31,8 @@ int main()
 
    std::cout << "floor: ";
    print_time(now);
+   std::cout << "\n Ceil: ";
+   print_time(ceil);
    std::cout << "\n first time shot: ";
    print_time(std::chrono::system_clock::time_point(15min) - (std::chrono::system_clock::now() - now));
    std::cout << "current now: ";
