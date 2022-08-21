@@ -1,12 +1,17 @@
 #include <iostream>
 #include <future>
 #include <chrono>
+#include <thread>
 
+using namespace std::string_literals;
+//you know this for std::this_thread::chrono_literals
+using namespace std::chrono_literals;
 
 std::string f(std::string token)
 {
     std::string data = "fetched data: " + token;
     std::this_thread::sleep_for(std::chrono::seconds(3));
+    std::this_thread::sleep_for(3s);
     return data;
 }
 
