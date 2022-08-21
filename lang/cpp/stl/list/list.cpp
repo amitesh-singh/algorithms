@@ -44,6 +44,7 @@ int main()
 
 
     //sort list in ascending order.
+    // note: std::vector does not have sort() member function.
     l.sort(); //without comparator function
     std::cout << "After sorting\n";
     printList(l);
