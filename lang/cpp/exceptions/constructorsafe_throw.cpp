@@ -8,6 +8,9 @@ class device
            if (id == 2)
              throw std::runtime_error("device id can't be 2");
       }
+      ~device() {
+           std::cout << "~device()\n";
+      }
 };
 
 class driver 
@@ -21,6 +24,8 @@ class driver
               d1 = std::make_unique<device>(id1);
               d2 = std::make_unique<device>(id2);
          }catch (...) {
+              d1.reset();
+              d2.reset();
               throw;
          }
       }
@@ -32,7 +37,8 @@ class driver
 int main()
 {
    try {
-        device d1(2);
+      //  device d1(2);
+      driver d(1, 2);
    } catch(std::exception &e) {
         std::cerr << e.what() << '\n';
    }
