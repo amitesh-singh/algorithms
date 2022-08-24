@@ -15,11 +15,14 @@ int main()
             //
    //use auto instead to deduce the type
 
-   auto f2 = std::async(std::launch::async, []()->int {
+   int g = 0;
+   //passing lambda with argument
+   auto f2 = std::async(std::launch::async, [](int i)->int {
                         std::this_thread::sleep_for(10s);
 
+                        std::cout << "passed argument: " << i << '\n';
                         return 10;
-                        });
+                        }, g);
 
    //f2.get is blocking here
    std::cout << f2.get() << '\n';
