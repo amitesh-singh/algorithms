@@ -14,7 +14,10 @@ namespace nonstd
             std::condition_variable cond;
             int val = 0;
            public:
-            counting_semaphore(int v = 0): val(v) { }
+            counting_semaphore(int v = 0): val(v) {
+                 if (val > MAX_VAL) val = MAX_VAL;
+                 if (val < 0) val = 0;
+            }
 
             void acquire()
               {

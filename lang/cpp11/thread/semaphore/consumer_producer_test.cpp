@@ -24,7 +24,7 @@ void consumerWork()
 {
     while (1)
     {
-        std::this_thread::sleep_for(std::chrono::seconds(10));
+        std::this_thread::sleep_for(std::chrono::seconds(rand() % 10));
         fillCount.acquire();
         int r = q.front();
         q.pop();
