@@ -97,6 +97,14 @@ int main()
        private:
         char *data_ = nullptr;
         size_t len_ = 0;
+        //this three functions also need to be implemented.
+        /*
+         *
+         *  // Iterator functions
+    bool operator!=(const range&) const { return iter < last; }
+    void operator++() { ++iter; }
+    int operator*() const { return iter; }
+         * */
    };
 
    try {
