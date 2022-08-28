@@ -4,6 +4,8 @@
 #include <atomic>
 #include <unistd.h>
 
+using namespace std::chrono_literals;
+
 class timer {
      std::atomic<bool> active {false};
 
@@ -11,7 +13,7 @@ class timer {
      void setTimeout(auto function, int delay)
        {
           active = true;
-          std::thread t ([=]() {
+          std::thread t ([this, function, delay]() {
                          if (!active.load()) return;
                          std::this_thread::sleep_for(std::chrono::milliseconds(delay));
                          if (!active.load()) return;
@@ -23,7 +25,7 @@ class timer {
      void setInterval(auto function, int interval)
        {
           active = true;
-          std::thread t ([=]() {
+          std::thread t ([this, function, interval]() {
                          while (active.load()) {
                          std::this_thread::sleep_for(std::chrono::milliseconds(interval));
                          if (!active.load()) return;
@@ -37,6 +39,10 @@ class timer {
        {
           active = false;
        }
+
+     ~timer() {
+          stop();
+     }
 };
 
 int main()
@@ -44,7 +50,6 @@ int main()
    timer t;
    t.setTimeout([]()->void { std::cout << "after 3s\n"; }, 3000);
 
-   sleep(10);
-
+   std::this_thread::sleep_for(10s);
    return 0;
 }
