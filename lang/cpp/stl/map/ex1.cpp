@@ -43,6 +43,9 @@ int main()
         cout << x.first << " : " << x.second << endl;
      }
 
+     for (auto &[n1, n2]: m)
+       cout << n1 << " :" << n2 << '\n';
+
    cout << "unordered_map: size: " << m2.size() <<  "\n";
 
    for (auto &x: m2)
