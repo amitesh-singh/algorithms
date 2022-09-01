@@ -12,8 +12,10 @@ namespace nonstd {
              public:
 
               counting_semaphore(int val = 0): val_(val) {
-                   if (val_ < 0) val_ = 0;
-                   else if (val_ > COUNT_MAX) val_ = COUNT_MAX;
+                   val_ = [](int v)->int { if (v < 0) return 0;
+                        else if (v > COUNT_MAX) return COUNT_MAX;
+                        return v;
+                   }(val_);
               }
                  void acquire()
                    {
