@@ -45,6 +45,12 @@ int main()
 
    std::cout << '\n';
 
+   int y = 1;
+   //we could initialize this using lambda
+   bool is_y_1 = [&y]()->bool { return y == 1 ? true : false; }();
+   const bool y_bool = y == 1;
+
+   std::cout << "is_y_1: " << is_y_1 << '\n';
    return 0;
 }
 
