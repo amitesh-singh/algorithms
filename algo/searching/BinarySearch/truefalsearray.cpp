@@ -14,16 +14,17 @@ using namespace std;
 
 int findFirstFalse(vector<bool> &nums)
 {
+   if (nums.size() == 0) return -1;
     int low = 0, mid, high = nums.size();
     int ans = -1;
-    while (low <= high)
+    while (low < high)
     {
         mid = low + (high - low)/2;
 
         if (nums[mid] == false)
         {
             ans = mid;
-            high = mid - 1;
+            high = mid;
         }
         else
             low = mid + 1;
@@ -32,11 +33,36 @@ int findFirstFalse(vector<bool> &nums)
     return ans;
 }
 
+void print_tc(vector<bool> const & v)
+{
+   for (const auto &x: v)
+     std::cout << x << " ";
+   std::cout << '\n';
+}
+
+vector<bool> make_tc(int ones, int zeroes)
+{
+   vector<bool> v;
+   for (auto i = 0; i < ones; ++i)
+     v.push_back(true);
+   for (auto i = 0; i < zeroes; ++i)
+     v.push_back(false);
+
+   return v;
+}
+
 
 int main()
 {
     vector<bool> v =  {true, true, true, true, true,
                 false, false, false, false, false, false};
+    print_tc(v);
+    std::cout << findFirstFalse(v) << std::endl;
+    v.clear();
+
+    v = make_tc(3, 5);
+    print_tc(v);
+
     std::cout << findFirstFalse(v) << std::endl;
 
 
