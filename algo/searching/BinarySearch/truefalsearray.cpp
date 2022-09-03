@@ -65,6 +65,14 @@ int main()
 
     std::cout << findFirstFalse(v) << std::endl;
 
+    v = make_tc(3, 0);
+    print_tc(v);
+    std::cout << findFirstFalse(v) << std::endl;
+
+    v = make_tc(0, 3);
+    print_tc(v);
+
+    std::cout << findFirstFalse(v) << std::endl;
 
     return 0;
 }
