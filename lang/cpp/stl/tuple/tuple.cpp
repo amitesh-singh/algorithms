@@ -28,6 +28,9 @@ int main()
     std::tuple<int, std::string, std::optional<std::string>> person;
 
     person = std::make_tuple(20, "Ami", std::nullopt);
+    auto [id2, firstname, lastname] = person;
+
+    std::cout << "id2: " << id2 << " firstname: " << firstname << (lastname ? *lastname : "") << '\n';
 
     return 0;
 }
