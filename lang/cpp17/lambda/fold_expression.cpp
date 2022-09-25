@@ -55,6 +55,17 @@ auto add_all_strings_size(auto&& ... strings)
     return (0 + ... + strings.size());
 }
 
+auto sum3(auto&&... pack)
+{
+    return (... + pack);
+}
+
+auto avg(auto&&... pack)
+{
+    auto s = sum3(pack...);
+    return s/sizeof...(pack);
+}
+
 int main()
 {
     std::cout << do_stuff(1, 2, 3, 4) << '\n';
@@ -82,6 +93,9 @@ int main()
     std::string s2 = "meh";
 
     std::cout << add_all_strings_size(s1, s2) << '\n';
+
+    std::cout << "average: " << avg(10, 11.0, 2) << std::endl;
+
 
     return 0;
 }
