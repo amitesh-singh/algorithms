@@ -42,7 +42,7 @@ int main()
    //async timer implementation in a recursive lambda
 
    asio::steady_timer t3(io);
-   
+
    t3.expires_after(1s);
    int n = 10;
    auto recursive_lambda = [&t3, &n](auto &&recursive) {
@@ -55,6 +55,19 @@ int main()
 
    t3.async_wait(std::bind(recursive_lambda, recursive_lambda));
 
+   asio::steady_timer t4(io);
+
+   t4.expires_after(2s);
+   int n2 = 5;
+   std::function<void()> recursive_lambda2 = [&t4, &n2, &recursive_lambda2]()->void {
+      if (n2 == 0) return;
+      std::cout << "recursive lambda2: n2 = " << n2 << '\n';
+      n2--;
+      t4.async_wait(std::bind(recursive_lambda2));
+   };
+   
+   t4.async_wait(std::bind(recursive_lambda2));
+   
    io.run();
    return 0;
 }
