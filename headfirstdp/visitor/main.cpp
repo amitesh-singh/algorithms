@@ -74,6 +74,7 @@ void car::accept(Ivisitor &&v)
 
 struct write_to_db : public Ivisitor
 {
+   //define DB Connection objects etcs
    void handle(person &p) override
      {
         std::cout << "writing " << p.name_  << ", " << p.age_ << " to DB\n";
@@ -81,10 +82,13 @@ struct write_to_db : public Ivisitor
 
    void handle(landmark &l) override
      {
+      std::cout << "writing " << l.city_ << ", " << l.name_ << " to DB\n";
      }
    void handle(car &c) override
      {
+      std::cout << "writing " << c.make_ << ", " << c.model_ << " to DB\n";
      }
+
    ~write_to_db()
      {
         std::cout << __PRETTY_FUNCTION__ << std::endl;
@@ -93,12 +97,39 @@ struct write_to_db : public Ivisitor
 
 struct write_to_txt: public Ivisitor
 {
-   //TODO
+   //define file handlers
+   void handle(person &p) override
+   {
+      std::cout << "writing " << p.name_ << ", " << p.age_ << " to txt\n";
+   }
+
+   void handle(landmark &l) override
+   {
+      std::cout << "writing " << l.name_ << ", " << l.city_ << " to txt\n";
+   }
+
+   void handle(car &c) override
+   {
+      std::cout << "writing " << c.model_ << ", " << c.make_ << " to txt\n";
+   }
 };
 
 struct write_to_json: public Ivisitor
 {
-   //TODO
+   void handle(person &p) override
+   {
+      std::cout << "writing " << p.name_ << ", " << p.age_ << " to json\n";
+   }
+
+   void handle(landmark &l) override
+   {
+      std::cout << "writing " << l.name_ << ", " << l.city_ << " to json\n";
+   }
+
+   void handle(car &c) override
+   {
+      std::cout << "writing " << c.model_ << ", " << c.make_ << " to json\n";
+   }
 };
 
 
@@ -113,5 +144,10 @@ int main()
         write_to_db wdb;
         person.accept(wdb);
      }
+   
+   car.accept(write_to_json{});
+
+   landmark.accept(write_to_txt{});
+   
    return 0;
 }
