@@ -45,9 +45,9 @@ class car
 
 struct Ivisitor
 {
-    virtual void handle(person &p) = 0;
-    virtual void handle(car &c) = 0;
-    virtual void handle(landmark &l) = 0;
+    virtual void visit(person &p) = 0;
+    virtual void visit(car &c) = 0;
+    virtual void visit(landmark &l) = 0;
     virtual ~Ivisitor()
       {
          std::cout << __PRETTY_FUNCTION__ << std::endl;
@@ -56,35 +56,35 @@ struct Ivisitor
 
 void person::accept(Ivisitor &&v)
 {
-   v.handle(*this);
+   v.visit(*this);
 }
 void person::accept(Ivisitor &v)
 {
-   v.handle(*this);
+   v.visit(*this);
 }
 void landmark::accept(Ivisitor &&v)
 {
-   v.handle(*this);
+   v.visit(*this);
 }
 
 void car::accept(Ivisitor &&v)
 {
-   v.handle(*this);
+   v.visit(*this);
 }
 
 struct write_to_db : public Ivisitor
 {
    //define DB Connection objects etcs
-   void handle(person &p) override
+   void visit(person &p) override
      {
         std::cout << "writing " << p.name_  << ", " << p.age_ << " to DB\n";
      }
 
-   void handle(landmark &l) override
+   void visit(landmark &l) override
      {
       std::cout << "writing " << l.city_ << ", " << l.name_ << " to DB\n";
      }
-   void handle(car &c) override
+   void visit(car &c) override
      {
       std::cout << "writing " << c.make_ << ", " << c.model_ << " to DB\n";
      }
@@ -98,17 +98,17 @@ struct write_to_db : public Ivisitor
 struct write_to_txt: public Ivisitor
 {
    //define file handlers
-   void handle(person &p) override
+   void visit(person &p) override
    {
       std::cout << "writing " << p.name_ << ", " << p.age_ << " to txt\n";
    }
 
-   void handle(landmark &l) override
+   void visit(landmark &l) override
    {
       std::cout << "writing " << l.name_ << ", " << l.city_ << " to txt\n";
    }
 
-   void handle(car &c) override
+   void visit(car &c) override
    {
       std::cout << "writing " << c.model_ << ", " << c.make_ << " to txt\n";
    }
@@ -116,17 +116,17 @@ struct write_to_txt: public Ivisitor
 
 struct write_to_json: public Ivisitor
 {
-   void handle(person &p) override
+   void visit(person &p) override
    {
       std::cout << "writing " << p.name_ << ", " << p.age_ << " to json\n";
    }
 
-   void handle(landmark &l) override
+   void visit(landmark &l) override
    {
       std::cout << "writing " << l.name_ << ", " << l.city_ << " to json\n";
    }
 
-   void handle(car &c) override
+   void visit(car &c) override
    {
       std::cout << "writing " << c.model_ << ", " << c.make_ << " to json\n";
    }
