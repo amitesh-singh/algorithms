@@ -1,0 +1,1 @@
+- install https://github.com/reo7sp/tgbot-cpp
