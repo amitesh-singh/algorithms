@@ -23,6 +23,12 @@ int main()
                              });
 
    bot.getEvents().onAnyMessage([&bot](Message::Ptr message) {
+                                cout << "username: " << message->chat->username << '\n';
+                                cout << "first name: " << message->chat->firstName << "\n";
+                                cout << "last name: " << message->chat->lastName << "\n";
+                                cout << "id: " << message->chat->id << "\n";
+                                cout << "bio: " << message->chat->bio << "\n";
+                                
                                 cout << "User Wrote: " << message->text << '\n';
 
                                 //don't handle /start since it's handled already
@@ -39,8 +45,10 @@ int main()
                                     //download a file from telegram and save it in memory
                                     // returns the content of the file in string?
                                     auto downloaded = bot.getApi().downloadFile(file_info->filePath);
-                                    std::ofstream out("image.jpg", std::ios::binary);
+                                    std::ofstream out("/tmp/image.jpg", std::ios::out | std::ios::binary);
                                     out << downloaded;
+                                    std::cout << "/tmp/image.jpg is created\n";
+                                    bot.getApi().sendMessage(message->chat->id, "image is uploaded successfully.");
                                 }
                                 });
 
@@ -52,7 +60,7 @@ int main()
     try {
         std::cout << "Bot username: " << bot.getApi().getMe()->username << '\n';
         bot.getApi().deleteWebhook();
-        TgLongPoll longPoll(bot);
+        TgLongPoll longPoll(bot, 100, 10);
         while (true) {
              std::cout << "Long Poll started\n";
              longPoll.start();
