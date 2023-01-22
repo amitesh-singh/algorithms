@@ -32,5 +32,8 @@ cv2.imshow("dilate image", imgDilate)
 imgErode = cv2.erode(imgDilate, kernel, iterations=1)
 cv2.imshow("erode image", imgErode)
 
+#save the eroded image into a file
+cv2.imwrite("img_erode.png", imgErode)
+
 # press q to exit
 cv2.waitKey(0)
