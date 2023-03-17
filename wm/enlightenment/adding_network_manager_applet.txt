@@ -1,7 +1,7 @@
 ami@ami-VirtualBox:~/.config/systemd/user$ cat ami.netwkmgr.service
 [Unit]
 Description=network manager for enlightenment
-After=network.target
+After=default.target
 
 [Service]
 Type=simple
