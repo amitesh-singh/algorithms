@@ -1,0 +1,17 @@
+ami@ami-VirtualBox:~/.config/systemd/user$ cat ami.netwkmgr.service
+[Unit]
+Description=network manager for enlightenment
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=nm-applet --indicator
+WorkingDirectory=/home/ami
+
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+
+$ systemctl --user enable ami.ntwkmgr.service
+$ systemctl --user start ami.ntwkmgr.service
