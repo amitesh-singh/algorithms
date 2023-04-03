@@ -5,13 +5,15 @@
 
 int main()
 {
-   const char *serviceName = "com.ami.test";
+   const char *serviceName = "com.ami.test2";
    //create Dbus connection to the session bus
-   auto connection = sdbus::createSessionBusConnection(serviceName);
+   //auto connection = sdbus::createSessionBusConnection(serviceName);
+   auto connection = sdbus::createSessionBusConnection();
+   connection->requestName(serviceName);
 
    //creat a proxy which triggers by dbus-send signal emit
-   const char *interface = "com.ami.test";
-   const char *objPath = "/com/ami/test";
+   const char *interface = "com.ami.test2";
+   const char *objPath = "/com/ami/test2";
 
    auto obj = sdbus::createObject(*connection, objPath);
 
@@ -23,6 +25,8 @@ int main()
 
    std::cout << "Entering into Event loop\n";
    connection->enterEventLoop();
+
+   connection->releaseName(serviceName);
 
    return 0;
 }

@@ -1,1 +1,1 @@
- busctl --user introspect com.ami.test /com/ami/test
+ busctl --user introspect com.ami.test2 /com/ami/test2
