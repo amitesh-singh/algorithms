@@ -13,10 +13,11 @@ int main()
    foo();
    */
    auto moo = [i]() mutable {
-        //we'r allowed to modify i now
+        //we're allowed to modify i now
         i++;
    };
    
    moo();
+   std::cout << "i: " << i << std::endl;
    return 0;
 }
