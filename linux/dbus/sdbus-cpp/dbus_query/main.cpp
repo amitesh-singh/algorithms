@@ -27,6 +27,13 @@ int main()
                                                                });
    obj->finishRegistration();
 
+   obj->callMethodAsync("ListNames")
+       .onInterface(interface)
+       .uponReplyInvoke([](const sdbus::Error *e, const std::vector<std::string> &services) {
+                            for (auto &s: services) {
+                                std::cout << s << '\n';
+                            }
+                        });
    std::cout << "Entering into Event loop\n";
    connection->enterEventLoop();
 
