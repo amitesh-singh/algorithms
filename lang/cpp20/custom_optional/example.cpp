@@ -36,6 +36,12 @@ int main()
    std::cout << "Assign\n";
    opt = A("kldnflkdsnf");
 
+   /*
+    * Note that emplace() is more efficient than operator=() or emplace_back() for
+    * constructing objects in optional objects because it avoids creating temporary
+    * objects and copying or moving them into the optional object.
+    *
+    */
    std::cout << "Emplace\n";
    opt.emplace("Awesome");
 
