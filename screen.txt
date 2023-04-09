@@ -1,0 +1,12 @@
+install screen
+- start the screen
+screen
+
+run a long time taking command
+Ctrl -A and Ctrl-D to exit
+
+
+to reconnect to screen
+screen -r
+
+
