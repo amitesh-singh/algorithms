@@ -7,12 +7,11 @@ void onAdd(const std::string &str)
 }
 int main()
 {
-    const char *serviceName = "org.cpu.getid";
-   auto connection = sdbus::createSystemBusConnection(serviceName);
+   auto connection = sdbus::createSessionBusConnection();
    
    const char *destName = "org.sdbuscpp.add";
    const char *objPath = "/org/sdbuscpp/add";
-   auto addProxy = sdbus::createProxy(destName, objPath);
+   auto addProxy = sdbus::createProxy(*connection, destName, objPath);
 
    //this will be called whenever PropertiesChanged signal is emitted
    const char *intfName = "org.freedesktop.DBus.Properties";

@@ -6,7 +6,7 @@ int main()
 {
    //create Dbus connection to the system bus
    const char *serviceName = "org.sdbuscpp.add";
-   auto connection = sdbus::createSystemBusConnection(serviceName);
+   auto connection = sdbus::createSessionBusConnection(serviceName);
 
    const char *intfName = "org.sdbuscpp.Add";
 
@@ -24,7 +24,7 @@ int main()
 
    std::cout << "Enterig into main loop\n";
 
-   add->emitPropertiesChangedSignal("org.sdbuscpp.Add", {"state"});
+   add->emitPropertiesChangedSignal(intfName, {"state"});
    connection->enterEventLoop();
 
    return 0;
