@@ -34,6 +34,22 @@ class driver
          std::cout << "~device()\n";
       }
 };
+
+/*
+Use the noexcept(false) specifier in the constructor declaration: This explicitly indicates that the constructor may throw exceptions. 
+By default, C++ constructors are assumed to be noexcept(true), meaning they are not allowed to throw exceptions. However, you can override this by specifying noexcept(false).
+*/
+class meh
+{
+    public:
+    meh(int val) noexcept(false)
+    {
+        if (val < 0) {
+            throw std::runtime_error("val can't be negative");
+        }
+    }
+};
+
 int main()
 {
    try {
@@ -41,6 +57,12 @@ int main()
       driver d(1, 2);
    } catch(std::exception &e) {
         std::cerr << e.what() << '\n';
+   }
+
+   try {
+      meh m(-2);
+   } catch(const std::exception &e) {
+      std::cerr << e.what() << '\n';
    }
 
    return 0;
