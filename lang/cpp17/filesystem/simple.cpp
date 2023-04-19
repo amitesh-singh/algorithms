@@ -15,6 +15,10 @@ int main(int argc, char **argv)
      {
         std::cout << mydir << "exists.\n";
      }
+   std::cout << "current dir: " << std::filesystem::current_path() << std::endl;
+   std::cout << "tmp dir: " << std::filesystem::temp_directory_path() << std::endl;
+
+
    std::cout << "root name: " <<  mydir.root_name() << std::endl;
    std::cout << "root path: " << mydir.root_path() << std::endl;
    std::cout << "relative path: " << mydir.relative_path() << std::endl;
