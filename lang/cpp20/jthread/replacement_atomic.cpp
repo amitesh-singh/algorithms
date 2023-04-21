@@ -13,8 +13,8 @@ class A
         t = std::jthread([this](std::stop_token st) {
             while (!st.stop_requested())
             {
-                std::cout << "..\n";
                 std::this_thread::sleep_for(std::chrono::seconds(1));
+                std::cout << "..\n";
             }
         });
     }
