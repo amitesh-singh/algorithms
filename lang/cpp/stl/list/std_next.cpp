@@ -14,7 +14,9 @@ int main()
    printList(l);
 
    l.push_front(100); //100, 1, 2, 3, -1
+   printList(l);
    l.push_back(10);   //100, 1, 2, 3, -1, 10
+   printList(l);
    
    auto adj_front = std::next(l.begin(), 1);
    std::cout << "adjacent to front of list is " << *adj_front << '\n';
