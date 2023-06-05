@@ -1,0 +1,4 @@
+sudo apt-get install patchutils
+
+interdiff -q file.patch /dev/null > reversed.patch
+
