@@ -10,3 +10,5 @@ to reconnect to screen
 screen -r
 
 
+forcefully reconnect to the screen:
+screen -r -f
