@@ -24,7 +24,7 @@ int main()
         if (it != dict.end()) {
              return it->second();
         }
-        return false;
+        throw std::runtime_error("No matching case found");
    };
 
    while (1) {
