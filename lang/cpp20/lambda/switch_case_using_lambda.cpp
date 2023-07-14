@@ -27,6 +27,16 @@ int main()
         throw std::runtime_error("No matching case found");
    };
 
+
+   constexpr auto switch_case2 = []<typename Key>(const Key &key, const std::unordered_map<Key, std::function<bool()>> &cases) constexpr -> bool {
+        const auto it = cases.find(key);
+        if (it != cases.end()) {
+             return it->second();
+        }
+
+        throw std::runtime_error("No matching case found");
+   };
+
    while (1) {
         int input;
         std::cout << "Enter input: ";
@@ -46,6 +56,21 @@ int main()
                                         }
                                }
                                });
+
+        bool ret2 = switch_case2(static_cast<values>(input), {
+                                 {
+                                    values::FIRST, []() {
+                                        std::cout << "First from 2nd \n";
+                                        return true;
+                                    }
+                                 },
+                                 {
+                                    values::SECOND, []() {
+                                        std::cout << "Second from 2nd: \n";
+                                        return true;
+                                    }
+                                 },
+                                 });
 
    };
    return 0;
