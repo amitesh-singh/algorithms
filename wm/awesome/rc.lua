@@ -5,6 +5,15 @@ pcall(require, "luarocks.loader")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+
+-- my custom widgets
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
+
+
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -198,7 +207,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
     
     -- import module
-    local battery_widget = require("battery-widget")
+
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
@@ -210,20 +219,42 @@ awful.screen.connect_for_each_screen(function(s)
             mylauncher,
             s.mytaglist,
             s.mypromptbox,
-            battery_widget {
-                -- Use different colors for ac_prefix and battery_prefix
-                ac_prefix = '<span color="red">AC: </span>',
-                battery_prefix = '<span color="green" font="Deja Vu Sans Bold 10">Bat: </span>',
-
-                -- Use a bold font for both prefixes (overrides widget_font)
-                widget_text = '<span font="Deja Vu Sans Bold 16">${AC_BAT}</span>${color_on}${percent}%${color_off}'
-            }
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            --customized
+            weather_widget({
+                api_key='241c664b670cb2f8b0d92736fdc360b1',
+                coordinates = {45.5017, -73.5673},
+                time_format_12h = true,
+            units = 'imperial',
+            both_units_widget = true,
+            font_name = 'Carter One',
+            icons = 'VitalyGorbachev',
+            icons_extension = '.svg',
+            show_hourly_forecast = true,
+            show_daily_forecast = true,
+            }),
+            -- cpu_widget(),
+            cpu_widget({
+                width = 70,
+                step_width = 2,
+                step_spacing = 0,
+                color = '#434c5e'
+            }),
             mykeyboardlayout,
             wibox.widget.systray(),
+            -- volume_widget(),
+            volume_widget{
+                widget_type = 'arc'
+            },
+            battery_widget(),
+                brightness_widget{
+                type = 'icon_and_text',
+                program = 'xbacklight',
+                step = 2,        
+            },
             mytextclock,
             s.mylayoutbox
         },
@@ -241,6 +272,9 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    -- awful.key({ "Control",     }, "c", function () awful.spawn("clipster -sp") end, {description = "increase brightness", group = "custom"}),
+    awful.key({ modkey         }, ";", function () brightness_widget:inc(2) end, {description = "increase brightness", group = "custom"}),
+    awful.key({ modkey, "Shift"}, ";", function () brightness_widget:dec(2) end, {description = "decrease brightness", group = "custom"}),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -285,7 +319,12 @@ globalkeys = gears.table.join(
         end,
         {description = "go back", group = "client"}),
 
+  awful.key({ modkey }, "]", function() volume_widget:inc(5) end),
+  awful.key({ modkey }, "[", function() volume_widget:dec(5) end),
+  awful.key({ modkey }, "\\", function() volume_widget:toggle() end),
     -- Standard program
+    awful.key({ modkey,  "Control"         }, "p", function () awful.spawn("ksnip") end,
+              {description = "screenshot", group = "launcher"}),
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "c", function () awful.spawn("google-chrome-stable") end,
