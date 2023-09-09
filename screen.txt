@@ -12,3 +12,7 @@ screen -r
 
 forcefully reconnect to the screen:
 screen -r -f
+
+detach a screen session and connect it here
+
+screen -r -d
