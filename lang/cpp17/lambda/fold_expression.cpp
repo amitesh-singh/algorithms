@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 //refer to https://www.fluentcpp.com/2021/03/12/cpp-fold-expressions/
 template<typename... T>
@@ -66,6 +67,27 @@ auto avg(auto&&... pack)
     return s/sizeof...(pack);
 }
 
+auto version(auto&&... pack)
+{
+    return (... + [pack](){ return "." + pack;}());
+    //return ([pack](){ return pack + ".";}() + ...);
+}
+
+std::string version2(auto&&... args) {
+    std::stringstream result;
+    auto concat_with_period = [&result](auto&& arg) {
+        if (result.tellp() != 0) {
+            result << ".";
+        }
+        result << std::forward<decltype(arg)>(arg);
+    };
+
+    (..., concat_with_period(std::forward<decltype(args)>(args)));
+
+    return result.str();
+}
+
+
 int main()
 {
     std::cout << do_stuff(1, 2, 3, 4) << '\n';
@@ -97,5 +119,11 @@ int main()
     std::cout << "average: " << avg(10, 11.0, 2) << std::endl;
 
 
+    s1 = "1"; 
+    s2 = "2";
+    std::string res = version(s1, s2);
+    std::cout << "version(1, 2): " << res << std::endl;
+    res = version2(s1, s2);
+    std::cout << "version2(1, 2): " << res << std::endl;
     return 0;
 }
