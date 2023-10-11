@@ -1,6 +1,8 @@
 #include <iostream>
 #include <concepts>
 
+//forcing a member function to be defined in LanguagePolicy class
+//method1:
 template<typename T>
 concept LanguagePolicyConcept = requires(T a)
 {
@@ -35,6 +37,7 @@ class A
     }
 };
 
+//method 2:
 
 template<typename LanguagePolicy>
 class B
@@ -53,6 +56,23 @@ class B
                   "LanguagePolicy must provide a Message() function that returns a std::string.");
 };
 
+// method 3:
+/*
+In method 1, what if the message() class is in protected? method1 works only for 
+public methods. To fix this,
+You could make them public or you could hack around it like this
+
+template <typename Policy>
+struct expose_language_policy : Policy {
+    using Policy::Message;
+};
+
+template <typename Policy>
+concept language_policy = requires(expose_language_policy<Policy> const p) {
+    { p.Message(); } -> std::convertible_to<std::string>;
+};
+
+*/
 int main()
 {
     A<LanguagePolicyEnglish> a;
