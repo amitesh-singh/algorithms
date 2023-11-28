@@ -27,5 +27,7 @@ int main()
     std::cout << combined() << ":" << combined(2) << std::endl;
     
     X2 combined2 {f1, f2};
+
+    std::cout << combined2() << ":" << combined2(10) << std::endl;
     return 0;
 }

@@ -2,12 +2,39 @@
 #include <vector>
 #include <sstream>
 
+//fold expression removes the need of using recursion 
+/*
+e.g.
+earlier we used to do following to implement sum
+
+template<typename T>
+T sum(T a)
+{
+    return a;
+}
+
+template<typename T, typename... Args>
+auto sum(T first, T second, Args&&... args)
+{
+    return first + sum(args...);
+}
+
+
+
+
+
+
+
+
+
+
+*/
 //refer to https://www.fluentcpp.com/2021/03/12/cpp-fold-expressions/
 template<typename... T>
 auto do_stuff(T... t)
 {
     //the below line is equivalent to
-    // return t0 + t1 + t2 + .... + tn;
+    // return t0 + (t1 + (t2 + .... (tn-1 + tn))...;
     return (t + ...); ///this is called fold expression
     //return (t + 3 + ...) will result into error, check the do_stuff_lambda
 }
@@ -25,9 +52,11 @@ auto sum(T&&... args)
     return (0 + ... + args); //0 is the initial value.. so sum() would work
 }
 
+//A way to remember it is that the associativity is on the same side as the dot dot dot.
 template<typename... T>
 auto sum2(T&&... args)
 {
+    //arg1 + (arg2 + arg3)
     return (args + ... + 0); // 0 is the initial value.. so sum2() would work
 }
 
