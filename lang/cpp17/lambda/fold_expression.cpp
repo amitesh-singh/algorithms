@@ -21,11 +21,29 @@ auto sum(T first, T second, Args&&... args)
 
 
 
+https://www.scs.stanford.edu/~dm/blog/param-pack.html
 
+There are four types of fold in C++. In these examples, let pat be a cast-expression containing one more 
+more unexpanded parameter packs (i.e., a pattern). Let e be a normal cast-expression without any unexpanded parameter packs. 
+Let p1, …, pn be the instances of pat corresponding to each element captured by pat’s unexpanded parameter packs. 
+Let ⊕ stand for any binary operator in the C++ grammar (.*, ->*, *, /, %, +, -, <<, >>, <=>, <, <=, >, >=, ==, 
+!=, &, ^, |, &&, ||, =, +=, -=, *=, /=, %=, <<=, >>=, &=, ^=, |=, or the comma operator “,”).
 
+A binary left fold has the form (e⊕...⊕pat) and is equivalent to (((e ⊕ p1) ⊕ p2) ⊕ ⋯) ⊕ pn.
 
+A unary left fold has the form (...⊕pat) and is equivalent to ((p1 ⊕ p2) ⊕ ⋯) ⊕ pn.
 
+A binary right fold has the form (pat⊕...⊕e) and is equivalent to p1⊕(p2⊕(⋯⊕(pn⊕e))).
 
+A unary right fold has the form (pat⊕...) and is equivalent to p1⊕(p2⊕(⋯ ⊕ pn)).
+
+Note that parentheses are always required around a fold, regardless of context.
+
+When the parameter pack is empty (has size 0), a binary fold is equivalent to e. A unary fold over an empty parameter pack is only permitted for 3 specific binary operators:
+
+If ⊕ is &&, then an empty unary fold is equivalent to true.
+If ⊕ is ||, then an empty unary fold is equivalent to false.
+If ⊕ is the comma operator ,, then an empty unary fold is equivalent to void().
 
 
 */
