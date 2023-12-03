@@ -2,6 +2,18 @@
 #include <iostream>
 #include <optional>
 
+void print(auto x)
+{
+    std::cout << x << std::endl;
+};
+
+
+template<typename T, size_t... Is>
+void print_tuple(const T &c)
+{
+    (print(std::get<Is>(c)), ...);
+}
+
 int main()
 {
     std::tuple<int, std::string, int, float> t {1, "ami", 20, 20.2};
@@ -31,6 +43,10 @@ int main()
     auto [id2, firstname, lastname] = person;
 
     std::cout << "id2: " << id2 << " firstname: " << firstname << (lastname ? *lastname : "") << '\n';
+
+    //iterate std::tuple
+    std::cout << "iterate over a tuple: ";
+    print_tuple<decltype(t), 0, 1, 2>(t);
 
     return 0;
 }
