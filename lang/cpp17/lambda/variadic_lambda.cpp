@@ -20,7 +20,7 @@ int main()
     };
 
     print3("hello", 1, 2, 3, 10.5f);
-
+    std::cout << '\n';
     const auto print4 = [](auto... args) {
         ((std::cout << ',' << args), ...);
         std::cout << '\n';
