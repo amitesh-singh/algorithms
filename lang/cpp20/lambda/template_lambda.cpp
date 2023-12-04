@@ -7,6 +7,7 @@ auto main()->int
     };
 
     std::cout << sum(1, 1) << "," << sum(0.1, 1) << sum(2, 3) << std::endl;
+    std::cout << sum.operator()<int, int>(1, 2) << std::endl;
 
     auto sum2 = [](auto&&... args) {
          return (args + ...);
