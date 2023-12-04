@@ -1,20 +1,23 @@
 #include <iostream>
-#include <memory>
+#include <memory> //std::construct_at defined under this header
 
 //it is used to replace placement new
 struct A
 {
-    A() {
-        std::cout << "ctor()\n";
+    A()
+    {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
     }
-    ~A() {
-        std::cout << "dtor()\n";
+    ~A()
+    {
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
     }
-    int a_;
     A(int a): a_(a)
     {
         std::cout << __PRETTY_FUNCTION__ << std::endl;
     }
+
+    int a_;
 };
 
 int main()
