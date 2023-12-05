@@ -12,20 +12,12 @@ class circle
 {
 public:
     int r;
-    void rotate(int angle)
-    {
-        std::cout << "rotate circle\n";
-    }
 };
 
 class rectangle
 {
 public:
     int x, y, w, h;
-    void rotate(int angle)
-    {
-        std::cout << "rotate rectangle\n";
-    }
 };
 
 using shape = std::variant<circle, rectangle>;
@@ -47,11 +39,11 @@ struct rotate
     int angle;
     void operator() (circle &c)
     {
-        c.rotate(angle);
+        std::cout << "rotate circle by an angle: " << angle << '\n';
     }
     void operator() (rectangle &r)
     {
-        r.rotate(angle);
+        std::cout << "roate rectangle by an angle: " << angle << '\n';
     }
 };
 
