@@ -14,6 +14,13 @@ struct overloaded : Ts... { using Ts::operator()...; };
 template<class... Ts>
 overloaded(Ts...) -> overloaded<Ts...>;
 
+//write wrapper over std::visit
+auto visit_variant(auto&& variant, auto&&... alternatives)
+{
+    return std::visit(overloaded{std::forward<decltype(alternatives)>(alternatives)...},
+           std::forward<decltype(variant)>(variant));
+}
+
 int main()
 {
     std::vector<Nodes> nodes = {
@@ -21,11 +28,17 @@ int main()
         NodeB{},
     };
 
+    overloaded o{
+        [] (const NodeA&) { std::cout << "NodeA" << std::endl; },
+        [] (const NodeB&) { std::cout << "NodeB" << std::endl; }
+    };
+
     for (auto&& node : nodes) {
-        std::visit(overloaded{
-            [] (const NodeA&) { std::cout << "NodeA" << std::endl; },
-            [] (const NodeB&) { std::cout << "NodeB" << std::endl; }
-        }, node);
+        std::visit(o, node);
+
+        visit_variant(node, 
+         [] (const NodeA&) { std::cout << "NodeA" << std::endl; },
+        [] (const NodeB&) { std::cout << "NodeB" << std::endl; } );
     }
 
     // Prints:
