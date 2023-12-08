@@ -8,6 +8,8 @@ In C++20, CTAD was extended to support deduction guides for class templates. A d
 information to the compiler on how to deduce template arguments for a class template. The deduction guide 
 is typically a separate declaration that helps the
  compiler infer the template arguments correctly.
+
+ The compiler automatically generates guides that map each constructor call argument to a template argument.
 */
 
 #include <iostream>
@@ -25,8 +27,10 @@ struct container
 
 //define CTAD, so that we could do 
 // container c(19);
+// Constructor match -> Template instance
 template<typename T>
 container(T)->container<T>;
+
 
 int main()
 {

@@ -19,30 +19,32 @@ class person
         }
    friend class personbuilder;
 };
- class personbuilder
-      {
- 
-         person p;
-        public:
-            personbuilder() {}
-            //these are called fluent APIs
-            personbuilder &withName(std::string &&n)
-              {
-                 p.name = std::move(n);
-                 return *this;
-              }
-            //these are called fluent APIs
-            personbuilder &withAge(int age)
-              {
-                 p.age = age;
-                 return *this;
-              }
- 
-            person build()
-              {
-                 return p;
-              }
-      };
+
+class personbuilder
+{
+   person p;
+public:
+   personbuilder() {}
+   //these are called fluent APIs
+   personbuilder &withName(std::string &&n)
+   {
+      p.name = std::move(n);
+      return *this;
+   }
+
+   //these are called fluent APIs
+   personbuilder &withAge(int age)
+   {
+      p.age = age;
+      return *this;
+   }
+
+   person build()
+   {
+      return p;
+   }
+};
+
 int main()
 {
    person ami = personbuilder().withName("ami").withAge(10).build();

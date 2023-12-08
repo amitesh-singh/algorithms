@@ -1,5 +1,14 @@
 #include <iostream>
 
+struct A
+{
+     template<typename T>
+     void operator()() const
+     {
+
+     }
+};
+
 auto main()->int
 {
     auto sum = []<typename T, typename U>(const T& a, const U& b) {
@@ -32,6 +41,7 @@ auto main()->int
           }
      };
     */
+
     print_numbers.operator()<10>();
     //this won't compile 
     //print_numbers<10>();
