@@ -31,6 +31,16 @@ struct container
 template<typename T>
 container(T)->container<T>;
 
+template<typename T1, typename T2>
+struct pair
+{
+    T1 first;
+    T2 second;
+};
+
+
+template<typename T1, typename T2>
+pair(T1, T2)->pair<T1, T2>;
 
 int main()
 {
@@ -44,6 +54,8 @@ int main()
 
     container c2(29);
     c2.print();
+
+    pair p1{1, 2.0};
 
     return 0;
 }
