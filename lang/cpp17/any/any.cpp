@@ -1,6 +1,11 @@
 #include <iostream>
 #include <any>
 
+struct A
+{
+ int a{2};
+};
+
 int main()
 {
     std::any data;
@@ -12,12 +17,13 @@ int main()
 
     data = std::string("ami");
     std::string s = std::any_cast<std::string>(data);
-    std::cout << s2 << std::endl;
+    std::cout << s << std::endl;
 
-    data = "ami2";
-    std::string &s2 = std::any_cast<std::string&>(data);
+    A aa;
+    std::any data2 = aa;
 
-    std::cout << s2 << std::endl;
+    A &a1 = std::any_cast<A&>(data2);
+    std::cout << a1.a << std::endl;
 
     return 0;
 }
