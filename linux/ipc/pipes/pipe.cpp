@@ -24,8 +24,9 @@ int main()
    else if (pid != 0)
      {
         //parent
+        //remember fork() returns pid of child in the parent process
         close(fd[0]);
-        std::cout << "parent: " << getpid() << ": writing to child:" << std::endl;
+        std::cout << "parent: " << getpid() << ": writing to child pid(" << pid << ")" << std::endl;
         write(fd[1], "hey child", 10);
         close(fd[1]);
         if (waitpid(pid, NULL, 0) < 0)
