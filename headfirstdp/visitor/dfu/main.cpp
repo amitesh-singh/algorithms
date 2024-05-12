@@ -20,13 +20,17 @@ int main()
 
     std::visit(op_, coap);
 
+    dfu coap_confirm = firmware::dfu::coap_confirm{};
+
+    std::visit(op_, coap_confirm);
+
     //std::vector<dfu> dfu_actions { firmware::dfu::coap<true>{}, firmware::dfu::coap_confirm{}};
     dfu act1 { firmware::dfu::coap{true} };
     dfu act2 {firmware::dfu::coap_confirm{}};
     std::visit(op_, act1, act2);
 
-    auto &coap_confirm = std::get<1>(act2); 
+    auto &coap_confirm2 = std::get<1>(act2); 
 
-    std::cout << coap_confirm.success << std::endl;
+    std::cout << coap_confirm2.success << std::endl;
     return 0;
 }

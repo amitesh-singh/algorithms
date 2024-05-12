@@ -13,6 +13,10 @@ namespace firmware::dfu::operations
 
         }
         void operator()(auto) {}
+        void operator() (firmware::dfu::coap_confirm &c)
+        {
+            c.confirm();
+        }
         void operator()(firmware::dfu::coap &c)
         {
             c.flash();
