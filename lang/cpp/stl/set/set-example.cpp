@@ -31,7 +31,7 @@ void print(std::set<int> &s)
 int main()
 {
   //elements are in sorted order, in descending order
-   std::set<int, std::greater<int>> S;
+   std::set<int, std::greater<int>> S; // or std::set<int, std::greater<>> S; //CDAT
 
    S.insert(1);
    S.insert(2);

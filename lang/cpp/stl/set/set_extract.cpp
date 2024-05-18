@@ -13,14 +13,23 @@ struct person
     }
 };
 
+
+void set_insert(auto& s, auto&&... elements)
+{
+    (s.insert(elements), ...);
+}
+
 int main()
 {
     //basic type
     std::set<int> s;
 
+
     s.insert(1);
     s.insert(3);
     s.insert(4);
+
+    set_insert(s, 4, 4, 5, 8);
 
     for (auto &elem: s) {
         std::cout << elem << ", ";
