@@ -64,6 +64,7 @@ int main()
     }
 
 
+    std::cout << "after insert\n";
     ami.value().name = "amitesh"; ///changed the non-key value
     //insert it
 
