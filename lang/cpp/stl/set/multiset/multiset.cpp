@@ -1,4 +1,4 @@
-#include <set>
+#include <set> //this has multiset defined 
 #include <iostream>
 
 void print(auto &s)
@@ -26,6 +26,10 @@ int main()
         std::cout << "found " << *itr << std::endl;
         s.erase(itr);
         print(s);
+
+        int c = s.count(1);
+
+        std::cout << "occurrence of 1: " << c << std::endl;
     }
 
     {
