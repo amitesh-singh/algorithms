@@ -34,7 +34,7 @@ int main()
 
     {
         std::cout << "descending\n";
-        //descending order
+        //descending order; also std::multiset<int, std::greater<>> s;
         std::multiset<int, std::greater<int> > s;
         s.insert(100);
         s.insert(100);
@@ -48,8 +48,21 @@ int main()
         s.erase(100);
         print(s);
 
+        
+
+        //lets find all 1s, using equal_range, which returns std::pair
+        auto range = s.equal_range(1);
+        if (range.first == range.second) {
+            //only single entry
+        } else {
+            for (auto it = range.first; it != range.second; ++it) {
+                std::cout << *it << '\n';
+            }
+        }
+
         s.clear();
         s.empty() ? std::cout << "multiset is empty\n" : std::cout << "multiset is not empty\n";
+    
     }
 
     return 0;

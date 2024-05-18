@@ -2,8 +2,6 @@
 #include <iostream>
 
 //we just need to define < const operator 
-
-
 struct person
 {
     int id;
@@ -56,7 +54,6 @@ int main()
     std::cout << "entries with key 1: " << sp.count(person{1, ""}) << '\n';
 
     //lets find the nodes using equal range api
-
     auto range = sp.equal_range(person{1, ""});
 
     if (range.first == range.second) {
