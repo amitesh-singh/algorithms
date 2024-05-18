@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Sets are usually implemented as Red-Black Tree.
 
 class client
 {
@@ -29,7 +30,7 @@ void print(std::set<int> &s)
 
 int main()
 {
-  //elements are in sorted order
+  //elements are in sorted order, in descending order
    std::set<int, std::greater<int>> S;
 
    S.insert(1);
@@ -92,6 +93,10 @@ int main()
 
         //how many times 56 is present in the set?
         int rep = s.count(56);
+        std::cout << "56 is present " << rep << " times.\n";
+        s.insert(56);
+
+        rep = s.count(56);
         std::cout << "56 is present " << rep << " times.\n";
 
         std::cout << "clearing the set\n";
