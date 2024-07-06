@@ -31,10 +31,10 @@ class signal
            slots_.clear();
         }
 
-      void emit(Args... arg)
+      void emit(Args&&... arg)
         {
            for (auto const &it : slots_)
-             it.second(arg...);
+             it.second(std::forward<Args>(arg)...);
         }
 };
 
