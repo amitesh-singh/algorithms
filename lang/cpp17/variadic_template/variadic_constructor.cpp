@@ -1,7 +1,9 @@
 #include <iostream>
 #include <utility>
 
+
 class var {
+
     template <typename T>
     void insert(T val) {
         std::cout << "inserting: " << val << '\n';

@@ -17,14 +17,17 @@ private:
              insert(std::forward<decltype(rest)>(rest)...);
     */
     // the below line is needed or else we gonna get above errors.
-    void insert() {}
+    void insert(auto&&... items)
+    {
+        (insert(items), ...);
+    }
     void insert(auto&& first, auto&& second, auto&&...rest)
     {
         insert_pair(std::forward<decltype(first)>(first),
                     std::forward<decltype(second)>(second));
         insert(std::forward<decltype(rest)>(rest)...);
     }
-    
+    public:
     pair(auto&&... args)
     {
         static_assert(sizeof...(args) == 2 * N, "invalid list of pairs");

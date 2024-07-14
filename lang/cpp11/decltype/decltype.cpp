@@ -42,6 +42,10 @@ struct X
 // The decltype can be used to determine the type of an expression at compile-type.
 int main()
 {
+   //we could also use "using" as typedef in modern C++
+   using MyInt = decltype(3);
+   MyInt meh;
+
    decltype(5) a; // x will be type of int, since 5 is int.
    decltype(a) b; // b  will be type of int, since a is defined int before.
    b = 10;

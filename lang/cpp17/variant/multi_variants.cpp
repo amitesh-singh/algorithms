@@ -7,8 +7,9 @@ struct LightItem { };
 struct HeavyItem { };
 struct FragileItem { };
 
-std::variant<LightItem, HeavyItem> pkgA { LightItem{}};
-std::variant<LightItem, HeavyItem> pkgB { HeavyItem{} };
+using my_type = std::variant<LightItem, HeavyItem>;
+my_type pkgA { LightItem{}};
+my_type pkgB { HeavyItem{} };
 
 
 struct visitor
@@ -27,6 +28,7 @@ struct visitor
     }
 };
 
+
 template<typename... Ts>
 struct overload: Ts...
 {
@@ -35,7 +37,6 @@ struct overload: Ts...
 
 template<typename... Ts>
 overload(Ts...)->overload<Ts...>;
-
 
 int main()
 {

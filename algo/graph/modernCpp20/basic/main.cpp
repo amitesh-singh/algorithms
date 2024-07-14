@@ -32,6 +32,11 @@ class graph
         adj_list_[from].emplace_back(to, true);
     }
 
+    void add_directed_edge(auto&&... items)
+    {
+        (add_directed_edge(items), ...);
+    }
+    
     void display()
     {
         for (const auto &v: adj_list_) {
@@ -62,6 +67,6 @@ int main()
     g.add_undirected_edge(1, 3);
 
     g.display();
-    
+
     return 0;
 }

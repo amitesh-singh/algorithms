@@ -48,5 +48,20 @@ int main()
     std::cout << "iterate over a tuple: ";
     print_tuple<decltype(t), 0, 1, 2>(t);
 
+    auto [x, y] = []() {
+        return std::make_tuple(10, 20);
+    }();
+
+    int a, b;
+
+    std::tie(a, b) = []() {
+        return std::make_tuple(20, 20);
+    }();
+
+    int a1, b1;
+
+    std::tie(a1, b1) = []() {
+        return std::make_pair(20, 30);
+    }();
     return 0;
 }
