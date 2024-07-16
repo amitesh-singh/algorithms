@@ -1,6 +1,8 @@
 #include <unordered_map>
 #include <vector>
 #include <iostream>
+#include <stack>
+#include <unordered_set>
 
 class graph
 {
@@ -42,10 +44,41 @@ class graph
         for (const auto &v: adj_list_) {
             std::cout << v.first << ": ";
             for (const auto &e: v.second) {
-                std::cout << (e.is_directed_ ? "--" : "-->") << e.to_<< " ";
+                std::cout << (e.is_directed_ ? "-->" : "--") << e.to_<< " ";
             }
             std::cout << '\n';
         }
+    }
+
+    enum color { white, grey, black } ;
+    bool dfs_iterative_cyclic(int source)
+    {
+        std::stack<int> s;
+        std::unordered_map<int, color> visited;
+
+        s.push(source);
+        visited.insert({source, color::grey});
+        while (!s.empty()) {
+            int vertex = s.top();
+            s.pop();
+            for (const auto &e: adj_list_[vertex]) {
+                auto itr = visited.find(e.to_);
+                if (itr == visited.end()) {
+                    s.push(e.to_);
+                    visited.insert({e.to_, color::grey});
+                } else {
+                    if (itr->second == color::grey) {
+                        std::cout << "cycle is found for " << vertex << "-->" << e.to_ << "\n";
+                        return true;
+                    }
+                }
+            }
+
+            std::cout << vertex << " ";
+            visited[vertex] = color::black;
+        }
+
+        return false;
     }
 private:
 
@@ -64,9 +97,11 @@ int main()
     graph g;
 
     g.add_directed_edge(1, 2);
-    g.add_undirected_edge(1, 3);
+    g.add_directed_edge(1, 3);
+    g.add_undirected_edge(2, 3);
 
     g.display();
-
+    std::cout << "is cyclic: " << g.dfs_iterative_cyclic(1) << std::endl;
+    
     return 0;
 }
