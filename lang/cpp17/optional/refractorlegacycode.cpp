@@ -2,9 +2,12 @@
 #include <iostream>
 //Refactoring legacy code with optional<T>
 /*
-In case you have lots of legacy code where default values like -1 or “” are used extensively, and you don’t want to change all of it at the same time, you can still replace the most critical parts of your code with optionals, and leave the rest unchanged.
+In case you have lots of legacy code where default values like -1 or “” are used extensively, and you
+ don’t want to change all of it at the same time, you can still replace the most critical parts of your 
+ code with optionals, and leave the rest unchanged.
 
-For this use the get_value_or (simply value_or for C++17’s std::optional) method to bridge up the two. It takes a value and returns it if the optional object turns out to be empty.
+For this use the get_value_or (simply value_or for C++17’s std::optional) method to bridge up the two. 
+It takes a value and returns it if the optional object turns out to be empty.
 For instance, let’s consider the following legacy function:
 */
 std::optional<int> newF(int x)

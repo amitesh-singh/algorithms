@@ -1,6 +1,14 @@
 #include <iostream>
 #include <set>
 
+// for custom set, we need bool operator<(const A&) const;
+//  for custom undordered_set, we need bool operator==(const A&) const along with hash function implementation
+// hash function would look like below
+// struct A_hash {
+//  size_t operator()(const A& obj) const { return std::hash<int>{}(obj.a);}
+// }; 
+//
+
 struct person
 {
     int id;
@@ -13,7 +21,7 @@ struct person
     }
 };
 
-
+// use this interviews for inserting elements
 void set_insert(auto& s, auto&&... elements)
 {
     (s.insert(elements), ...);
