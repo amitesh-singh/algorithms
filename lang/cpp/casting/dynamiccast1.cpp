@@ -15,11 +15,24 @@ class B
     public:
     virtual ~B(){}
 };
+
+class C: public A
+{
+
+};
+
 int main()
 {
-    B bb;
+    B bb; // dynamic cast would fail since B and A are not related. B
+    // has to inherit from A;
     A *aa = dynamic_cast<A *>(&bb);
     cout << aa << endl;
+
+    C cc;
+
+    A *a1 = dynamic_cast<A *>(&cc);
+
+    std::cout << a1 << std::endl;
 
     return 0;
 }
