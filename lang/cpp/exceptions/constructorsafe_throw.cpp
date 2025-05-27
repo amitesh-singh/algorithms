@@ -4,7 +4,7 @@
 class device
 {
   public:
-      device(int id) {
+      device(int id)  {
            if (id == 2)
              throw std::runtime_error("device id can't be 2");
       }
@@ -36,8 +36,10 @@ class driver
 };
 
 /*
-Use the noexcept(false) specifier in the constructor declaration: This explicitly indicates that the constructor may throw exceptions. 
-By default, C++ constructors are assumed to be noexcept(true), meaning they are not allowed to throw exceptions. However, you can override this by specifying noexcept(false).
+Use the noexcept(false) specifier in the constructor declaration: This explicitly 
+indicates that the constructor may throw exceptions. 
+By default, C++ constructors are assumed to be noexcept(true), meaning they are not
+ allowed to throw exceptions. However, you can override this by specifying noexcept(false).
 */
 class meh
 {
